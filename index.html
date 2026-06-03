@@ -430,9 +430,9 @@ footer{background:var(--bg2);border-top:1px solid rgba(204,0,51,.12);padding:44p
   <p class="sdesc rv">These aren't predictions. JPMorgan, Goldman Sachs and Morgan Stanley are deploying these systems today. Your interviewers built them.</p>
 
   <div class="istat-row rv">
-    <div class="ist"><div class="ist-n c-g">B</div><div class="ist-l">JPMorgan AI investment in 2026</div><div class="ist-s">Bloomberg</div></div>
-    <div class="ist"><div class="ist-n c-r">95%</div><div class="ist-l">PE firms adopting Agentic AI 2026</div><div class="ist-s">CFA Institute</div></div>
-    <div class="ist"><div class="ist-n c-w">B</div><div class="ist-l">Annual value AI adds to banking</div><div class="ist-s">McKinsey Global</div></div>
+    <div class="ist"><div class="ist-n c-g">$17B</div><div class="ist-l">JPMorgan AI investment in 2026</div><div class="ist-s">Bloomberg</div></div>
+    <div class="ist"><div class="ist-n c-r">95%</div><div class="ist-l">PE firms adopting Agentic AI by 2026</div><div class="ist-s">CFA Institute</div></div>
+    <div class="ist"><div class="ist-n c-w">$1T</div><div class="ist-l">Annual value AI adds to banking</div><div class="ist-s">McKinsey Global</div></div>
     <div class="ist"><div class="ist-n c-g">73%</div><div class="ist-l">YC finance startups are agentic AI</div><div class="ist-s">Jan 2024–Jun 2025</div></div>
   </div>
 
@@ -898,8 +898,7 @@ function cUp(el){
   function u(n){const p=Math.min((n-st)/dur,1),e=1-Math.pow(1-p,4);el.textContent=Number((t*e).toFixed(0))+s;if(p<1)requestAnimationFrame(u);}
   requestAnimationFrame(u);
 }
-const co=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('[data-count]').forEach(cUp);co.unobserve(e.target);}}),{threshold:.3});
-document.querySelectorAll('#hero').forEach(el=>co.observe(el));
+document.querySelectorAll('[data-count]').forEach(cUp);
 
 // ── Module Tabs ──
 function swM(i){
