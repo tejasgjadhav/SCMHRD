@@ -1,2142 +1,849 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>AI Finance Mastery — SCMHRD | 6-Hour Intensive Course</title>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>AI Finance Mastery — SCMHRD | 6-Hour Intensive | Tejas Jadhav CFA FRM</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-:root {
-  --gold: #F4C430;
-  --gold2: #FFD700;
-  --blue: #00D4FF;
-  --blue2: #0088CC;
-  --purple: #9B59B6;
-  --green: #00FF88;
-  --red: #FF4444;
-  --bg: #020408;
-  --bg2: #050C14;
-  --bg3: #0A1628;
-  --card: rgba(10,20,40,0.8);
-  --border: rgba(0,212,255,0.2);
-  --text: #E8F4FD;
-  --muted: #7A9BB5;
+:root{
+  --gold:#F4C430;--gold2:#FFD700;
+  --blue:#00D4FF;--blue2:#0066CC;
+  --purple:#9B59B6;--purple2:#7D3C98;
+  --green:#00FF88;--red:#FF4B4B;
+  --bg:#020509;--bg2:#05090F;--bg3:#081220;
+  --card:rgba(8,18,32,0.85);
+  --border:rgba(0,212,255,0.18);
+  --text:#E4F1FB;--muted:#6B8FA8;
 }
-
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
+body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;}
 
-body {
-  font-family: 'Space Grotesk', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  overflow-x: hidden;
-}
+/* ── PROGRESS ── */
+#prog{position:fixed;top:0;left:0;height:2px;z-index:9999;background:linear-gradient(90deg,var(--blue),var(--purple),var(--gold));transition:width .1s;}
 
-/* ═══════════════════════════════════════
-   CANVAS BACKGROUND
-═══════════════════════════════════════ */
-#matrix-canvas {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  z-index: 0;
-  opacity: 0.04;
-  pointer-events: none;
-}
+/* ── CANVAS ── */
+#bgcanvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.035;}
 
-/* ═══════════════════════════════════════
-   JARVIS ASSISTANT
-═══════════════════════════════════════ */
-#jarvis-orb {
-  position: fixed;
-  bottom: 32px; right: 32px;
-  z-index: 1000;
-  cursor: pointer;
-}
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:14px 48px;display:flex;align-items:center;justify-content:space-between;background:rgba(2,5,9,.75);backdrop-filter:blur(18px);border-bottom:1px solid rgba(0,212,255,.08);}
+.nav-brand{display:flex;align-items:center;gap:10px;}
+.nav-gem{width:36px;height:36px;background:linear-gradient(135deg,var(--gold),#C8960C);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 0 18px rgba(244,196,48,.35);}
+.nav-title{font-weight:800;font-size:16px;letter-spacing:-.3px;}
+.nav-sub{font-size:10px;color:var(--muted);margin-top:1px;}
+.nav-links{display:flex;gap:28px;}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:13px;font-weight:500;transition:color .2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--blue);}
+.nav-cta{padding:9px 22px;background:linear-gradient(135deg,var(--gold),#C8960C);color:#000;border:none;border-radius:8px;font-weight:700;font-size:13px;cursor:pointer;transition:all .2s;font-family:'Space Grotesk',sans-serif;}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 0 24px rgba(244,196,48,.45);}
+@media(max-width:768px){nav{padding:14px 18px;}.nav-links{display:none;}}
 
-.jarvis-ring {
-  width: 72px; height: 72px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, #00D4FF, #0033AA, #000);
-  box-shadow: 0 0 0 3px rgba(0,212,255,0.4), 0 0 30px rgba(0,212,255,0.6), 0 0 60px rgba(0,100,255,0.3);
-  display: flex; align-items: center; justify-content: center;
-  animation: jarvis-pulse 2.5s ease-in-out infinite;
-  position: relative;
-}
+/* ── JARVIS ── */
+#jorb{position:fixed;bottom:28px;right:28px;z-index:600;cursor:pointer;}
+.jorb-ring{width:66px;height:66px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#00E5FF,#0033AA,#000812);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 2px rgba(0,212,255,.5),0 0 28px rgba(0,212,255,.6),0 0 60px rgba(0,80,255,.25);animation:jorb-pulse 2.8s ease-in-out infinite;position:relative;}
+.jorb-ring::before{content:'';position:absolute;width:80px;height:80px;border-radius:50%;border:1.5px solid rgba(0,212,255,.3);animation:ring-out 2.8s ease-out infinite;}
+.jorb-ring::after{content:'';position:absolute;width:94px;height:94px;border-radius:50%;border:1px solid rgba(0,212,255,.12);animation:ring-out 2.8s ease-out infinite .6s;}
+@keyframes jorb-pulse{0%,100%{box-shadow:0 0 0 2px rgba(0,212,255,.5),0 0 28px rgba(0,212,255,.6),0 0 60px rgba(0,80,255,.25);}50%{box-shadow:0 0 0 2px rgba(0,212,255,.8),0 0 45px rgba(0,212,255,1),0 0 90px rgba(0,80,255,.5);}}
+@keyframes ring-out{0%{transform:scale(1);opacity:.6;}100%{transform:scale(1.55);opacity:0;}}
+.jorb-icon{font-size:26px;z-index:1;}
 
-.jarvis-ring::before {
-  content: '';
-  position: absolute;
-  width: 84px; height: 84px;
-  border-radius: 50%;
-  border: 2px solid rgba(0,212,255,0.3);
-  animation: ring-expand 2.5s ease-out infinite;
-}
-.jarvis-ring::after {
-  content: '';
-  position: absolute;
-  width: 96px; height: 96px;
-  border-radius: 50%;
-  border: 1px solid rgba(0,212,255,0.15);
-  animation: ring-expand 2.5s ease-out infinite 0.5s;
-}
-
-.jarvis-icon { font-size: 28px; z-index: 1; }
-
-@keyframes jarvis-pulse {
-  0%,100%{box-shadow:0 0 0 3px rgba(0,212,255,0.4),0 0 30px rgba(0,212,255,0.6),0 0 60px rgba(0,100,255,0.3);}
-  50%{box-shadow:0 0 0 3px rgba(0,212,255,0.7),0 0 50px rgba(0,212,255,0.9),0 0 100px rgba(0,100,255,0.5);}
-}
-@keyframes ring-expand {
-  0%{transform:scale(1);opacity:0.6;}
-  100%{transform:scale(1.6);opacity:0;}
-}
-
-#jarvis-panel {
-  position: fixed;
-  bottom: 120px; right: 32px;
-  width: 360px;
-  background: rgba(2,8,20,0.95);
-  border: 1px solid rgba(0,212,255,0.4);
-  border-radius: 20px;
-  padding: 24px;
-  z-index: 999;
-  display: none;
-  backdrop-filter: blur(20px);
-  box-shadow: 0 0 60px rgba(0,212,255,0.2);
-}
-
-.jarvis-header {
-  display: flex; align-items: center; gap: 12px;
-  margin-bottom: 16px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid var(--border);
-}
-
-.jarvis-avatar {
-  width: 44px; height: 44px;
-  border-radius: 50%;
-  background: radial-gradient(circle, #00D4FF, #0044AA);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 20px;
-  box-shadow: 0 0 20px rgba(0,212,255,0.5);
-  animation: jarvis-pulse 2.5s ease-in-out infinite;
-}
-
-.jarvis-name { font-weight: 700; color: var(--blue); font-size: 15px; }
-.jarvis-status { font-size: 11px; color: var(--green); }
-
-#jarvis-text {
-  font-size: 13px;
-  line-height: 1.7;
-  color: var(--text);
-  min-height: 80px;
-  font-family: 'JetBrains Mono', monospace;
-}
-
-.jarvis-cursor {
-  display: inline-block;
-  width: 8px; height: 14px;
-  background: var(--blue);
-  animation: blink 1s infinite;
-  vertical-align: middle;
-  margin-left: 2px;
-}
+#jpanel{position:fixed;bottom:110px;right:28px;width:370px;background:rgba(2,7,18,.97);border:1px solid rgba(0,212,255,.4);border-radius:20px;padding:22px;z-index:599;display:none;backdrop-filter:blur(24px);box-shadow:0 0 60px rgba(0,212,255,.15),0 30px 80px rgba(0,0,0,.6);}
+.jhead{display:flex;align-items:center;gap:12px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid rgba(0,212,255,.12);}
+.javatar{width:42px;height:42px;border-radius:50%;background:radial-gradient(circle,#00D4FF,#0044AA);display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 0 18px rgba(0,212,255,.5);animation:jorb-pulse 2.8s ease-in-out infinite;}
+.jname{font-weight:700;color:var(--blue);font-size:14px;}
+.jstatus{font-size:10px;color:var(--green);margin-top:2px;}
+#jtext{font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.75;color:var(--text);min-height:72px;}
+.jcursor{display:inline-block;width:7px;height:13px;background:var(--blue);animation:blink 1s infinite;vertical-align:middle;margin-left:2px;}
 @keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
-
-.jarvis-btns {
-  display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap;
-}
-.jarvis-btn {
-  padding: 6px 14px;
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  font-size: 11px;
-  background: transparent;
-  color: var(--blue);
-  cursor: pointer;
-  transition: all 0.2s;
-  font-family: 'Space Grotesk', sans-serif;
-}
-.jarvis-btn:hover { background: rgba(0,212,255,0.15); border-color: var(--blue); }
-
-/* ═══════════════════════════════════════
-   NAV
-═══════════════════════════════════════ */
-nav {
-  position: fixed; top: 0; left: 0; right: 0;
-  z-index: 100;
-  padding: 16px 48px;
-  display: flex; align-items: center; justify-content: space-between;
-  background: rgba(2,4,8,0.7);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(0,212,255,0.1);
-}
-
-.nav-logo {
-  display: flex; align-items: center; gap: 12px;
-}
-.nav-logo-icon {
-  width: 40px; height: 40px;
-  background: linear-gradient(135deg, var(--gold), var(--gold2));
-  border-radius: 10px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 20px;
-  box-shadow: 0 0 20px rgba(244,196,48,0.4);
-}
-.nav-logo-text { font-weight: 800; font-size: 18px; }
-.nav-logo-sub { font-size: 11px; color: var(--muted); margin-top: 1px; }
-
-.nav-links { display: flex; gap: 32px; }
-.nav-links a {
-  color: var(--muted);
-  text-decoration: none;
-  font-size: 13px;
-  font-weight: 500;
-  transition: color 0.2s;
-}
-.nav-links a:hover { color: var(--blue); }
-
-.nav-cta {
-  padding: 10px 24px;
-  background: linear-gradient(135deg, var(--gold), #E8A800);
-  color: #000;
-  border: none; border-radius: 8px;
-  font-weight: 700; font-size: 13px;
-  cursor: pointer;
-  transition: all 0.2s;
-  box-shadow: 0 0 20px rgba(244,196,48,0.3);
-}
-.nav-cta:hover { transform: translateY(-2px); box-shadow: 0 0 30px rgba(244,196,48,0.5); }
-
-/* ═══════════════════════════════════════
-   HERO
-═══════════════════════════════════════ */
-#hero {
-  min-height: 100vh;
-  display: flex; align-items: center; justify-content: center;
-  text-align: center;
-  padding: 120px 24px 80px;
-  position: relative;
-  overflow: hidden;
-}
-
-.hero-bg-grid {
-  position: absolute; inset: 0;
-  background-image:
-    linear-gradient(rgba(0,212,255,0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,212,255,0.05) 1px, transparent 1px);
-  background-size: 50px 50px;
-  animation: grid-move 20s linear infinite;
-}
-@keyframes grid-move {
-  0%{background-position:0 0;}
-  100%{background-position:50px 50px;}
-}
-
-.hero-glow {
-  position: absolute;
-  width: 600px; height: 600px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(0,212,255,0.08) 0%, transparent 70%);
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  animation: glow-pulse 4s ease-in-out infinite;
-}
-@keyframes glow-pulse {
-  0%,100%{transform:translate(-50%,-50%) scale(1);}
-  50%{transform:translate(-50%,-50%) scale(1.2);}
-}
-
-.hero-badge {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 6px 20px;
-  background: rgba(244,196,48,0.1);
-  border: 1px solid rgba(244,196,48,0.3);
-  border-radius: 30px;
-  font-size: 12px; font-weight: 600;
-  color: var(--gold);
-  margin-bottom: 28px;
-  animation: fadeInDown 0.8s ease;
-}
-.hero-badge-dot {
-  width: 6px; height: 6px;
-  background: var(--gold);
-  border-radius: 50%;
-  animation: blink 1.5s infinite;
-}
-
-h1.hero-title {
-  font-family: 'Inter', sans-serif;
-  font-size: clamp(42px, 7vw, 88px);
-  font-weight: 900;
-  line-height: 1.0;
-  margin-bottom: 24px;
-  animation: fadeInUp 0.8s ease 0.2s both;
-}
-
-.gradient-text {
-  background: linear-gradient(135deg, #00D4FF, #9B59B6, #F4C430);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.hero-sub {
-  font-size: clamp(16px, 2vw, 20px);
-  color: var(--muted);
-  max-width: 640px;
-  margin: 0 auto 40px;
-  line-height: 1.6;
-  animation: fadeInUp 0.8s ease 0.4s both;
-}
-
-.hero-stats {
-  display: flex; gap: 48px; justify-content: center; flex-wrap: wrap;
-  margin-bottom: 48px;
-  animation: fadeInUp 0.8s ease 0.6s both;
-}
-
-.hero-stat {
-  text-align: center;
-}
-.hero-stat-value {
-  font-size: 32px; font-weight: 800;
-  color: var(--gold);
-  font-family: 'Inter', sans-serif;
-}
-.hero-stat-label { font-size: 12px; color: var(--muted); margin-top: 4px; }
-
-.hero-actions {
-  display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
-  animation: fadeInUp 0.8s ease 0.8s both;
-}
-
-.btn-primary {
-  padding: 16px 36px;
-  background: linear-gradient(135deg, var(--blue), var(--blue2));
-  color: #fff; border: none; border-radius: 12px;
-  font-weight: 700; font-size: 15px;
-  cursor: pointer; transition: all 0.3s;
-  box-shadow: 0 0 30px rgba(0,212,255,0.3);
-  font-family: 'Space Grotesk', sans-serif;
-}
-.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 0 50px rgba(0,212,255,0.5); }
-
-.btn-secondary {
-  padding: 16px 36px;
-  background: transparent;
-  color: var(--text); border: 1px solid var(--border);
-  border-radius: 12px;
-  font-weight: 600; font-size: 15px;
-  cursor: pointer; transition: all 0.3s;
-  font-family: 'Space Grotesk', sans-serif;
-}
-.btn-secondary:hover { background: rgba(0,212,255,0.1); border-color: var(--blue); }
-
-/* ═══════════════════════════════════════
-   PLACEMENT DATA TICKER
-═══════════════════════════════════════ */
-.ticker-wrap {
-  background: rgba(0,212,255,0.05);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  padding: 14px 0;
-  overflow: hidden;
-  white-space: nowrap;
-  position: relative;
-  z-index: 10;
-}
-.ticker-inner {
-  display: inline-flex; gap: 0;
-  animation: ticker 35s linear infinite;
-}
-.ticker-item {
-  padding: 0 40px;
-  font-size: 13px;
-  font-family: 'JetBrains Mono', monospace;
-  color: var(--blue);
-  display: inline-flex; align-items: center; gap: 10px;
-}
-.ticker-item span { color: var(--gold); font-weight: 700; }
-.ticker-sep { color: rgba(0,212,255,0.3); }
-@keyframes ticker { 0%{transform:translateX(0);} 100%{transform:translateX(-50%);} }
-
-/* ═══════════════════════════════════════
-   SECTIONS SHARED
-═══════════════════════════════════════ */
-section {
-  position: relative;
-  z-index: 10;
-  padding: 100px 48px;
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
-.section-label {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 4px 16px;
-  background: rgba(0,212,255,0.08);
-  border: 1px solid rgba(0,212,255,0.2);
-  border-radius: 30px;
-  font-size: 11px; font-weight: 700;
-  color: var(--blue);
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin-bottom: 20px;
-}
-
-h2.section-title {
-  font-family: 'Inter', sans-serif;
-  font-size: clamp(32px, 4vw, 56px);
-  font-weight: 800;
-  line-height: 1.1;
-  margin-bottom: 16px;
-}
-
-.section-desc {
-  font-size: 17px;
-  color: var(--muted);
-  max-width: 560px;
-  line-height: 1.6;
-  margin-bottom: 64px;
-}
-
-/* ═══════════════════════════════════════
-   PLACEMENT STATS DASHBOARD
-═══════════════════════════════════════ */
-#placement {
-  background: linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%);
-  padding: 100px 0;
-}
-#placement > .inner { max-width: 1400px; margin: 0 auto; padding: 0 48px; }
-
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-  margin-bottom: 60px;
-}
-
-.stat-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 28px 24px;
-  text-align: center;
-  backdrop-filter: blur(10px);
-  transition: all 0.3s;
-  position: relative;
-  overflow: hidden;
-}
-
-.stat-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--blue), transparent);
-}
-
-.stat-card:hover { transform: translateY(-6px); border-color: var(--blue); box-shadow: 0 20px 60px rgba(0,212,255,0.15); }
-
-.stat-card-icon { font-size: 32px; margin-bottom: 12px; }
-.stat-card-value {
-  font-size: 36px; font-weight: 800;
-  font-family: 'Inter', sans-serif;
-  color: var(--gold);
-  counter-reset: num;
-}
-.stat-card-label { font-size: 12px; color: var(--muted); margin-top: 6px; font-weight: 500; }
-.stat-card-sub { font-size: 11px; color: var(--green); margin-top: 4px; }
-
-.roles-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 12px;
-}
-
-.role-pill {
-  background: rgba(0,212,255,0.05);
-  border: 1px solid rgba(0,212,255,0.15);
-  border-radius: 12px;
-  padding: 14px 18px;
-  display: flex; align-items: center; gap: 12px;
-  transition: all 0.25s;
-  cursor: default;
-}
-.role-pill:hover { background: rgba(0,212,255,0.1); border-color: var(--blue); transform: translateX(4px); }
-.role-num { font-size: 11px; color: var(--gold); font-weight: 700; font-family: 'JetBrains Mono', monospace; }
-.role-name { font-size: 13px; font-weight: 600; }
-
-/* ═══════════════════════════════════════
-   COMPANIES MARQUEE
-═══════════════════════════════════════ */
-.companies-track {
-  overflow: hidden;
-  padding: 40px 0;
-}
-.companies-inner {
-  display: flex; gap: 24px;
-  animation: scroll-left 30s linear infinite;
-  width: max-content;
-}
-.company-chip {
-  background: rgba(0,212,255,0.06);
-  border: 1px solid rgba(0,212,255,0.2);
-  border-radius: 10px;
-  padding: 10px 20px;
-  font-size: 13px; font-weight: 600;
-  white-space: nowrap;
-  color: var(--text);
-  transition: all 0.2s;
-}
-.company-chip:hover { background: rgba(0,212,255,0.15); border-color: var(--blue); }
-@keyframes scroll-left { 0%{transform:translateX(0);} 100%{transform:translateX(-50%);} }
-
-/* ═══════════════════════════════════════
-   COURSE OVERVIEW
-═══════════════════════════════════════ */
-.modules-timeline {
-  position: relative;
-  padding-left: 48px;
-}
-.modules-timeline::before {
-  content: '';
-  position: absolute; left: 16px; top: 0; bottom: 0;
-  width: 2px;
-  background: linear-gradient(180deg, var(--blue), var(--purple), var(--gold));
-}
-
-.module-block {
-  position: relative;
-  margin-bottom: 80px;
-  animation: fadeInLeft 0.6s ease both;
-}
-
-.module-dot {
-  position: absolute;
-  left: -40px; top: 24px;
-  width: 16px; height: 16px;
-  border-radius: 50%;
-  border: 3px solid var(--blue);
-  background: var(--bg);
-  box-shadow: 0 0 15px rgba(0,212,255,0.5);
-}
-
-.module-header {
-  display: flex; align-items: flex-start; gap: 20px;
-  margin-bottom: 28px;
-}
-
-.module-num {
-  font-size: 64px; font-weight: 900;
-  font-family: 'Inter', sans-serif;
-  line-height: 1;
-  opacity: 0.08;
-  position: absolute;
-  right: 24px; top: 0;
-  letter-spacing: -4px;
-}
-
-.module-tag {
-  padding: 4px 14px;
-  border-radius: 20px;
-  font-size: 11px; font-weight: 700;
-  text-transform: uppercase; letter-spacing: 1px;
-}
-.tag-blue { background: rgba(0,212,255,0.15); color: var(--blue); border: 1px solid rgba(0,212,255,0.3); }
-.tag-purple { background: rgba(155,89,182,0.15); color: var(--purple); border: 1px solid rgba(155,89,182,0.3); }
-.tag-gold { background: rgba(244,196,48,0.15); color: var(--gold); border: 1px solid rgba(244,196,48,0.3); }
-
-.module-title {
-  font-size: clamp(22px, 3vw, 32px);
-  font-weight: 800;
-  font-family: 'Inter', sans-serif;
-  margin-bottom: 8px;
-}
-.module-subtitle { font-size: 15px; color: var(--muted); }
-.module-duration {
-  margin-left: auto;
-  padding: 8px 16px;
-  background: rgba(0,212,255,0.08);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  font-size: 13px; font-weight: 600;
-  color: var(--blue);
-  white-space: nowrap;
-}
-
-.lessons-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 16px;
-}
-
-.lesson-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 20px;
-  backdrop-filter: blur(10px);
-  transition: all 0.3s;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-}
-
-.lesson-card::after {
-  content: '';
-  position: absolute; inset: 0;
-  background: linear-gradient(135deg, rgba(0,212,255,0.05), transparent);
-  opacity: 0; transition: opacity 0.3s;
-}
-.lesson-card:hover { transform: translateY(-4px); border-color: rgba(0,212,255,0.4); box-shadow: 0 16px 48px rgba(0,212,255,0.1); }
-.lesson-card:hover::after { opacity: 1; }
-
-.lesson-num { font-size: 11px; color: var(--muted); font-family: 'JetBrains Mono', monospace; margin-bottom: 8px; }
-.lesson-title { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
-.lesson-desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
-
-.lesson-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
-.lesson-tag {
-  padding: 3px 10px;
-  border-radius: 20px;
-  font-size: 10px; font-weight: 600;
-  background: rgba(0,212,255,0.08);
-  color: var(--blue);
-  border: 1px solid rgba(0,212,255,0.15);
-}
-
-.lesson-duration {
-  position: absolute; top: 16px; right: 16px;
-  font-size: 10px; color: var(--muted);
-  font-family: 'JetBrains Mono', monospace;
-}
-
-/* ═══════════════════════════════════════
-   AI TOOLS SHOWCASE
-═══════════════════════════════════════ */
-.tools-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 20px;
-}
-
-.tool-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 28px;
-  transition: all 0.3s;
-  position: relative;
-  overflow: hidden;
-}
-
-.tool-card:hover { transform: translateY(-6px); }
-
-.tool-logo {
-  width: 56px; height: 56px;
-  border-radius: 14px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 28px;
-  margin-bottom: 16px;
-}
-
-.tool-name { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
-.tool-desc { font-size: 13px; color: var(--muted); line-height: 1.5; margin-bottom: 16px; }
-
-.tool-use-cases { display: flex; flex-wrap: wrap; gap: 6px; }
-.tool-use-case {
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 11px;
-  background: rgba(155,89,182,0.1);
-  color: var(--purple);
-  border: 1px solid rgba(155,89,182,0.2);
-}
-
-.tool-glow {
-  position: absolute;
-  width: 100px; height: 100px;
-  border-radius: 50%;
-  top: -30px; right: -30px;
-  opacity: 0.2;
-  filter: blur(30px);
-}
-
-/* ═══════════════════════════════════════
-   PROJECTS SHOWCASE
-═══════════════════════════════════════ */
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-  gap: 24px;
-}
-
-.project-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 24px;
-  overflow: hidden;
-  transition: all 0.35s;
-  position: relative;
-}
-
-.project-card:hover { transform: translateY(-8px); box-shadow: 0 30px 80px rgba(0,0,0,0.4); border-color: rgba(0,212,255,0.4); }
-
-.project-header {
-  padding: 28px;
-  position: relative;
-  min-height: 160px;
-  display: flex; flex-direction: column; justify-content: flex-end;
-}
-
-.project-body { padding: 20px 28px 28px; }
-
-.project-icon {
-  font-size: 48px;
-  margin-bottom: 16px;
-  display: block;
-}
-
-.project-difficulty {
-  position: absolute;
-  top: 20px; right: 20px;
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 10px; font-weight: 700;
-  text-transform: uppercase; letter-spacing: 1px;
-}
-
-.diff-beginner { background: rgba(0,255,136,0.15); color: var(--green); border: 1px solid rgba(0,255,136,0.3); }
-.diff-intermediate { background: rgba(244,196,48,0.15); color: var(--gold); border: 1px solid rgba(244,196,48,0.3); }
-.diff-advanced { background: rgba(255,68,68,0.15); color: var(--red); border: 1px solid rgba(255,68,68,0.3); }
-
-.project-title { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
-.project-desc { font-size: 13px; color: var(--muted); line-height: 1.5; margin-bottom: 16px; }
-
-.project-stack { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
-.stack-tag {
-  padding: 4px 10px;
-  border-radius: 6px;
-  font-size: 11px; font-weight: 600;
-  background: rgba(0,212,255,0.08);
-  color: var(--blue);
-  font-family: 'JetBrains Mono', monospace;
-}
-
-.project-role {
-  font-size: 12px;
-  color: var(--gold);
-  font-weight: 600;
-  display: flex; align-items: center; gap: 6px;
-}
-
-/* ═══════════════════════════════════════
-   SALARY VISUALIZATION
-═══════════════════════════════════════ */
-.salary-viz {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 24px;
-  padding: 40px;
-  backdrop-filter: blur(10px);
-}
-
-.salary-title { font-size: 22px; font-weight: 700; margin-bottom: 32px; }
-
-.salary-bar-row {
-  display: flex; align-items: center; gap: 16px;
-  margin-bottom: 20px;
-}
-.salary-label { font-size: 13px; font-weight: 600; width: 120px; flex-shrink: 0; }
-.salary-bar-wrap { flex: 1; height: 10px; background: rgba(255,255,255,0.06); border-radius: 10px; overflow: hidden; }
-.salary-bar {
-  height: 100%;
-  border-radius: 10px;
-  background: linear-gradient(90deg, var(--blue), var(--purple));
-  transform-origin: left;
-  transition: width 1.5s cubic-bezier(0.16,1,0.3,1);
-  width: 0;
-}
-.salary-val { font-size: 14px; font-weight: 700; color: var(--gold); width: 90px; text-align: right; }
-
-/* ═══════════════════════════════════════
-   PROMPT LIBRARY
-═══════════════════════════════════════ */
-.prompts-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 16px;
-}
-
-.prompt-card {
-  background: rgba(5,12,24,0.9);
-  border: 1px solid rgba(0,212,255,0.15);
-  border-radius: 16px;
-  padding: 20px;
-  cursor: pointer;
-  transition: all 0.3s;
-  position: relative;
-}
-
-.prompt-card:hover { border-color: var(--blue); background: rgba(0,212,255,0.05); }
-
-.prompt-role { font-size: 10px; color: var(--gold); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
-.prompt-text {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 12px;
-  color: var(--text);
-  line-height: 1.6;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-.prompt-copy {
-  position: absolute; top: 12px; right: 12px;
-  background: transparent; border: 1px solid var(--border);
-  color: var(--muted); padding: 4px 10px; border-radius: 6px;
-  font-size: 10px; cursor: pointer; transition: all 0.2s;
-}
-.prompt-copy:hover { border-color: var(--blue); color: var(--blue); }
-
-/* ═══════════════════════════════════════
-   CTA SECTION
-═══════════════════════════════════════ */
-#cta {
-  text-align: center;
-  padding: 120px 48px;
-  position: relative;
-  overflow: hidden;
-}
-
-.cta-glow {
-  position: absolute;
-  width: 800px; height: 400px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(244,196,48,0.06) 0%, transparent 70%);
-  left: 50%; top: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-}
-
-/* ═══════════════════════════════════════
-   FOOTER
-═══════════════════════════════════════ */
-footer {
-  background: var(--bg2);
-  border-top: 1px solid var(--border);
-  padding: 48px;
-  text-align: center;
-  position: relative; z-index: 10;
-}
-
-.footer-logo { font-size: 24px; font-weight: 800; margin-bottom: 8px; }
-.footer-sub { font-size: 13px; color: var(--muted); margin-bottom: 24px; }
-.footer-links { display: flex; gap: 24px; justify-content: center; margin-bottom: 24px; flex-wrap: wrap; }
-.footer-links a { color: var(--muted); text-decoration: none; font-size: 13px; transition: color 0.2s; }
-.footer-links a:hover { color: var(--blue); }
-.footer-bottom { font-size: 12px; color: rgba(122,155,181,0.5); }
-
-/* ═══════════════════════════════════════
-   ANIMATIONS
-═══════════════════════════════════════ */
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-@keyframes fadeInDown {
-  from { opacity: 0; transform: translateY(-20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-@keyframes fadeInLeft {
-  from { opacity: 0; transform: translateX(-20px); }
-  to { opacity: 1; transform: translateX(0); }
-}
-
-.reveal {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
-}
-.reveal.visible { opacity: 1; transform: translateY(0); }
-
-/* ═══════════════════════════════════════
-   SCROLLBAR
-═══════════════════════════════════════ */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--blue); }
-
-/* ═══════════════════════════════════════
-   RESPONSIVE
-═══════════════════════════════════════ */
-@media (max-width: 768px) {
-  nav { padding: 16px 20px; }
-  .nav-links { display: none; }
-  section { padding: 60px 20px; }
-  .hero-stats { gap: 24px; }
-  .modules-timeline { padding-left: 28px; }
-  #jarvis-panel { width: calc(100vw - 40px); right: 20px; }
-  footer { padding: 40px 20px; }
-}
-
-/* ═══════════════════════════════════════
-   SPECIAL ELEMENTS
-═══════════════════════════════════════ */
-.highlight-box {
-  background: linear-gradient(135deg, rgba(0,212,255,0.08), rgba(155,89,182,0.08));
-  border: 1px solid rgba(0,212,255,0.2);
-  border-radius: 20px;
-  padding: 32px;
-  margin: 32px 0;
-}
-
-.numbered-list { list-style: none; }
-.numbered-list li {
-  display: flex; align-items: flex-start; gap: 16px;
-  padding: 16px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-}
-.numbered-list li:last-child { border-bottom: none; }
-.numbered-list .n {
-  width: 32px; height: 32px;
-  background: linear-gradient(135deg, var(--blue), var(--purple));
-  border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 12px; font-weight: 800;
-  flex-shrink: 0;
-  font-family: 'JetBrains Mono', monospace;
-}
-
-.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-@media(max-width:768px){ .two-col { grid-template-columns: 1fr; } }
-
-.tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
-.tag { padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; }
-.tag-blue-fill { background: rgba(0,212,255,0.15); color: var(--blue); }
-.tag-gold-fill { background: rgba(244,196,48,0.15); color: var(--gold); }
-.tag-green-fill { background: rgba(0,255,136,0.12); color: var(--green); }
-.tag-purple-fill { background: rgba(155,89,182,0.15); color: var(--purple); }
-
-/* Progress indicator */
-#progress-bar {
-  position: fixed; top: 0; left: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--blue), var(--purple), var(--gold));
-  z-index: 9999;
-  transition: width 0.1s;
-  width: 0%;
-}
-
-/* Notification Toast */
-#toast {
-  position: fixed; bottom: 120px; left: 50%;
-  transform: translateX(-50%) translateY(100px);
-  background: rgba(0,212,255,0.15);
-  border: 1px solid var(--blue);
-  border-radius: 12px;
-  padding: 12px 24px;
-  font-size: 13px;
-  z-index: 2000;
-  transition: transform 0.3s;
-  backdrop-filter: blur(10px);
-}
-#toast.show { transform: translateX(-50%) translateY(0); }
-
+.jbtns{display:flex;gap:7px;margin-top:14px;flex-wrap:wrap;}
+.jbtn{padding:5px 13px;border:1px solid rgba(0,212,255,.25);border-radius:18px;font-size:11px;background:transparent;color:var(--blue);cursor:pointer;transition:all .2s;font-family:'Space Grotesk',sans-serif;}
+.jbtn:hover{background:rgba(0,212,255,.12);border-color:var(--blue);}
+.jlinks{margin-top:12px;display:flex;flex-direction:column;gap:6px;}
+.jlink{font-size:11px;color:var(--gold);text-decoration:none;transition:color .2s;}
+.jlink:hover{color:var(--gold2);}
+@media(max-width:500px){#jpanel{width:calc(100vw - 36px);right:18px;}}
+
+/* ── HERO ── */
+#hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:110px 24px 80px;position:relative;overflow:hidden;}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,212,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,.04) 1px,transparent 1px);background-size:60px 60px;animation:grid-drift 25s linear infinite;}
+@keyframes grid-drift{0%{background-position:0 0;}100%{background-position:60px 60px;}}
+.hero-radial{position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(0,212,255,.06) 0%,transparent 68%);top:50%;left:50%;transform:translate(-50%,-50%);animation:radial-breathe 5s ease-in-out infinite;}
+@keyframes radial-breathe{0%,100%{transform:translate(-50%,-50%) scale(1);}50%{transform:translate(-50%,-50%) scale(1.15);}}
+
+.pill{display:inline-flex;align-items:center;gap:7px;padding:5px 18px;border-radius:30px;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;}
+.pill-gold{background:rgba(244,196,48,.1);border:1px solid rgba(244,196,48,.3);color:var(--gold);}
+.pill-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);animation:blink 1.5s infinite;}
+.pill-blue{background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.25);color:var(--blue);}
+
+h1.hero-h{font-family:'Inter',sans-serif;font-size:clamp(44px,8vw,96px);font-weight:900;line-height:.95;letter-spacing:-3px;margin:22px 0 20px;}
+.gtext{background:linear-gradient(135deg,#00D4FF 0%,#9B59B6 50%,#F4C430 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-desc{font-size:clamp(15px,1.8vw,18px);color:var(--muted);max-width:600px;margin:0 auto 36px;line-height:1.65;}
+.hero-row{display:flex;gap:40px;justify-content:center;flex-wrap:wrap;margin-bottom:44px;}
+.hero-kpi{text-align:center;}
+.kpi-val{font-size:28px;font-weight:800;font-family:'Inter',sans-serif;color:var(--gold);}
+.kpi-lbl{font-size:11px;color:var(--muted);margin-top:3px;}
+.btn-p{padding:14px 34px;background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;border:none;border-radius:10px;font-weight:700;font-size:14px;cursor:pointer;transition:all .3s;box-shadow:0 0 28px rgba(0,212,255,.28);font-family:'Space Grotesk',sans-serif;}
+.btn-p:hover{transform:translateY(-3px);box-shadow:0 0 48px rgba(0,212,255,.5);}
+.btn-s{padding:14px 34px;background:transparent;color:var(--text);border:1px solid var(--border);border-radius:10px;font-weight:600;font-size:14px;cursor:pointer;transition:all .3s;font-family:'Space Grotesk',sans-serif;}
+.btn-s:hover{background:rgba(0,212,255,.08);border-color:var(--blue);}
+.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+
+/* ── TICKER ── */
+.ticker-wrap{background:rgba(0,212,255,.04);border-top:1px solid rgba(0,212,255,.1);border-bottom:1px solid rgba(0,212,255,.1);padding:13px 0;overflow:hidden;white-space:nowrap;position:relative;z-index:10;}
+.ticker-inner{display:inline-flex;animation:tick 40s linear infinite;}
+.t-item{padding:0 36px;font-size:12px;font-family:'JetBrains Mono',monospace;color:var(--blue);display:inline-flex;align-items:center;gap:9px;}
+.t-item b{color:var(--gold);}
+.t-sep{color:rgba(0,212,255,.2);}
+@keyframes tick{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+/* ── SECTIONS ── */
+.wrap{max-width:1360px;margin:0 auto;padding:0 48px;}
+@media(max-width:768px){.wrap{padding:0 18px;}}
+section.sec{padding:96px 0;position:relative;z-index:10;}
+
+.sec-label{display:inline-flex;align-items:center;gap:6px;padding:4px 15px;background:rgba(0,212,255,.07);border:1px solid rgba(0,212,255,.18);border-radius:28px;font-size:10px;font-weight:700;color:var(--blue);letter-spacing:2px;text-transform:uppercase;margin-bottom:18px;}
+h2.sh{font-family:'Inter',sans-serif;font-size:clamp(30px,4vw,52px);font-weight:800;line-height:1.08;margin-bottom:14px;}
+.sdesc{font-size:16px;color:var(--muted);max-width:520px;line-height:1.6;margin-bottom:52px;}
+
+/* ── SYLLABUS CONTEXT ── */
+.syllabus-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin-bottom:48px;}
+.syl-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 16px;transition:all .25s;cursor:default;}
+.syl-card:hover{border-color:rgba(0,212,255,.5);transform:translateY(-3px);}
+.syl-icon{font-size:24px;margin-bottom:10px;}
+.syl-sub{font-size:13px;font-weight:700;margin-bottom:4px;}
+.syl-meta{font-size:11px;color:var(--muted);}
+
+/* ── INDUSTRY STRIP ── */
+.industry-strip{background:linear-gradient(135deg,rgba(5,9,15,1),rgba(8,18,32,.9));border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:72px 0;position:relative;z-index:10;}
+.stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0;}
+.istat{text-align:center;padding:32px 20px;border-right:1px solid rgba(0,212,255,.08);}
+.istat:last-child{border-right:none;}
+.istat-num{font-size:44px;font-weight:900;font-family:'Inter',sans-serif;line-height:1;}
+.istat-lbl{font-size:13px;color:var(--muted);margin-top:8px;line-height:1.4;}
+.istat-src{font-size:10px;color:rgba(107,143,168,.5);margin-top:6px;font-family:'JetBrains Mono',monospace;}
+
+/* ── COMPANY AI CARDS ── */
+.company-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;}
+.co-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:24px;transition:all .3s;position:relative;overflow:hidden;}
+.co-card:hover{transform:translateY(-5px);border-color:rgba(0,212,255,.4);box-shadow:0 20px 60px rgba(0,0,0,.35);}
+.co-top{display:flex;align-items:center;gap:14px;margin-bottom:14px;}
+.co-logo{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;}
+.co-name{font-size:17px;font-weight:700;}
+.co-tool{font-size:11px;color:var(--blue);font-family:'JetBrains Mono',monospace;margin-top:2px;}
+.co-desc{font-size:13px;color:var(--muted);line-height:1.55;}
+.co-stat{font-size:18px;font-weight:800;color:var(--gold);font-family:'Inter',sans-serif;margin-top:12px;}
+.co-glow{position:absolute;width:80px;height:80px;border-radius:50%;top:-20px;right:-20px;opacity:.15;filter:blur(25px);}
+
+/* ── MODULES ── */
+.mod-tabs{display:flex;gap:8px;margin-bottom:48px;flex-wrap:wrap;}
+.mod-tab{padding:10px 22px;border:1px solid var(--border);border-radius:30px;font-size:13px;font-weight:600;cursor:pointer;transition:all .25s;background:transparent;color:var(--muted);font-family:'Space Grotesk',sans-serif;}
+.mod-tab.active,.mod-tab:hover{background:rgba(0,212,255,.12);border-color:var(--blue);color:var(--text);}
+.mod-tab.active{box-shadow:0 0 18px rgba(0,212,255,.2);}
+
+.mod-panel{display:none;}
+.mod-panel.active{display:block;}
+
+.mod-hero{display:grid;grid-template-columns:1fr 2fr;gap:40px;margin-bottom:40px;align-items:start;}
+@media(max-width:768px){.mod-hero{grid-template-columns:1fr;}}
+.mod-meta{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:28px;}
+.mod-num{font-size:64px;font-weight:900;font-family:'Inter',sans-serif;line-height:1;opacity:.1;position:absolute;}
+.mod-badge{display:inline-flex;padding:4px 13px;border-radius:18px;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px;}
+.mod-title-lg{font-size:clamp(20px,2.5vw,28px);font-weight:800;font-family:'Inter',sans-serif;margin-bottom:8px;}
+.mod-sub{font-size:13px;color:var(--muted);line-height:1.55;margin-bottom:20px;}
+.mod-chips{display:flex;flex-wrap:wrap;gap:7px;}
+.mchip{padding:4px 12px;border-radius:18px;font-size:11px;font-weight:600;background:rgba(0,212,255,.08);color:var(--blue);border:1px solid rgba(0,212,255,.18);}
+
+/* LLM Diagram */
+.llm-diagram{background:rgba(5,10,20,.9);border:1px solid rgba(0,212,255,.2);border-radius:18px;padding:28px;margin-bottom:18px;}
+.llm-flow{display:flex;align-items:center;gap:0;flex-wrap:wrap;justify-content:center;}
+.llm-box{background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.3);border-radius:10px;padding:10px 16px;font-size:12px;font-weight:700;text-align:center;min-width:80px;}
+.llm-arrow{font-size:18px;color:rgba(0,212,255,.4);padding:0 6px;}
+.rag-box{background:rgba(155,89,182,.1);border:1px solid rgba(155,89,182,.35);border-radius:10px;padding:10px 16px;font-size:12px;font-weight:700;text-align:center;min-width:80px;color:var(--purple);}
+.mcp-box{background:rgba(244,196,48,.08);border:1px solid rgba(244,196,48,.3);border-radius:10px;padding:10px 16px;font-size:12px;font-weight:700;text-align:center;min-width:80px;color:var(--gold);}
+
+.lessons-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px;}
+.lcard{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;transition:all .3s;cursor:default;position:relative;overflow:hidden;}
+.lcard::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,212,255,.04),transparent);opacity:0;transition:opacity .3s;}
+.lcard:hover{transform:translateY(-3px);border-color:rgba(0,212,255,.38);}.lcard:hover::before{opacity:1;}
+.lcard-num{font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-bottom:7px;}
+.lcard-dur{position:absolute;top:14px;right:14px;font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace;background:rgba(255,255,255,.04);padding:2px 7px;border-radius:6px;}
+.lcard-title{font-size:14px;font-weight:700;margin-bottom:7px;}
+.lcard-desc{font-size:12px;color:var(--muted);line-height:1.55;}
+.lcard-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px;}
+.ltag{padding:2px 9px;border-radius:14px;font-size:9px;font-weight:700;background:rgba(0,212,255,.07);color:var(--blue);border:1px solid rgba(0,212,255,.15);}
+.ltag-p{background:rgba(155,89,182,.08);color:var(--purple);border-color:rgba(155,89,182,.2);}
+.ltag-g{background:rgba(244,196,48,.07);color:var(--gold);border-color:rgba(244,196,48,.2);}
+.ltag-gr{background:rgba(0,255,136,.06);color:var(--green);border-color:rgba(0,255,136,.18);}
+
+/* ── AI CONCEPTS VISUAL ── */
+.concepts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px;}
+.concept-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:24px;transition:all .3s;position:relative;overflow:hidden;}
+.concept-card:hover{transform:translateY(-5px);}
+.cc-icon{font-size:36px;margin-bottom:14px;}
+.cc-name{font-size:18px;font-weight:800;margin-bottom:8px;}
+.cc-def{font-size:13px;color:var(--muted);line-height:1.55;margin-bottom:14px;}
+.cc-finance{font-size:12px;color:var(--green);font-weight:600;padding:6px 12px;background:rgba(0,255,136,.06);border-radius:8px;border:1px solid rgba(0,255,136,.15);}
+.cc-glow{position:absolute;width:120px;height:120px;border-radius:50%;top:-30px;right:-30px;opacity:.12;filter:blur(35px);}
+
+/* ── TOOLS GRID ── */
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;}
+.tool-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;transition:all .3s;position:relative;overflow:hidden;}
+.tool-card:hover{transform:translateY(-4px);}
+.tl-logo{width:50px;height:50px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:14px;}
+.tl-name{font-size:16px;font-weight:700;margin-bottom:6px;}
+.tl-desc{font-size:12px;color:var(--muted);line-height:1.5;margin-bottom:12px;}
+.tl-uses{display:flex;flex-wrap:wrap;gap:5px;}
+.tl-use{padding:3px 10px;border-radius:14px;font-size:10px;font-weight:600;background:rgba(155,89,182,.1);color:var(--purple);border:1px solid rgba(155,89,182,.2);}
+
+/* ── ABOUT INSTRUCTOR ── */
+#about{background:linear-gradient(135deg,rgba(5,9,15,1),rgba(8,18,32,.95));border-top:1px solid var(--border);}
+.about-inner{display:grid;grid-template-columns:380px 1fr;gap:60px;align-items:start;}
+@media(max-width:900px){.about-inner{grid-template-columns:1fr;}}
+.about-card{background:rgba(8,18,32,.9);border:1px solid rgba(0,212,255,.2);border-radius:24px;padding:36px;text-align:center;position:relative;overflow:hidden;}
+.about-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,212,255,.04),rgba(155,89,182,.04));pointer-events:none;}
+.about-avatar{width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--purple));display:flex;align-items:center;justify-content:center;font-size:52px;margin:0 auto 20px;box-shadow:0 0 40px rgba(0,212,255,.3);}
+.about-name{font-size:24px;font-weight:800;margin-bottom:4px;}
+.about-creds{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:16px;}
+.cred-badge{padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700;background:rgba(244,196,48,.12);color:var(--gold);border:1px solid rgba(244,196,48,.3);}
+.about-role{font-size:13px;color:var(--muted);line-height:1.5;margin-bottom:20px;}
+.about-stat-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px;}
+.astat{background:rgba(0,212,255,.05);border:1px solid rgba(0,212,255,.12);border-radius:10px;padding:14px;text-align:center;}
+.astat-n{font-size:22px;font-weight:800;color:var(--gold);font-family:'Inter',sans-serif;}
+.astat-l{font-size:10px;color:var(--muted);margin-top:2px;}
+
+.about-content{padding:8px 0;}
+.about-content h3{font-size:clamp(22px,3vw,34px);font-weight:800;font-family:'Inter',sans-serif;margin-bottom:16px;}
+.about-quote{font-size:clamp(15px,1.6vw,18px);color:var(--muted);line-height:1.7;font-style:italic;border-left:3px solid var(--blue);padding-left:20px;margin-bottom:28px;}
+.about-bio{font-size:15px;color:var(--muted);line-height:1.7;margin-bottom:24px;}
+.about-exp-list{list-style:none;}
+.about-exp-list li{display:flex;align-items:flex-start;gap:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.05);}
+.about-exp-list li:last-child{border-bottom:none;}
+.aexp-icon{width:34px;height:34px;background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.15);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.aexp-title{font-size:14px;font-weight:700;}
+.aexp-sub{font-size:12px;color:var(--muted);margin-top:2px;}
+
+.book-card{background:linear-gradient(135deg,rgba(244,196,48,.08),rgba(155,89,182,.06));border:1px solid rgba(244,196,48,.25);border-radius:16px;padding:20px;display:flex;align-items:center;gap:16px;margin-top:28px;transition:all .3s;}
+.book-card:hover{border-color:var(--gold);transform:translateY(-2px);}
+.book-cover{width:52px;height:68px;background:linear-gradient(135deg,var(--gold),#8B6914);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;box-shadow:4px 4px 12px rgba(0,0,0,.4);}
+.book-title{font-size:14px;font-weight:700;margin-bottom:4px;}
+.book-meta{font-size:11px;color:var(--muted);}
+.book-tag{display:inline-flex;padding:2px 9px;background:rgba(0,255,136,.1);color:var(--green);border-radius:10px;font-size:10px;font-weight:700;margin-top:6px;border:1px solid rgba(0,255,136,.2);}
+
+/* ── PROMPTS ── */
+.prompts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px;}
+.prompt-card{background:rgba(5,10,20,.95);border:1px solid rgba(0,212,255,.14);border-radius:14px;padding:18px;cursor:pointer;transition:all .3s;position:relative;}
+.prompt-card:hover{border-color:rgba(0,212,255,.4);background:rgba(0,212,255,.04);}
+.pr-role{font-size:9px;color:var(--gold);font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:7px;}
+.pr-text{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text);line-height:1.65;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;}
+.pr-copy{position:absolute;top:12px;right:12px;background:transparent;border:1px solid var(--border);color:var(--muted);padding:3px 9px;border-radius:6px;font-size:9px;cursor:pointer;transition:all .2s;font-family:'Space Grotesk',sans-serif;}
+.pr-copy:hover{border-color:var(--blue);color:var(--blue);}
+
+/* ── CTA ── */
+#cta{text-align:center;padding:110px 24px;position:relative;overflow:hidden;}
+.cta-glow{position:absolute;width:600px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(244,196,48,.05),transparent 70%);left:50%;top:50%;transform:translate(-50%,-50%);pointer-events:none;}
+
+/* ── FOOTER ── */
+footer{background:var(--bg2);border-top:1px solid var(--border);padding:44px;text-align:center;position:relative;z-index:10;}
+.fl{font-size:22px;font-weight:800;margin-bottom:6px;}
+.fs{font-size:12px;color:var(--muted);margin-bottom:20px;}
+.flinks{display:flex;gap:22px;justify-content:center;flex-wrap:wrap;margin-bottom:20px;}
+.flinks a{color:var(--muted);text-decoration:none;font-size:12px;transition:color .2s;}
+.flinks a:hover{color:var(--blue);}
+.fcopy{font-size:11px;color:rgba(107,143,168,.4);}
+
+/* ── REVEAL ── */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
+.rv.vis{opacity:1;transform:translateY(0);}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
+::-webkit-scrollbar-thumb:hover{background:var(--blue);}
+
+/* ── TOAST ── */
+#toast{position:fixed;bottom:110px;left:50%;transform:translateX(-50%) translateY(80px);background:rgba(0,212,255,.12);border:1px solid var(--blue);border-radius:10px;padding:11px 22px;font-size:12px;z-index:2000;transition:transform .3s;backdrop-filter:blur(14px);}
+#toast.show{transform:translateX(-50%) translateY(0);}
+
+/* colors helpers */
+.c-blue{color:var(--blue);} .c-gold{color:var(--gold);} .c-purple{color:var(--purple);} .c-green{color:var(--green);}
+.bg-blue{background:rgba(0,212,255,.08);} .bg-gold{background:rgba(244,196,48,.08);} .bg-purple{background:rgba(155,89,182,.08);} .bg-green{background:rgba(0,255,136,.06);}
+.b-blue{border-color:rgba(0,212,255,.25)!important;} .b-gold{border-color:rgba(244,196,48,.3)!important;} .b-purple{border-color:rgba(155,89,182,.3)!important;}
 </style>
 </head>
 <body>
 
-<!-- Progress Bar -->
-<div id="progress-bar"></div>
-
-<!-- Matrix Canvas -->
-<canvas id="matrix-canvas"></canvas>
-
-<!-- JARVIS Assistant -->
-<div id="jarvis-orb" onclick="toggleJarvis()">
-  <div class="jarvis-ring">
-    <span class="jarvis-icon">🤖</span>
-  </div>
-</div>
-
-<div id="jarvis-panel">
-  <div class="jarvis-header">
-    <div class="jarvis-avatar">🤖</div>
-    <div>
-      <div class="jarvis-name">J.A.R.V.I.S. — Finance AI</div>
-      <div class="jarvis-status">● ONLINE — SCMHRD AI Module</div>
-    </div>
-  </div>
-  <div id="jarvis-text"></div>
-  <span class="jarvis-cursor"></span>
-  <div class="jarvis-btns">
-    <button class="jarvis-btn" onclick="jarvisSay('placement')">📊 Placements</button>
-    <button class="jarvis-btn" onclick="jarvisSay('course')">📚 Course Info</button>
-    <button class="jarvis-btn" onclick="jarvisSay('projects')">💡 AI Projects</button>
-    <button class="jarvis-btn" onclick="jarvisSay('salary')">💰 Salary Data</button>
-  </div>
-</div>
-
+<div id="prog"></div>
+<canvas id="bgcanvas"></canvas>
 <div id="toast"></div>
 
+<!-- JARVIS -->
+<div id="jorb" onclick="jToggle()"><div class="jorb-ring"><span class="jorb-icon">🤖</span></div></div>
+<div id="jpanel">
+  <div class="jhead">
+    <div class="javatar">🤖</div>
+    <div><div class="jname">J.A.R.V.I.S. — AI Finance</div><div class="jstatus">● ONLINE · SCMHRD Course Intelligence</div></div>
+    <div style="margin-left:auto;cursor:pointer;color:var(--muted);font-size:18px;" onclick="jToggle()">×</div>
+  </div>
+  <div id="jtext"></div><span class="jcursor"></span>
+  <div class="jbtns" id="jbtns">
+    <button class="jbtn" onclick="jSay('llm')">🧠 What is LLM?</button>
+    <button class="jbtn" onclick="jSay('rag')">📚 RAG explained</button>
+    <button class="jbtn" onclick="jSay('mcp')">⚙️ MCP & Agents</button>
+    <button class="jbtn" onclick="jSay('context')">🔍 Context Window</button>
+    <button class="jbtn" onclick="jSay('jpmorgan')">🏦 JPMorgan AI</button>
+    <button class="jbtn" onclick="jSay('career')">🎯 Career Advice</button>
+  </div>
+  <div class="jlinks" id="jlinks"></div>
+</div>
+
 <!-- NAV -->
-<nav>
-  <div class="nav-logo">
-    <div class="nav-logo-icon">⚡</div>
-    <div>
-      <div class="nav-logo-text">AI Finance</div>
-      <div class="nav-logo-sub">SCMHRD × Tejas Jadhav CFA FRM</div>
-    </div>
+<nav id="nav">
+  <div class="nav-brand">
+    <div class="nav-gem">⚡</div>
+    <div><div class="nav-title">AI Finance — SCMHRD</div><div class="nav-sub">by Tejas Jadhav CFA FRM</div></div>
   </div>
   <div class="nav-links">
-    <a href="#placement">Placements</a>
+    <a href="#overview">Overview</a>
+    <a href="#industry">Industry AI</a>
     <a href="#modules">Modules</a>
-    <a href="#tools">AI Tools</a>
-    <a href="#projects">Projects</a>
-    <a href="#prompts">Prompt Lab</a>
+    <a href="#concepts">Concepts</a>
+    <a href="#tools">Tools</a>
+    <a href="#about">Instructor</a>
   </div>
-  <button class="nav-cta" onclick="document.getElementById('modules').scrollIntoView({behavior:'smooth'})">Start Learning →</button>
+  <button class="nav-cta" onclick="scrollTo('modules')">Start Learning →</button>
 </nav>
 
-<!-- ═══════════════════════════════════════
-     HERO
-═══════════════════════════════════════ -->
+<!-- ═══ HERO ═══ -->
 <section id="hero">
-  <div class="hero-bg-grid"></div>
-  <div class="hero-glow"></div>
-
+  <div class="hero-grid"></div>
+  <div class="hero-radial"></div>
   <div style="position:relative;z-index:2;">
-    <div class="hero-badge">
-      <span class="hero-badge-dot"></span>
-      SCMHRD MBA Finance · Batch 2023–25 · Tejas Jadhav CFA FRM
+    <div class="pill pill-gold" style="margin-bottom:22px;display:inline-flex;"><span class="pill-dot"></span>SCMHRD MBA Finance · 2nd Year · 6-Hour Intensive</div>
+    <h1 class="hero-h">AI Finance<br><span class="gtext">Mastery</span></h1>
+    <p class="hero-desc">Master LLMs, RAG, Context Engineering & MCP — mapped to your MBA Finance syllabus and directly applicable to roles at JPMorgan, Goldman Sachs, Morgan Stanley, Kotak & beyond.</p>
+    <div class="hero-row">
+      <div class="hero-kpi"><div class="kpi-val" data-count="6" data-suf=" Hrs">0</div><div class="kpi-lbl">Total Duration</div></div>
+      <div class="hero-kpi"><div class="kpi-val" data-count="3" data-suf=" Modules">0</div><div class="kpi-lbl">Deep-Dive Modules</div></div>
+      <div class="hero-kpi"><div class="kpi-val" data-count="18" data-suf=" Lessons">0</div><div class="kpi-lbl">Hands-On Lessons</div></div>
+      <div class="hero-kpi"><div class="kpi-val" data-count="8" data-suf=" Projects">0</div><div class="kpi-lbl">Portfolio Builds</div></div>
     </div>
-
-    <h1 class="hero-title">
-      AI Finance<br>
-      <span class="gradient-text">Mastery</span>
-    </h1>
-
-    <p class="hero-sub">
-      A 6-hour intensive course built for SCMHRD Finance students — master the AI tools, build real projects, and land ₹20–30 LPA roles in Investment Banking, Portfolio Management, Risk & more.
-    </p>
-
-    <div class="hero-stats">
-      <div class="hero-stat">
-        <div class="hero-stat-value" data-count="19.64" data-suffix=" LPA">0</div>
-        <div class="hero-stat-label">Finance Avg CTC</div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-value" data-count="29.80" data-suffix=" LPA">0</div>
-        <div class="hero-stat-label">Finance Highest CTC</div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-value" data-count="6" data-suffix=" Hours">0</div>
-        <div class="hero-stat-label">Intensive Course</div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-value" data-count="3" data-suffix=" Modules">0</div>
-        <div class="hero-stat-label">Deep-Dive Modules</div>
-      </div>
-    </div>
-
-    <div class="hero-actions">
-      <button class="btn-primary" onclick="document.getElementById('modules').scrollIntoView({behavior:'smooth'})">
-        🚀 Start the Course
-      </button>
-      <button class="btn-secondary" onclick="document.getElementById('placement').scrollIntoView({behavior:'smooth'})">
-        📊 View Placement Data
-      </button>
+    <div class="hero-btns">
+      <button class="btn-p" onclick="scrollTo('modules')">🚀 Explore Modules</button>
+      <button class="btn-s" onclick="jToggle()">🤖 Ask JARVIS</button>
     </div>
   </div>
 </section>
 
 <!-- TICKER -->
 <div class="ticker-wrap">
-  <div class="ticker-inner" id="ticker">
-    <span class="ticker-item">💰 Finance Avg CTC <span>₹19.64 LPA</span></span>
-    <span class="ticker-sep">|</span>
-    <span class="ticker-item">🏆 Highest CTC <span>₹29.80 LPA</span></span>
-    <span class="ticker-sep">|</span>
-    <span class="ticker-item">📈 Top 10% Avg <span>₹28.97 LPA</span></span>
-    <span class="ticker-sep">|</span>
-    <span class="ticker-item">💼 Investment Banking <span>Top Role</span></span>
-    <span class="ticker-sep">|</span>
-    <span class="ticker-item">🏦 BFSI Recruiters <span>30.11%</span></span>
-    <span class="ticker-sep">|</span>
-    <span class="ticker-item">📊 Top 25% Avg <span>₹25.03 LPA</span></span>
-    <span class="ticker-sep">|</span>
-    <span class="ticker-item">🤖 AI Tools in Finance <span>ChatGPT · Claude · Bloomberg AI</span></span>
-    <span class="ticker-sep">|</span>
-    <span class="ticker-item">🎓 SCMHRD <span>AACSB Accredited</span></span>
-    <span class="ticker-sep">|</span>
-    <!-- duplicate for seamless loop -->
-    <span class="ticker-item">💰 Finance Avg CTC <span>₹19.64 LPA</span></span>
-    <span class="ticker-sep">|</span>
-    <span class="ticker-item">🏆 Highest CTC <span>₹29.80 LPA</span></span>
-    <span class="ticker-sep">|</span>
-    <span class="ticker-item">📈 Top 10% Avg <span>₹28.97 LPA</span></span>
-    <span class="ticker-sep">|</span>
-    <span class="ticker-item">💼 Investment Banking <span>Top Role</span></span>
-    <span class="ticker-sep">|</span>
-    <span class="ticker-item">🏦 BFSI Recruiters <span>30.11%</span></span>
-    <span class="ticker-sep">|</span>
-    <span class="ticker-item">📊 Top 25% Avg <span>₹25.03 LPA</span></span>
-    <span class="ticker-sep">|</span>
-    <span class="ticker-item">🤖 AI Tools in Finance <span>ChatGPT · Claude · Bloomberg AI</span></span>
-    <span class="ticker-sep">|</span>
-    <span class="ticker-item">🎓 SCMHRD <span>AACSB Accredited</span></span>
+  <div class="ticker-inner">
+    <span class="t-item">🧠 LLM <b>Large Language Models</b></span><span class="t-sep">·</span>
+    <span class="t-item">📚 RAG <b>Retrieval Augmented Generation</b></span><span class="t-sep">·</span>
+    <span class="t-item">⚙️ MCP <b>Model Context Protocol</b></span><span class="t-sep">·</span>
+    <span class="t-item">🏦 JPMorgan <b>LLM Suite — IB Decks in 30 sec</b></span><span class="t-sep">·</span>
+    <span class="t-item">📊 Morgan Stanley <b>AI @ Scale — 900 Advisors</b></span><span class="t-sep">·</span>
+    <span class="t-item">💰 Goldman Sachs <b>Gen AI for Code & IB</b></span><span class="t-sep">·</span>
+    <span class="t-item">🎯 Agentic AI <b>95% of PE firms adopting in 2026</b></span><span class="t-sep">·</span>
+    <span class="t-item">📈 AI Asset Mgmt <b>$107B → $1,168B by 2035</b></span><span class="t-sep">·</span>
+    <span class="t-item">🧠 LLM <b>Large Language Models</b></span><span class="t-sep">·</span>
+    <span class="t-item">📚 RAG <b>Retrieval Augmented Generation</b></span><span class="t-sep">·</span>
+    <span class="t-item">⚙️ MCP <b>Model Context Protocol</b></span><span class="t-sep">·</span>
+    <span class="t-item">🏦 JPMorgan <b>LLM Suite — IB Decks in 30 sec</b></span><span class="t-sep">·</span>
+    <span class="t-item">📊 Morgan Stanley <b>AI @ Scale — 900 Advisors</b></span><span class="t-sep">·</span>
+    <span class="t-item">💰 Goldman Sachs <b>Gen AI for Code & IB</b></span><span class="t-sep">·</span>
+    <span class="t-item">🎯 Agentic AI <b>95% of PE firms adopting in 2026</b></span><span class="t-sep">·</span>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════
-     PLACEMENT DATA
-═══════════════════════════════════════ -->
-<div id="placement" style="background:linear-gradient(180deg,var(--bg2) 0%,var(--bg) 100%);position:relative;z-index:10;">
-<div class="inner">
-<section style="max-width:100%;padding:100px 48px;">
+<!-- ═══ COURSE OVERVIEW ═══ -->
+<section class="sec" id="overview">
+<div class="wrap">
+  <div class="sec-label">📐 Academic Design</div>
+  <h2 class="sh rv">Built on Real<br><span class="gtext">MBA Finance Syllabus</span></h2>
+  <p class="sdesc rv">Every lesson is anchored to Semester 2 subjects from SCMHRD, Wharton, Harvard, and LBS — then extended with AI tools your future employers are already deploying.</p>
 
-  <div class="section-label">📊 SCMHRD Placement Data 2023–25</div>
-  <h2 class="section-title reveal">Finance Placement<br><span class="gradient-text">Intelligence</span></h2>
-  <p class="section-desc reveal">Real numbers from the SCMHRD Final Placement Report — your target compensation benchmarks and dream roles.</p>
-
-  <div class="stats-grid reveal">
-    <div class="stat-card">
-      <div class="stat-card-icon">💰</div>
-      <div class="stat-card-value" data-count="19.64" data-suffix=" LPA">—</div>
-      <div class="stat-card-label">Finance Average CTC</div>
-      <div class="stat-card-sub">MBA Finance Batch 2023-25</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-card-icon">🏆</div>
-      <div class="stat-card-value" data-count="29.80" data-suffix=" LPA">—</div>
-      <div class="stat-card-label">Highest CTC Offer</div>
-      <div class="stat-card-sub">BFSI sector leader</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-card-icon">📈</div>
-      <div class="stat-card-value" data-count="20.00" data-suffix=" LPA">—</div>
-      <div class="stat-card-label">Finance Median CTC</div>
-      <div class="stat-card-sub">50th percentile</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-card-icon">⭐</div>
-      <div class="stat-card-value" data-count="28.97" data-suffix=" LPA">—</div>
-      <div class="stat-card-label">Top 10% Average CTC</div>
-      <div class="stat-card-sub">Elite finance roles</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-card-icon">🎯</div>
-      <div class="stat-card-value" data-count="25.03" data-suffix=" LPA">—</div>
-      <div class="stat-card-label">Top 25% Average CTC</div>
-      <div class="stat-card-sub">Upper quartile</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-card-icon">🏦</div>
-      <div class="stat-card-value" data-count="30.11" data-suffix="%">—</div>
-      <div class="stat-card-label">BFSI Placements</div>
-      <div class="stat-card-sub">Largest finance sector</div>
-    </div>
+  <div class="syllabus-grid rv">
+    <div class="syl-card bg-blue b-blue"><div class="syl-icon">📊</div><div class="syl-sub">Financial Management</div><div class="syl-meta">AI for Valuation, DCF, Capital Structure</div></div>
+    <div class="syl-card bg-blue b-blue"><div class="syl-icon">📉</div><div class="syl-sub">Corporate Finance</div><div class="syl-meta">M&A Screening, Deal Structuring with AI</div></div>
+    <div class="syl-card bg-purple b-purple"><div class="syl-icon">⚠️</div><div class="syl-sub">Risk Management</div><div class="syl-meta">VaR, CVaR, AI Stress Testing</div></div>
+    <div class="syl-card bg-purple b-purple"><div class="syl-icon">📈</div><div class="syl-sub">Portfolio Theory</div><div class="syl-meta">Markowitz + ML Factor Models</div></div>
+    <div class="syl-card bg-gold b-gold"><div class="syl-icon">🌐</div><div class="syl-sub">Macroeconomics</div><div class="syl-meta">AI Macro Signal Extraction</div></div>
+    <div class="syl-card bg-gold b-gold"><div class="syl-icon">📋</div><div class="syl-sub">Business Analytics</div><div class="syl-meta">RAG Pipelines for Finance Data</div></div>
+    <div class="syl-card bg-green" style="border-color:rgba(0,255,136,.2)!important;"><div class="syl-icon">🔍</div><div class="syl-sub">Research Methods</div><div class="syl-meta">LLM-Assisted Research & Synthesis</div></div>
+    <div class="syl-card bg-blue b-blue"><div class="syl-icon">🏦</div><div class="syl-sub">Investment Banking</div><div class="syl-meta">Pitchbook AI, CIM Automation</div></div>
   </div>
 
-  <!-- Salary Bar Chart -->
-  <div class="two-col reveal" style="margin-bottom:60px;">
-    <div class="salary-viz">
-      <div class="salary-title">📊 Finance CTC Breakdown</div>
-      <div class="salary-bar-row">
-        <div class="salary-label">Highest CTC</div>
-        <div class="salary-bar-wrap"><div class="salary-bar" data-width="100" style="background:linear-gradient(90deg,#00FF88,#00D4FF)"></div></div>
-        <div class="salary-val">₹29.80 L</div>
-      </div>
-      <div class="salary-bar-row">
-        <div class="salary-label">Top 10% Avg</div>
-        <div class="salary-bar-wrap"><div class="salary-bar" data-width="97" style="background:linear-gradient(90deg,#F4C430,#FF8C00)"></div></div>
-        <div class="salary-val">₹28.97 L</div>
-      </div>
-      <div class="salary-bar-row">
-        <div class="salary-label">Top 25% Avg</div>
-        <div class="salary-bar-wrap"><div class="salary-bar" data-width="84"></div></div>
-        <div class="salary-val">₹25.03 L</div>
-      </div>
-      <div class="salary-bar-row">
-        <div class="salary-label">Top 50% Avg</div>
-        <div class="salary-bar-wrap"><div class="salary-bar" data-width="76" style="background:linear-gradient(90deg,#9B59B6,#00D4FF)"></div></div>
-        <div class="salary-val">₹22.52 L</div>
-      </div>
-      <div class="salary-bar-row">
-        <div class="salary-label">Median CTC</div>
-        <div class="salary-bar-wrap"><div class="salary-bar" data-width="67" style="background:linear-gradient(90deg,#7A9BB5,#9B59B6)"></div></div>
-        <div class="salary-val">₹20.00 L</div>
-      </div>
-      <div class="salary-bar-row">
-        <div class="salary-label">Average CTC</div>
-        <div class="salary-bar-wrap"><div class="salary-bar" data-width="66" style="background:linear-gradient(90deg,#444,#7A9BB5)"></div></div>
-        <div class="salary-val">₹19.64 L</div>
-      </div>
-    </div>
-
+  <div class="rv" style="background:rgba(0,212,255,.04);border:1px solid rgba(0,212,255,.15);border-radius:20px;padding:28px 32px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;">
+    <div style="font-size:36px;">🎓</div>
     <div>
-      <div class="salary-title" style="font-size:20px;font-weight:800;margin-bottom:24px;">🏢 Sector CTC — BFSI</div>
-      <div class="salary-bar-row" style="margin-bottom:16px;">
-        <div class="salary-label">BFSI Highest</div>
-        <div class="salary-bar-wrap"><div class="salary-bar" data-width="100" style="background:linear-gradient(90deg,#F4C430,#FF8C00)"></div></div>
-        <div class="salary-val">₹29.80 L</div>
-      </div>
-      <div class="salary-bar-row" style="margin-bottom:32px;">
-        <div class="salary-label">BFSI Average</div>
-        <div class="salary-bar-wrap"><div class="salary-bar" data-width="69" style="background:linear-gradient(90deg,#00D4FF,#9B59B6)"></div></div>
-        <div class="salary-val">₹20.51 L</div>
-      </div>
+      <div style="font-weight:700;font-size:16px;margin-bottom:6px;">Benchmarked Against World's Best</div>
+      <div style="font-size:13px;color:var(--muted);line-height:1.55;">Course structure draws from <strong style="color:var(--text);">Wharton FNCE 6110 / 6130</strong>, <strong style="color:var(--text);">Harvard Finance I & II</strong>, <strong style="color:var(--text);">LBS Finance Core</strong>, and <strong style="color:var(--text);">MIT Sloan AI for Finance</strong> — then adapted for SCMHRD's semester 2 context and Indian capital markets.</div>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-left:auto;">
+      <span class="pill pill-gold" style="font-size:10px;">Wharton</span>
+      <span class="pill pill-gold" style="font-size:10px;">Harvard</span>
+      <span class="pill pill-gold" style="font-size:10px;">LBS</span>
+      <span class="pill pill-gold" style="font-size:10px;">MIT Sloan</span>
+    </div>
+  </div>
+</div>
+</section>
 
-      <div class="highlight-box">
-        <div style="font-size:13px;font-weight:700;color:var(--gold);margin-bottom:12px;">🤖 JARVIS INSIGHT</div>
-        <div style="font-size:14px;line-height:1.6;color:var(--text);">
-          Students with demonstrated AI skills in finance consistently land in the <strong style="color:var(--gold);">top 25%</strong> salary bracket. Building projects like AI-powered credit scoring, portfolio optimization, and risk dashboards differentiates you in BFSI interviews.
+<!-- ═══ INDUSTRY AI ═══ -->
+<div class="industry-strip" id="industry">
+<div class="wrap">
+  <div class="sec-label" style="margin-bottom:16px;">🏢 Real-World AI Adoption</div>
+  <h2 class="sh rv" style="margin-bottom:8px;">What Finance Giants<br><span class="gtext">Are Already Doing</span></h2>
+  <p class="sdesc rv" style="margin-bottom:40px;">These aren't future predictions. This is what your interviewers are building right now.</p>
+
+  <div class="stat-row rv" style="border:1px solid var(--border);border-radius:20px;overflow:hidden;margin-bottom:52px;">
+    <div class="istat"><div class="istat-num c-gold">$17B</div><div class="istat-lbl">JPMorgan Chase AI investment in 2026</div><div class="istat-src">source: Bloomberg</div></div>
+    <div class="istat"><div class="istat-num c-blue">95%</div><div class="istat-lbl">PE firms adopting Agentic AI in 2026</div><div class="istat-src">source: CFA Institute</div></div>
+    <div class="istat"><div class="istat-num c-purple">$340B</div><div class="istat-lbl">McKinsey: annual value AI adds to banking</div><div class="istat-src">source: McKinsey Global</div></div>
+    <div class="istat"><div class="istat-num c-green">73%</div><div class="istat-lbl">Y Combinator finance startups are agentic AI</div><div class="istat-src">Jan 2024 – Jun 2025</div></div>
+  </div>
+
+  <div class="company-grid rv">
+    <div class="co-card b-blue">
+      <div class="co-glow" style="background:var(--blue);"></div>
+      <div class="co-top"><div class="co-logo bg-blue" style="border:1px solid rgba(0,212,255,.2);">🏦</div><div><div class="co-name">JPMorgan Chase</div><div class="co-tool">LLM Suite · IndexGPT · DocLLM</div></div></div>
+      <div class="co-desc">LLM Suite enables a junior IB analyst to build a pitch deck in <strong style="color:var(--text);">30 seconds</strong> instead of hours. DocLLM processes contracts, legal filings, and prospectuses using layout-aware transformers. 200+ AI use cases deployed across 50,000 employees.</div>
+      <div class="co-stat">$17B AI investment · 2026</div>
+    </div>
+    <div class="co-card" style="border-color:rgba(155,89,182,.3);">
+      <div class="co-glow" style="background:var(--purple);"></div>
+      <div class="co-top"><div class="co-logo bg-purple" style="border:1px solid rgba(155,89,182,.2);">📊</div><div><div class="co-name">Morgan Stanley</div><div class="co-tool">AI @ Scale · RAG Research Assistant</div></div></div>
+      <div class="co-desc">Partnered with OpenAI to deploy a <strong style="color:var(--text);">RAG-powered research assistant</strong> to 900 wealth advisors. Synthesizes 100,000+ research documents to surface personalized insights for client conversations in real time.</div>
+      <div class="co-stat">900 advisors · 100K+ documents</div>
+    </div>
+    <div class="co-card" style="border-color:rgba(244,196,48,.25);">
+      <div class="co-glow" style="background:var(--gold);"></div>
+      <div class="co-top"><div class="co-logo bg-gold" style="border:1px solid rgba(244,196,48,.2);">💰</div><div><div class="co-name">Goldman Sachs</div><div class="co-tool">Gen AI · Code Modernization</div></div></div>
+      <div class="co-desc">Gen AI is central to all application development. Using LLMs to <strong style="color:var(--text);">modernize COBOL legacy code</strong> and validate AI-generated code before deployment. IB division using AI to automate CIM drafting and comparable company analysis.</div>
+      <div class="co-stat">Central to all dev workflows</div>
+    </div>
+    <div class="co-card" style="border-color:rgba(0,255,136,.2);">
+      <div class="co-glow" style="background:var(--green);"></div>
+      <div class="co-top"><div class="co-logo bg-green" style="border:1px solid rgba(0,255,136,.15);">💳</div><div><div class="co-name">Mastercard</div><div class="co-tool">Gen AI Fraud Detection</div></div></div>
+      <div class="co-desc">Gen AI <strong style="color:var(--text);">doubled detection of compromised cards</strong>, reduced false positives by 200%, and increased merchant fraud detection speed by 300%. Uses synthetic transaction generation for model training.</div>
+      <div class="co-stat">2× card detection · 300% speed</div>
+    </div>
+    <div class="co-card b-blue">
+      <div class="co-glow" style="background:var(--blue);"></div>
+      <div class="co-top"><div class="co-logo bg-blue" style="border:1px solid rgba(0,212,255,.2);">🇮🇳</div><div><div class="co-name">Kotak / HDFC / Axis</div><div class="co-tool">LLM Credit · Robo-Advisory</div></div></div>
+      <div class="co-desc">Indian BFSI leaders deploying AI for <strong style="color:var(--text);">credit underwriting automation</strong>, AI-assisted relationship manager workflows, and conversational robo-advisors for HNI wealth management.</div>
+      <div class="co-stat">₹20.51L avg CTC in BFSI</div>
+    </div>
+    <div class="co-card" style="border-color:rgba(155,89,182,.3);">
+      <div class="co-glow" style="background:var(--purple);"></div>
+      <div class="co-top"><div class="co-logo bg-purple" style="border:1px solid rgba(155,89,182,.2);">⚡</div><div><div class="co-name">Bloomberg</div><div class="co-tool">BloombergGPT · Terminal AI</div></div></div>
+      <div class="co-desc">50-billion parameter LLM trained <strong style="color:var(--text);">exclusively on financial data</strong> — 363B tokens from Bloomberg archives. Outperforms general-purpose LLMs on every financial NLP task including sentiment, NER, and headline classification.</div>
+      <div class="co-stat">50B params · 363B finance tokens</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══ AI CONCEPTS ═══ -->
+<section class="sec" id="concepts">
+<div class="wrap">
+  <div class="sec-label">🧠 Core AI Concepts</div>
+  <h2 class="sh rv">LLM · RAG · Context<br><span class="gtext">& MCP — Explained</span></h2>
+  <p class="sdesc rv">The four pillars of Module 1 — demystified for finance professionals.</p>
+
+  <div class="concepts-grid rv">
+    <div class="concept-card bg-blue b-blue">
+      <div class="cc-glow" style="background:var(--blue);"></div>
+      <div class="cc-icon">🧠</div>
+      <div class="cc-name">Large Language Model</div>
+      <div class="cc-def">A neural network trained on trillions of tokens that can understand and generate human language. Powered by transformers — the architecture behind GPT-4, Claude, and Bloomberg GPT. Knows finance from training data but can hallucinate facts.</div>
+      <div class="cc-finance">Finance use: Earnings summarization, DCF commentary, credit memo drafting</div>
+    </div>
+    <div class="concept-card" style="background:rgba(155,89,182,.06);border-color:rgba(155,89,182,.25)!important;">
+      <div class="cc-glow" style="background:var(--purple);"></div>
+      <div class="cc-icon">📚</div>
+      <div class="cc-name">RAG — Retrieval Augmented Generation</div>
+      <div class="cc-def">Grounds LLM responses in real, up-to-date data. A retrieval layer fetches relevant documents from a vector database, then injects them into the prompt as context. Morgan Stanley uses RAG to let advisors query 100K+ research reports.</div>
+      <div class="cc-finance" style="color:var(--purple);background:rgba(155,89,182,.08);border-color:rgba(155,89,182,.2);">Finance use: Annual report Q&A, prospectus analysis, live market data retrieval</div>
+    </div>
+    <div class="concept-card" style="background:rgba(0,212,255,.04);border-color:rgba(0,212,255,.25)!important;">
+      <div class="cc-glow" style="background:var(--blue);"></div>
+      <div class="cc-icon">🔍</div>
+      <div class="cc-name">Context Window</div>
+      <div class="cc-def">The maximum text an LLM can "see" at once — like working memory. Claude has 200K tokens (~150K words), enough to process an entire annual report. Context management determines output quality more than prompt wording alone.</div>
+      <div class="cc-finance">Finance use: Full 10-K analysis, multi-year financial comparison, deal room docs</div>
+    </div>
+    <div class="concept-card" style="background:rgba(244,196,48,.05);border-color:rgba(244,196,48,.25)!important;">
+      <div class="cc-glow" style="background:var(--gold);"></div>
+      <div class="cc-icon">⚙️</div>
+      <div class="cc-name">Model Context Protocol (MCP)</div>
+      <div class="cc-def">Anthropic's open standard for connecting AI models to external tools, databases, and APIs without custom code. Like USB-C for AI — one protocol to plug an LLM into Bloomberg Terminal, Excel, a risk database, or a trading platform.</div>
+      <div class="cc-finance" style="color:var(--gold);background:rgba(244,196,48,.07);border-color:rgba(244,196,48,.2);">Finance use: Live data feeds, automated report generation, agentic deal workflows</div>
+    </div>
+  </div>
+
+  <!-- LLM → RAG → MCP Flow Diagram -->
+  <div class="llm-diagram rv" style="margin-top:36px;">
+    <div style="font-size:12px;color:var(--muted);margin-bottom:18px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;">How They Work Together — Finance AI Pipeline</div>
+    <div class="llm-flow">
+      <div class="llm-box">📄<br><span style="font-size:10px;">Annual Report<br>/ Live Data</span></div>
+      <div class="llm-arrow">→</div>
+      <div class="rag-box">📚<br><span style="font-size:10px;color:var(--purple);">RAG<br>Vector DB</span></div>
+      <div class="llm-arrow">→</div>
+      <div class="llm-box">🔍<br><span style="font-size:10px;">Context<br>Injection</span></div>
+      <div class="llm-arrow">→</div>
+      <div class="llm-box" style="background:rgba(0,212,255,.12);border-color:rgba(0,212,255,.5);">🧠<br><span style="font-size:10px;">LLM<br>Claude/GPT</span></div>
+      <div class="llm-arrow">→</div>
+      <div class="mcp-box">⚙️<br><span style="font-size:10px;color:var(--gold);">MCP<br>Tools/APIs</span></div>
+      <div class="llm-arrow">→</div>
+      <div class="llm-box" style="background:rgba(0,255,136,.07);border-color:rgba(0,255,136,.3);">✅<br><span style="font-size:10px;color:var(--green);">Credit Memo<br>Risk Report</span></div>
+    </div>
+    <div style="margin-top:16px;font-size:11px;color:var(--muted);text-align:center;">This exact pipeline is deployed by Morgan Stanley (RAG), JPMorgan (MCP + LLM), and Bloomberg (LLM trained on finance data)</div>
+  </div>
+</div>
+</section>
+
+<!-- ═══ MODULES ═══ -->
+<section class="sec" id="modules" style="background:var(--bg2);padding:96px 0;">
+<div class="wrap">
+  <div class="sec-label">📚 6-Hour Intensive Program</div>
+  <h2 class="sh rv">Three Modules.<br><span class="gtext">Total Transformation.</span></h2>
+  <p class="sdesc rv">Each module is 2 hours of dense, application-first teaching — no fluff, just the skills your recruiters are testing for.</p>
+
+  <div class="mod-tabs rv">
+    <button class="mod-tab active" onclick="switchMod(0)">⚡ Module 1 · AI Foundations</button>
+    <button class="mod-tab" onclick="switchMod(1)">🏦 Module 2 · Finance Functions</button>
+    <button class="mod-tab" onclick="switchMod(2)">🚀 Module 3 · Build & Career</button>
+  </div>
+
+  <!-- ── MODULE 1 ── -->
+  <div class="mod-panel active" id="mod0">
+    <div class="mod-hero">
+      <div class="mod-meta">
+        <div class="mod-badge pill-blue" style="padding:4px 13px;font-size:10px;font-weight:700;letter-spacing:1.5px;display:inline-flex;background:rgba(0,212,255,.1);color:var(--blue);border:1px solid rgba(0,212,255,.3);">MODULE 1 · 2 HOURS</div>
+        <div class="mod-title-lg" style="margin-top:12px;">LLMs, RAG, Context<br>& MCP for Finance</div>
+        <div class="mod-sub">No coding background required. You'll understand — and use — the exact AI architecture deployed by the world's top finance firms by the end of Hour 2.</div>
+        <div class="mod-chips">
+          <span class="mchip">LLMs</span><span class="mchip">RAG Pipelines</span><span class="mchip">Context Engineering</span><span class="mchip">MCP</span><span class="mchip">BloombergGPT</span><span class="mchip">Agentic AI</span>
+        </div>
+        <div style="margin-top:20px;padding:16px;background:rgba(0,212,255,.05);border-radius:12px;border:1px solid rgba(0,212,255,.12);">
+          <div style="font-size:11px;color:var(--gold);font-weight:700;margin-bottom:6px;">🎯 MODULE OUTCOME</div>
+          <div style="font-size:13px;color:var(--muted);line-height:1.6;">Explain to a Goldman recruiter exactly how LLMs, RAG, and MCP work — and demonstrate a live use case you built in class.</div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:16px;">Hour 1 — The AI Stack</div>
+        <div class="lessons-grid" style="grid-template-columns:1fr 1fr;margin-bottom:24px;">
+          <div class="lcard"><div class="lcard-dur">25 min</div><div class="lcard-num">1.1</div><div class="lcard-title">How LLMs Work</div><div class="lcard-desc">Tokens, transformers, attention — how GPT-4, Claude and BloombergGPT differ. Why finance LLMs outperform general ones on ratio analysis and sentiment.</div><div class="lcard-tags"><span class="ltag">Transformers</span><span class="ltag">BloombergGPT</span><span class="ltag ltag-g">FinGPT</span></div></div>
+          <div class="lcard"><div class="lcard-dur">20 min</div><div class="lcard-num">1.2</div><div class="lcard-title">Context Windows & Prompt Engineering</div><div class="lcard-desc">Why context size matters more than model size for finance tasks. Engineer prompts for DCF, credit memos, risk reports. Chain-of-thought for financial reasoning.</div><div class="lcard-tags"><span class="ltag">Context Mgmt</span><span class="ltag ltag-p">Chain-of-Thought</span><span class="ltag">Prompting</span></div></div>
+          <div class="lcard"><div class="lcard-dur">25 min</div><div class="lcard-num">1.3</div><div class="lcard-title">RAG — Retrieval Augmented Generation</div><div class="lcard-desc">How Morgan Stanley's AI advisor retrieves from 100K+ research docs. Build a mini prospectus Q&A bot using RAG in Google Colab — no code from scratch, prompt-driven.</div><div class="lcard-tags"><span class="ltag ltag-p">RAG Pipeline</span><span class="ltag">Vector DB</span><span class="ltag">Morgan Stanley</span></div></div>
+          <div class="lcard"><div class="lcard-dur">10 min</div><div class="lcard-num">1.4</div><div class="lcard-title">Hallucination & Grounding</div><div class="lcard-desc">Why LLMs hallucinate financial data. Verification strategies for earnings numbers, valuations, regulatory facts. Critical for avoiding costly errors in finance workflows.</div><div class="lcard-tags"><span class="ltag ltag-g">Risk</span><span class="ltag">Grounding</span><span class="ltag">Verification</span></div></div>
+        </div>
+        <div style="font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:16px;">Hour 2 — MCP & Agentic Finance</div>
+        <div class="lessons-grid" style="grid-template-columns:1fr 1fr;">
+          <div class="lcard"><div class="lcard-dur">25 min</div><div class="lcard-num">1.5</div><div class="lcard-title">MCP — Model Context Protocol</div><div class="lcard-desc">Anthropic's open standard that makes AI "plug into" any tool — Bloomberg, Excel, risk databases, trading APIs. How JPMorgan's LLM Suite and Goldman's AI dev platform use this pattern.</div><div class="lcard-tags"><span class="ltag ltag-g">MCP</span><span class="ltag">Agent Tools</span><span class="ltag ltag-p">Anthropic</span></div></div>
+          <div class="lcard"><div class="lcard-dur">20 min</div><div class="lcard-num">1.6</div><div class="lcard-title">Agentic AI in Finance</div><div class="lcard-desc">When AI doesn't just respond — it acts. Multi-step agents that pull live data, run analysis, generate report, and email stakeholders. 82% of midsize finance firms deploying by 2026.</div><div class="lcard-tags"><span class="ltag">Multi-Agent</span><span class="ltag ltag-p">Orchestration</span><span class="ltag ltag-g">Automation</span></div></div>
+          <div class="lcard b-gold" style="background:rgba(244,196,48,.04);"><div class="lcard-dur">20 min</div><div class="lcard-num">1.7</div><div class="lcard-title">🔧 Live Build: Annual Report AI Bot</div><div class="lcard-desc">Use Claude + a RAG prompt pattern to Q&A any company's annual report. Ask: "What is the debt-to-equity trend?" "Summarize key risks." "Flag red flags for a credit analyst." — no database setup required.</div><div class="lcard-tags"><span class="ltag ltag-g">Hands-On</span><span class="ltag">Claude</span><span class="ltag ltag-p">RAG Pattern</span></div></div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Top Roles -->
-  <div class="section-label" style="margin-bottom:20px;">🎯 Top Finance Roles from SCMHRD</div>
-  <div class="roles-grid reveal">
-    <div class="role-pill"><span class="role-num">01</span><span class="role-name">Investment Banking Analyst</span></div>
-    <div class="role-pill"><span class="role-num">02</span><span class="role-name">Credit Analyst</span></div>
-    <div class="role-pill"><span class="role-num">03</span><span class="role-name">Portfolio Manager</span></div>
-    <div class="role-pill"><span class="role-num">04</span><span class="role-name">Corporate Finance Associate</span></div>
-    <div class="role-pill"><span class="role-num">05</span><span class="role-name">Risk Manager / Risk Analyst</span></div>
-    <div class="role-pill"><span class="role-num">06</span><span class="role-name">Wealth Management Analyst</span></div>
-    <div class="role-pill"><span class="role-num">07</span><span class="role-name">Associate — Research & Investment</span></div>
-    <div class="role-pill"><span class="role-num">08</span><span class="role-name">Relationship Manager (IB)</span></div>
-    <div class="role-pill"><span class="role-num">09</span><span class="role-name">Business Analyst (Finance)</span></div>
-    <div class="role-pill"><span class="role-num">10</span><span class="role-name">Accounts Manager</span></div>
-  </div>
-
-  <!-- Top Recruiters Marquee -->
-  <div style="margin-top:60px;">
-    <div class="section-label" style="margin-bottom:20px;">🏢 Finance Sector Recruiters</div>
-    <div class="companies-track">
-      <div class="companies-inner">
-        <div class="company-chip">Kotak Mahindra Bank</div>
-        <div class="company-chip">HDFC Bank</div>
-        <div class="company-chip">Axis Bank</div>
-        <div class="company-chip">Goldman Sachs</div>
-        <div class="company-chip">Morgan Stanley</div>
-        <div class="company-chip">JP Morgan</div>
-        <div class="company-chip">ICICI Bank</div>
-        <div class="company-chip">Aditya Birla Capital</div>
-        <div class="company-chip">Bajaj Finance</div>
-        <div class="company-chip">Angel One</div>
-        <div class="company-chip">Motilal Oswal</div>
-        <div class="company-chip">IDFC First Bank</div>
-        <div class="company-chip">Nomura</div>
-        <div class="company-chip">Deutsche Bank</div>
-        <div class="company-chip">Deloitte</div>
-        <div class="company-chip">EY</div>
-        <div class="company-chip">KPMG</div>
-        <div class="company-chip">Citi</div>
-        <!-- Duplicate for seamless -->
-        <div class="company-chip">Kotak Mahindra Bank</div>
-        <div class="company-chip">HDFC Bank</div>
-        <div class="company-chip">Axis Bank</div>
-        <div class="company-chip">Goldman Sachs</div>
-        <div class="company-chip">Morgan Stanley</div>
-        <div class="company-chip">JP Morgan</div>
-        <div class="company-chip">ICICI Bank</div>
-        <div class="company-chip">Aditya Birla Capital</div>
-        <div class="company-chip">Bajaj Finance</div>
-        <div class="company-chip">Angel One</div>
-        <div class="company-chip">Motilal Oswal</div>
-        <div class="company-chip">IDFC First Bank</div>
-        <div class="company-chip">Nomura</div>
-        <div class="company-chip">Deutsche Bank</div>
-        <div class="company-chip">Deloitte</div>
-        <div class="company-chip">EY</div>
-        <div class="company-chip">KPMG</div>
-        <div class="company-chip">Citi</div>
+  <!-- ── MODULE 2 ── -->
+  <div class="mod-panel" id="mod1">
+    <div class="mod-hero">
+      <div class="mod-meta">
+        <div class="mod-badge pill-blue" style="padding:4px 13px;font-size:10px;font-weight:700;letter-spacing:1.5px;display:inline-flex;background:rgba(155,89,182,.1);color:var(--purple);border:1px solid rgba(155,89,182,.3);">MODULE 2 · 2 HOURS</div>
+        <div class="mod-title-lg" style="margin-top:12px;">AI Across Core<br>Finance Functions</div>
+        <div class="mod-sub">IB · Credit · Risk · Portfolio · Wealth — AI applications mapped directly to your MBA Finance subjects and SCMHRD placement roles.</div>
+        <div class="mod-chips">
+          <span class="mchip" style="background:rgba(155,89,182,.08);color:var(--purple);border-color:rgba(155,89,182,.2);">Investment Banking</span>
+          <span class="mchip" style="background:rgba(155,89,182,.08);color:var(--purple);border-color:rgba(155,89,182,.2);">Credit Analysis</span>
+          <span class="mchip" style="background:rgba(155,89,182,.08);color:var(--purple);border-color:rgba(155,89,182,.2);">Portfolio AI</span>
+          <span class="mchip" style="background:rgba(155,89,182,.08);color:var(--purple);border-color:rgba(155,89,182,.2);">Risk Models</span>
+          <span class="mchip" style="background:rgba(155,89,182,.08);color:var(--purple);border-color:rgba(155,89,182,.2);">Wealth Tech</span>
+        </div>
+        <div style="margin-top:20px;padding:16px;background:rgba(155,89,182,.05);border-radius:12px;border:1px solid rgba(155,89,182,.15);">
+          <div style="font-size:11px;color:var(--gold);font-weight:700;margin-bottom:6px;">🎯 MODULE OUTCOME</div>
+          <div style="font-size:13px;color:var(--muted);line-height:1.6;">Walk into any finance interview and confidently describe how AI transforms the function — with real company examples and a live demo.</div>
+        </div>
+      </div>
+      <div>
+        <div class="lessons-grid" style="grid-template-columns:1fr 1fr;">
+          <div class="lcard" style="border-color:rgba(155,89,182,.2);"><div class="lcard-dur">22 min</div><div class="lcard-num">2.1</div><div class="lcard-title">🏦 AI in Investment Banking</div><div class="lcard-desc">JPMorgan's LLM Suite builds pitchbooks in 30 seconds. Comparable company analysis, CIM drafting, and M&A rationale — done with AI. Live demo: generate a 1-page M&A thesis for any deal.</div><div class="lcard-tags"><span class="ltag">IB Pitchbooks</span><span class="ltag ltag-p">M&A AI</span><span class="ltag">LLM Suite</span></div></div>
+          <div class="lcard" style="border-color:rgba(155,89,182,.2);"><div class="lcard-dur">22 min</div><div class="lcard-num">2.2</div><div class="lcard-title">📋 AI Credit Analysis</div><div class="lcard-desc">Feed an LLM a company's financials → it computes ratios, applies Altman Z-score logic, flags covenant risks, and drafts a CRISIL-style credit narrative. The future of credit underwriting at Kotak and Axis.</div><div class="lcard-tags"><span class="ltag ltag-p">Credit Scoring</span><span class="ltag">RAG</span><span class="ltag">Z-Score</span></div></div>
+          <div class="lcard" style="border-color:rgba(155,89,182,.2);"><div class="lcard-dur">20 min</div><div class="lcard-num">2.3</div><div class="lcard-title">📈 Portfolio Management & AI</div><div class="lcard-desc">Markowitz meets machine learning. Factor model construction with AI commentary. How hedge funds use alternative data (satellite, web scraping) for alpha generation — and how to talk about this in interviews.</div><div class="lcard-tags"><span class="ltag">MPT</span><span class="ltag ltag-p">Factor Models</span><span class="ltag">Alt Data</span></div></div>
+          <div class="lcard" style="border-color:rgba(155,89,182,.2);"><div class="lcard-dur">20 min</div><div class="lcard-num">2.4</div><div class="lcard-title">⚠️ Risk Management & AI</div><div class="lcard-desc">VaR, CVaR, and AI stress testing. How banks use Monte Carlo simulation + LLMs to generate CRO-ready risk narratives. Goldman's use of synthetic data for stress scenarios not in historical data.</div><div class="lcard-tags"><span class="ltag">VaR/CVaR</span><span class="ltag ltag-p">Monte Carlo</span><span class="ltag">Stress Testing</span></div></div>
+          <div class="lcard" style="border-color:rgba(155,89,182,.2);"><div class="lcard-dur">18 min</div><div class="lcard-num">2.5</div><div class="lcard-title">💎 AI in Wealth Management</div><div class="lcard-desc">Morgan Stanley's RAG advisor, robo-advisory platforms, AI-generated IPS. How LLMs are transforming the Relationship Manager role — augmenting, not replacing. 98% of advisors say AI is transformative.</div><div class="lcard-tags"><span class="ltag">Robo-Advisor</span><span class="ltag ltag-p">IPS Gen</span><span class="ltag">Morgan Stanley</span></div></div>
+          <div class="lcard" style="border-color:rgba(155,89,182,.2);background:rgba(155,89,182,.04);"><div class="lcard-dur">18 min</div><div class="lcard-num">2.6</div><div class="lcard-title">📊 Macro Intelligence & FinBERT</div><div class="lcard-desc">Bloomberg's 50B parameter LLM for macro signal extraction. FinBERT for earnings sentiment. How macro funds use NLP to front-run central bank announcements and earnings calls.</div><div class="lcard-tags"><span class="ltag ltag-g">FinBERT</span><span class="ltag">NLP</span><span class="ltag ltag-p">BloombergGPT</span></div></div>
+        </div>
       </div>
     </div>
   </div>
 
+  <!-- ── MODULE 3 ── -->
+  <div class="mod-panel" id="mod2">
+    <div class="mod-hero">
+      <div class="mod-meta">
+        <div class="mod-badge pill-blue" style="padding:4px 13px;font-size:10px;font-weight:700;letter-spacing:1.5px;display:inline-flex;background:rgba(244,196,48,.1);color:var(--gold);border:1px solid rgba(244,196,48,.3);">MODULE 3 · 2 HOURS</div>
+        <div class="mod-title-lg" style="margin-top:12px;">Build, Deploy<br>& Get Hired</div>
+        <div class="mod-sub">Prototype real AI finance tools. Leave with a GitHub portfolio, a recruiter-ready narrative, and the confidence to demo your work in any interview room.</div>
+        <div class="mod-chips">
+          <span class="mchip" style="background:rgba(244,196,48,.08);color:var(--gold);border-color:rgba(244,196,48,.2);">Portfolio Projects</span>
+          <span class="mchip" style="background:rgba(244,196,48,.08);color:var(--gold);border-color:rgba(244,196,48,.2);">Live Builds</span>
+          <span class="mchip" style="background:rgba(244,196,48,.08);color:var(--gold);border-color:rgba(244,196,48,.2);">Interview Prep</span>
+          <span class="mchip" style="background:rgba(244,196,48,.08);color:var(--gold);border-color:rgba(244,196,48,.2);">Hackathon</span>
+        </div>
+        <div style="margin-top:20px;padding:16px;background:rgba(244,196,48,.05);border-radius:12px;border:1px solid rgba(244,196,48,.18);">
+          <div style="font-size:11px;color:var(--gold);font-weight:700;margin-bottom:6px;">🎯 MODULE OUTCOME</div>
+          <div style="font-size:13px;color:var(--muted);line-height:1.6;">2 GitHub-ready projects, a refined interview narrative about AI in your target role, and a playbook for every finance function's AI interview question.</div>
+        </div>
+      </div>
+      <div>
+        <div class="lessons-grid" style="grid-template-columns:1fr 1fr;">
+          <div class="lcard" style="border-color:rgba(244,196,48,.2);"><div class="lcard-dur">28 min</div><div class="lcard-num">3.1</div><div class="lcard-title">🔨 Build: AI Equity Research Report</div><div class="lcard-desc">Prompt-chain using Claude — input a BSE/NSE ticker, generate a structured equity report: business overview, 3-year financials, DCF commentary, risks, and recommendation. No code — just prompts + Google Docs.</div><div class="lcard-tags"><span class="ltag ltag-g">Live Build</span><span class="ltag">Claude</span><span class="ltag ltag-p">Equity Research</span></div></div>
+          <div class="lcard" style="border-color:rgba(244,196,48,.2);"><div class="lcard-dur">25 min</div><div class="lcard-num">3.2</div><div class="lcard-title">🔨 Build: Credit RAG Pipeline</div><div class="lcard-desc">Upload any company's annual report → Claude extracts key financials via RAG pattern, computes credit ratios, generates a risk-rated memo. Uses MCP-style tool calls. GitHub-ready notebook.</div><div class="lcard-tags"><span class="ltag ltag-g">RAG</span><span class="ltag">Claude</span><span class="ltag ltag-p">MCP Pattern</span></div></div>
+          <div class="lcard" style="border-color:rgba(244,196,48,.2);"><div class="lcard-dur">22 min</div><div class="lcard-num">3.3</div><div class="lcard-title">🎯 Interview War Room</div><div class="lcard-desc">Role-play with AI: IB, credit, risk, portfolio, wealth — real technical + behavioral questions. Use Claude as your interview coach. "Walk me through how you'd use AI in this role" — you'll have a killer answer.</div><div class="lcard-tags"><span class="ltag ltag-g">Interview Prep</span><span class="ltag">Role Play</span><span class="ltag ltag-p">AI Coach</span></div></div>
+          <div class="lcard" style="border-color:rgba(244,196,48,.2);"><div class="lcard-dur">15 min</div><div class="lcard-num">3.4</div><div class="lcard-title">📄 AI Resume & LinkedIn Optimizer</div><div class="lcard-desc">Use Claude to match your resume to any JD, add quantified AI project bullets, and optimize your LinkedIn headline for BFSI/IB recruiter searches. Template included.</div><div class="lcard-tags"><span class="ltag ltag-g">Resume AI</span><span class="ltag">LinkedIn</span><span class="ltag">JD Match</span></div></div>
+          <div class="lcard" style="border-color:rgba(244,196,48,.2);background:rgba(244,196,48,.04);grid-column:1/-1;"><div class="lcard-dur">30 min</div><div class="lcard-num">3.5</div><div class="lcard-title">🏆 AI Finance Sprint — 30-Minute Hackathon</div><div class="lcard-desc">Teams pick a finance problem (credit, risk, IB, or wealth). Using Claude + prompt engineering, build a minimum viable AI finance tool in 30 minutes. Present to the cohort. Winning team gets bragging rights — and a GitHub project that impresses interviewers.</div><div class="lcard-tags"><span class="ltag ltag-g">Hackathon</span><span class="ltag">Teams</span><span class="ltag ltag-p">Live Demo</span><span class="ltag">GitHub</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
 </section>
+
+<!-- ═══ AI TOOLS ═══ -->
+<section class="sec" id="tools">
+<div class="wrap">
+  <div class="sec-label">🛠️ Your AI Toolkit</div>
+  <h2 class="sh rv">Tools You'll<br><span class="gtext">Use in the Course</span></h2>
+  <p class="sdesc rv">All tools are free-tier accessible. Zero local setup required — everything runs in the browser.</p>
+  <div class="tools-grid rv">
+    <div class="tool-card" style="border-color:rgba(0,212,255,.3);"><div class="co-glow" style="background:var(--blue);position:absolute;top:-15px;right:-15px;width:70px;height:70px;opacity:.1;filter:blur(20px);border-radius:50%;"></div><div class="tl-logo bg-blue">🤖</div><div class="tl-name">Claude (Anthropic)</div><div class="tl-desc">Best for long-document finance tasks — 200K context window processes full annual reports. Used in every module for RAG pattern demos and agentic workflows via MCP.</div><div class="tl-uses"><span class="tl-use">Annual Reports</span><span class="tl-use">Credit Memos</span><span class="tl-use">MCP Tools</span></div></div>
+    <div class="tool-card" style="border-color:rgba(0,212,255,.2);"><div class="tl-logo bg-blue">🧠</div><div class="tl-name">ChatGPT / GPT-4o</div><div class="tl-desc">All-purpose finance analyst assistant. Best for structured output generation — balance sheet analysis, DCF tables, equity research sections.</div><div class="tl-uses"><span class="tl-use">DCF Drafting</span><span class="tl-use">Equity Notes</span><span class="tl-use">Comparables</span></div></div>
+    <div class="tool-card" style="border-color:rgba(155,89,182,.25);"><div class="tl-logo bg-purple">🤗</div><div class="tl-name">Hugging Face (FinBERT)</div><div class="tl-desc">Pre-trained finance NLP models. FinBERT runs sentiment analysis on earnings calls and 10-K filings. Zero-code via Inference API.</div><div class="tl-uses"><span class="tl-use">Earnings Sentiment</span><span class="tl-use">News Scoring</span><span class="tl-use">10-K NLP</span></div></div>
+    <div class="tool-card" style="border-color:rgba(244,196,48,.2);"><div class="tl-logo bg-gold">📓</div><div class="tl-name">Google Colab</div><div class="tl-desc">Free GPU-backed Python notebooks. All course demos run here — no install, shareable links, and your finished notebooks become GitHub portfolio pieces.</div><div class="tl-uses"><span class="tl-use">Free GPU</span><span class="tl-use">Share Links</span><span class="tl-use">Portfolio</span></div></div>
+    <div class="tool-card" style="border-color:rgba(0,255,136,.2);"><div class="tl-logo bg-green">📰</div><div class="tl-name">BloombergGPT</div><div class="tl-desc">50B parameter LLM trained on 363B finance tokens. Outperforms general LLMs on financial NLP. Understanding its architecture is a differentiator in Goldman and Bloomberg interviews.</div><div class="tl-uses"><span class="tl-use">Finance NLP</span><span class="tl-use">Market Data</span><span class="tl-use">Interview Edge</span></div></div>
+    <div class="tool-card" style="border-color:rgba(0,212,255,.2);"><div class="tl-logo bg-blue">🐱</div><div class="tl-name">GitHub</div><div class="tl-desc">Host your Module 3 projects publicly. A GitHub finance AI portfolio is now expected by top-tier BFSI, IB, and quant fund interviewers in India and globally.</div><div class="tl-uses"><span class="tl-use">Project Showcase</span><span class="tl-use">Portfolio</span><span class="tl-use">Open Source</span></div></div>
+  </div>
 </div>
+</section>
+
+<!-- ═══ PROMPT LAB ═══ -->
+<section class="sec" id="prompts" style="background:var(--bg2);padding:96px 0;">
+<div class="wrap">
+  <div class="sec-label">💬 Prompt Engineering Lab</div>
+  <h2 class="sh rv">Finance Prompt<br><span class="gtext">Starter Kit</span></h2>
+  <p class="sdesc rv">Battle-tested prompts for your target role. Click to copy.</p>
+  <div class="prompts-grid rv">
+    <div class="prompt-card" onclick="copyP(this)"><button class="pr-copy">Copy</button><div class="pr-role">🧠 LLM + RAG — Annual Report Q&A</div><div class="pr-text">You are a senior credit analyst. I will provide an annual report extract below. Answer the following questions using ONLY information from the document: 1) What is the Debt/EBITDA ratio for the last 3 years? 2) List all disclosed covenant risks. 3) Summarize liquidity position. 4) Flag any red flags a lender should be aware of. Annual Report: [PASTE TEXT]</div></div>
+    <div class="prompt-card" onclick="copyP(this)"><button class="pr-copy">Copy</button><div class="pr-role">🏦 Investment Banking — Pitchbook Section</div><div class="pr-text">You are an M&A analyst at Goldman Sachs India. Generate a "Transaction Rationale" slide for the following deal: Acquirer: [NAME], Target: [NAME], Sector: [SECTOR]. Include: Strategic fit (3 bullets), synergy estimates (revenue + cost), key risks (3), and comparable transactions. Format as concise bullet points for a pitchbook slide.</div></div>
+    <div class="prompt-card" onclick="copyP(this)"><button class="pr-copy">Copy</button><div class="pr-role">⚙️ MCP Pattern — Agentic Finance Workflow</div><div class="pr-text">You are an AI agent with access to the following tools: [get_stock_data(ticker)], [get_news(company, days=7)], [calculate_dcf(revenue_growth, margins, wacc)]. Task: Analyze [COMPANY] for a buy/sell decision. Step 1: Fetch 3-year financials. Step 2: Get recent news sentiment. Step 3: Run DCF with base/bull/bear assumptions. Step 4: Output a 1-page investment memo.</div></div>
+    <div class="prompt-card" onclick="copyP(this)"><button class="pr-copy">Copy</button><div class="pr-role">📋 Credit Analysis — RAG Memo</div><div class="pr-text">You are a credit analyst at ICICI Bank with access to the company's financial statements below. Compute: Current Ratio, Quick Ratio, Debt/EBITDA, Interest Coverage, DSCR, and Altman Z-Score. For each ratio: state the value, industry benchmark, and risk implication. Conclude with a credit rating recommendation (AAA to D) and 3 monitoring triggers. Financials: [PASTE DATA]</div></div>
+    <div class="prompt-card" onclick="copyP(this)"><button class="pr-copy">Copy</button><div class="pr-role">⚠️ Risk Management — Stress Test Narrative</div><div class="pr-text">You are a Chief Risk Officer preparing a board report. Portfolio: [DESCRIBE]. Run a narrative stress test for these scenarios: 1) 2008 GFC — credit spreads +400bps, equity -50%, 2) COVID-2020 — liquidity shock, 3) 2022 rate hike — rates +500bps in 12 months. For each: estimated P&L impact, key risk drivers, and 3 mitigation actions. Output in board-ready language with RAG (Red/Amber/Green) status.</div></div>
+    <div class="prompt-card" onclick="copyP(this)"><button class="pr-copy">Copy</button><div class="pr-role">🎯 Interview Prep — AI Finance Role Play</div><div class="pr-text">I am interviewing for [ROLE] at [COMPANY]. Ask me technical interview questions one at a time. After each answer I give, provide: 1) What I got right, 2) What I missed, 3) A model answer from a top-10 candidate's perspective. Start with: "Walk me through how AI is changing [ROLE] and how you would use it in this job."</div></div>
+  </div>
 </div>
+</section>
 
-<!-- ═══════════════════════════════════════
-     COURSE MODULES
-═══════════════════════════════════════ -->
-<section id="modules">
-  <div class="section-label">📚 6-Hour Intensive Program</div>
-  <h2 class="section-title reveal">Course <span class="gradient-text">Modules</span></h2>
-  <p class="section-desc reveal">Three 2-hour deep dives designed for SCMHRD Finance students — from AI fundamentals to live project execution and career strategy.</p>
-
-  <div class="modules-timeline">
-
-    <!-- ─── MODULE 1 ─── -->
-    <div class="module-block reveal">
-      <div class="module-dot" style="border-color:#00D4FF;box-shadow:0 0 15px rgba(0,212,255,0.5);"></div>
-      <div class="module-num">01</div>
-
-      <div class="module-header">
+<!-- ═══ ABOUT INSTRUCTOR ═══ -->
+<section class="sec" id="about" style="padding:96px 0;">
+<div class="wrap">
+  <div class="sec-label">👤 Your Instructor</div>
+  <div class="about-inner rv">
+    <div class="about-card">
+      <div class="about-avatar">👨‍💼</div>
+      <div class="about-name">Tejas Jadhav</div>
+      <div class="about-creds">
+        <span class="cred-badge">CFA Charterholder</span>
+        <span class="cred-badge">FRM Certified</span>
+        <span class="cred-badge">MMS — Sydenham</span>
+      </div>
+      <div class="about-role">AI in Finance Author · Course Architect · 12+ years across Wealth, Risk & Banking</div>
+      <div class="about-stat-row">
+        <div class="astat"><div class="astat-n">12+</div><div class="astat-l">Years in Finance</div></div>
+        <div class="astat"><div class="astat-n">3</div><div class="astat-l">Institutions</div></div>
+        <div class="astat"><div class="astat-n">2</div><div class="astat-l">Amazon Bestsellers</div></div>
+        <div class="astat"><div class="astat-n">5</div><div class="astat-l">Finance Domains</div></div>
+      </div>
+      <div class="book-card">
+        <div class="book-cover">📘</div>
         <div>
-          <div class="module-tag tag-blue">Module 1 · 2 Hours</div>
-          <div class="module-title" style="margin-top:12px;">AI Foundations for Finance</div>
-          <div class="module-subtitle">From zero to AI-fluent — the finance professional's essential toolkit</div>
-        </div>
-        <div class="module-duration">⏱ 2:00 hrs</div>
-      </div>
-
-      <div class="highlight-box" style="margin-bottom:24px;">
-        <div style="font-size:13px;color:var(--muted);line-height:1.6;">
-          <strong style="color:var(--blue);">Learning Objective:</strong> Understand how AI and Large Language Models work at a conceptual level, master prompt engineering for finance tasks, and use ChatGPT / Claude as a daily productivity multiplier.
+          <div class="book-title">Claude AI for Finance Professionals</div>
+          <div class="book-meta">Amazon · AI in Finance Series</div>
+          <span class="book-tag">Amazon Bestseller</span>
         </div>
       </div>
-
-      <div class="lessons-grid">
-        <!-- Lesson 1.1 -->
-        <div class="lesson-card">
-          <div class="lesson-duration">25 min</div>
-          <div class="lesson-num">1.1</div>
-          <div class="lesson-title">The AI Landscape in 2025</div>
-          <div class="lesson-desc">How LLMs work, key models (GPT-4, Claude 3.5, Gemini), and why finance is AI's biggest opportunity. Bloomberg GPT deep-dive.</div>
-          <div class="lesson-tags">
-            <span class="lesson-tag">LLMs</span>
-            <span class="lesson-tag">Bloomberg GPT</span>
-            <span class="lesson-tag">Finance AI Roadmap</span>
-          </div>
-        </div>
-
-        <!-- Lesson 1.2 -->
-        <div class="lesson-card">
-          <div class="lesson-duration">30 min</div>
-          <div class="lesson-num">1.2</div>
-          <div class="lesson-title">Prompt Engineering for Finance</div>
-          <div class="lesson-desc">Zero-shot, few-shot, chain-of-thought, role prompting. Write prompts that get analyst-grade outputs for DCF, credit memos, and equity research.</div>
-          <div class="lesson-tags">
-            <span class="lesson-tag">Prompt Design</span>
-            <span class="lesson-tag">Chain-of-Thought</span>
-            <span class="lesson-tag">Finance Use Cases</span>
-          </div>
-        </div>
-
-        <!-- Lesson 1.3 -->
-        <div class="lesson-card">
-          <div class="lesson-duration">25 min</div>
-          <div class="lesson-num">1.3</div>
-          <div class="lesson-title">Python Crash Course for Finance</div>
-          <div class="lesson-desc">Variables, loops, pandas DataFrames, and yfinance API — everything you need to pull stock data and run analysis in 30 lines of code.</div>
-          <div class="lesson-tags">
-            <span class="lesson-tag">Python</span>
-            <span class="lesson-tag">Pandas</span>
-            <span class="lesson-tag">yfinance</span>
-          </div>
-        </div>
-
-        <!-- Lesson 1.4 -->
-        <div class="lesson-card">
-          <div class="lesson-duration">20 min</div>
-          <div class="lesson-num">1.4</div>
-          <div class="lesson-title">AI-Powered Financial Modelling</div>
-          <div class="lesson-desc">Use Claude to build 3-statement models, scenario analysis, and sensitivity tables. From natural language to live Excel model in 10 minutes.</div>
-          <div class="lesson-tags">
-            <span class="lesson-tag">Claude AI</span>
-            <span class="lesson-tag">3-Statement Model</span>
-            <span class="lesson-tag">Excel Automation</span>
-          </div>
-        </div>
-
-        <!-- Lesson 1.5 -->
-        <div class="lesson-card">
-          <div class="lesson-duration">20 min</div>
-          <div class="lesson-num">1.5</div>
-          <div class="lesson-title">Sentiment Analysis on News & Filings</div>
-          <div class="lesson-desc">Use Hugging Face FinBERT to score earnings call transcripts and news headlines — real edge for equity research and credit analysis.</div>
-          <div class="lesson-tags">
-            <span class="lesson-tag">FinBERT</span>
-            <span class="lesson-tag">NLP</span>
-            <span class="lesson-tag">Equity Research</span>
-          </div>
-        </div>
-
-        <!-- Lesson 1.6 -->
-        <div class="lesson-card">
-          <div class="lesson-duration">20 min</div>
-          <div class="lesson-num">1.6</div>
-          <div class="lesson-title">Live Workshop: Build Your First AI Finance Tool</div>
-          <div class="lesson-desc">Hands-on: build a stock screener + AI summary generator. Input any ticker, get a 1-page AI-written equity note with sentiment, financials & valuation.</div>
-          <div class="lesson-tags">
-            <span class="lesson-tag">Hands-On</span>
-            <span class="lesson-tag">Stock Screener</span>
-            <span class="lesson-tag">AI Report Generation</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="tag-row" style="margin-top:20px;">
-        <div class="tag tag-blue-fill">ChatGPT</div>
-        <div class="tag tag-blue-fill">Claude AI</div>
-        <div class="tag tag-gold-fill">Python</div>
-        <div class="tag tag-green-fill">Bloomberg GPT</div>
-        <div class="tag tag-purple-fill">FinBERT</div>
-        <div class="tag tag-blue-fill">yfinance</div>
-        <div class="tag tag-gold-fill">Pandas</div>
+      <div style="margin-top:14px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+        <a href="https://tejasgjadhav.github.io/" target="_blank" style="padding:8px 18px;background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.25);border-radius:8px;color:var(--blue);text-decoration:none;font-size:12px;font-weight:600;transition:all .2s;" onmouseover="this.style.background='rgba(0,212,255,.18)'" onmouseout="this.style.background='rgba(0,212,255,.08)'">🌐 Website</a>
+        <a href="https://tejasgjadhav.github.io/AIFINANCE/" target="_blank" style="padding:8px 18px;background:rgba(244,196,48,.08);border:1px solid rgba(244,196,48,.25);border-radius:8px;color:var(--gold);text-decoration:none;font-size:12px;font-weight:600;transition:all .2s;" onmouseover="this.style.background='rgba(244,196,48,.18)'" onmouseout="this.style.background='rgba(244,196,48,.08)'">⚡ AI Finance Course</a>
       </div>
     </div>
 
-    <!-- ─── MODULE 2 ─── -->
-    <div class="module-block reveal">
-      <div class="module-dot" style="border-color:#9B59B6;box-shadow:0 0 15px rgba(155,89,182,0.5);"></div>
-      <div class="module-num" style="color:var(--purple)">02</div>
-
-      <div class="module-header">
-        <div>
-          <div class="module-tag tag-purple">Module 2 · 2 Hours</div>
-          <div class="module-title" style="margin-top:12px;">AI in Core Finance Roles</div>
-          <div class="module-subtitle">Investment Banking · Credit · Risk · Portfolio Management · Wealth</div>
-        </div>
-        <div class="module-duration" style="border-color:rgba(155,89,182,0.3);color:var(--purple);">⏱ 2:00 hrs</div>
-      </div>
-
-      <div class="highlight-box" style="margin-bottom:24px;border-color:rgba(155,89,182,0.2);background:linear-gradient(135deg,rgba(155,89,182,0.06),rgba(0,212,255,0.04));">
-        <div style="font-size:13px;color:var(--muted);line-height:1.6;">
-          <strong style="color:var(--purple);">Learning Objective:</strong> Apply AI tools directly to your target SCMHRD finance roles. Leave with real, recruiter-tested frameworks for each function — from IB pitch decks to AI-generated credit memos and real-time risk dashboards.
-        </div>
-      </div>
-
-      <div class="lessons-grid">
-        <!-- Lesson 2.1 -->
-        <div class="lesson-card" style="border-color:rgba(155,89,182,0.2);">
-          <div class="lesson-duration">25 min</div>
-          <div class="lesson-num">2.1</div>
-          <div class="lesson-title">🏦 AI in Investment Banking</div>
-          <div class="lesson-desc">Use GPT-4 + Claude to accelerate IB pitchbook creation, CIM drafting, comparable company analysis, and M&A deal screening. Build a mini M&A screener live.</div>
-          <div class="lesson-tags">
-            <span class="lesson-tag">IB Pitchbooks</span>
-            <span class="lesson-tag">M&A Screening</span>
-            <span class="lesson-tag">LBO Model AI</span>
-          </div>
-        </div>
-
-        <!-- Lesson 2.2 -->
-        <div class="lesson-card" style="border-color:rgba(155,89,182,0.2);">
-          <div class="lesson-duration">25 min</div>
-          <div class="lesson-num">2.2</div>
-          <div class="lesson-title">📋 AI Credit Analysis Engine</div>
-          <div class="lesson-desc">Build an AI credit scoring pipeline — extract financials from PDFs, run ratio analysis, generate credit memos, and flag risk signals automatically.</div>
-          <div class="lesson-tags">
-            <span class="lesson-tag">Credit Scoring</span>
-            <span class="lesson-tag">PDF Extraction</span>
-            <span class="lesson-tag">Risk Flagging</span>
-          </div>
-        </div>
-
-        <!-- Lesson 2.3 -->
-        <div class="lesson-card" style="border-color:rgba(155,89,182,0.2);">
-          <div class="lesson-duration">20 min</div>
-          <div class="lesson-num">2.3</div>
-          <div class="lesson-title">📊 Portfolio Management with AI</div>
-          <div class="lesson-desc">Modern Portfolio Theory + ML — use Python to build a Markowitz optimizer, add AI commentary generation, and create a portfolio rebalancing alert system.</div>
-          <div class="lesson-tags">
-            <span class="lesson-tag">MPT</span>
-            <span class="lesson-tag">Portfolio Optimizer</span>
-            <span class="lesson-tag">Rebalancing AI</span>
-          </div>
-        </div>
-
-        <!-- Lesson 2.4 -->
-        <div class="lesson-card" style="border-color:rgba(155,89,182,0.2);">
-          <div class="lesson-duration">25 min</div>
-          <div class="lesson-num">2.4</div>
-          <div class="lesson-title">⚠️ Risk Management & AI</div>
-          <div class="lesson-desc">AI-driven VaR, CVaR, and stress-testing. Use Monte Carlo simulation in Python + AI-generated risk narratives. Build a real-time market risk dashboard.</div>
-          <div class="lesson-tags">
-            <span class="lesson-tag">VaR / CVaR</span>
-            <span class="lesson-tag">Monte Carlo</span>
-            <span class="lesson-tag">Risk Dashboard</span>
-          </div>
-        </div>
-
-        <!-- Lesson 2.5 -->
-        <div class="lesson-card" style="border-color:rgba(155,89,182,0.2);">
-          <div class="lesson-duration">20 min</div>
-          <div class="lesson-num">2.5</div>
-          <div class="lesson-title">💎 AI in Wealth Management</div>
-          <div class="lesson-desc">Build a robo-advisor prototype — risk profiling, goal-based allocation, and AI-generated client investment policy statements (IPS) in minutes.</div>
-          <div class="lesson-tags">
-            <span class="lesson-tag">Robo-Advisor</span>
-            <span class="lesson-tag">Client Profiling</span>
-            <span class="lesson-tag">IPS Generation</span>
-          </div>
-        </div>
-
-        <!-- Lesson 2.6 -->
-        <div class="lesson-card" style="border-color:rgba(155,89,182,0.2);">
-          <div class="lesson-duration">25 min</div>
-          <div class="lesson-num">2.6</div>
-          <div class="lesson-title">🔍 Alternative Data & AI Alpha</div>
-          <div class="lesson-desc">Satellite imagery, web scraping, social media sentiment — how hedge funds use alternative data and how you can demo this skill in interviews.</div>
-          <div class="lesson-tags">
-            <span class="lesson-tag">Alt Data</span>
-            <span class="lesson-tag">Alpha Generation</span>
-            <span class="lesson-tag">Hedge Fund Tools</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="tag-row" style="margin-top:20px;">
-        <div class="tag tag-purple-fill">Investment Banking</div>
-        <div class="tag tag-purple-fill">Credit Analysis</div>
-        <div class="tag tag-blue-fill">Portfolio Management</div>
-        <div class="tag tag-gold-fill">Risk Management</div>
-        <div class="tag tag-green-fill">Wealth Management</div>
-        <div class="tag tag-blue-fill">Alt Data</div>
-      </div>
+    <div class="about-content">
+      <h3>Not a visiting lecturer.<br><span class="gtext">The architect.</span></h3>
+      <div class="about-quote">"I spent 12 years building the exact systems students will learn — from live trading desks to fund automation at institutional level. This course is not theory. It's a practitioner's field guide."</div>
+      <div class="about-bio">Tejas Jadhav is a CFA Charterholder and FRM-certified finance professional with over 12 years of experience spanning wealth management, market risk, climate risk technology, and banking across Citi, HDFC Bank, and leading Swiss institutions. He currently leads AI & Finance integration at a global MNC in Pune.</div>
+      <div class="about-bio" style="margin-bottom:8px;">He is the author of <strong style="color:var(--text);">"Claude AI for Finance Professionals"</strong> — an Amazon bestseller that has been used by analysts across India and the US. As course architect for the <strong style="color:var(--text);">Agentic AI & Advanced Analytics in Finance</strong> programme at ISBMS, he has designed curriculum benchmarked against Wharton, Harvard, and LBS.</div>
+      <ul class="about-exp-list">
+        <li><div class="aexp-icon">🏦</div><div><div class="aexp-title">Market Risk & FRTB</div><div class="aexp-sub">Built FRTB market risk solutions at institutional level — Citi & Swiss Banking</div></div></li>
+        <li><div class="aexp-icon">🌿</div><div><div class="aexp-title">ESG & Climate Risk Technology</div><div class="aexp-sub">Designed AI-powered ESG and climate risk platforms for institutional finance</div></div></li>
+        <li><div class="aexp-icon">💼</div><div><div class="aexp-title">Wealth Management</div><div class="aexp-sub">Managed HNI portfolios — equities, structured products, fixed income, direct P&L accountability</div></div></li>
+        <li><div class="aexp-icon">🤖</div><div><div class="aexp-title">AI in Finance Author & Educator</div><div class="aexp-sub">Bestselling books, course architect at ISBMS — teaching MBA students at SCMHRD & beyond</div></div></li>
+      </ul>
     </div>
-
-    <!-- ─── MODULE 3 ─── -->
-    <div class="module-block reveal">
-      <div class="module-dot" style="border-color:#F4C430;box-shadow:0 0 15px rgba(244,196,48,0.5);"></div>
-      <div class="module-num" style="color:var(--gold)">03</div>
-
-      <div class="module-header">
-        <div>
-          <div class="module-tag tag-gold">Module 3 · 2 Hours</div>
-          <div class="module-title" style="margin-top:12px;">Career Edge — AI Projects & Interviews</div>
-          <div class="module-subtitle">Build projects that get you hired · Interview strategy · Placement hacks</div>
-        </div>
-        <div class="module-duration" style="border-color:rgba(244,196,48,0.3);color:var(--gold);">⏱ 2:00 hrs</div>
-      </div>
-
-      <div class="highlight-box" style="margin-bottom:24px;border-color:rgba(244,196,48,0.2);background:linear-gradient(135deg,rgba(244,196,48,0.06),rgba(0,212,255,0.04));">
-        <div style="font-size:13px;color:var(--muted);line-height:1.6;">
-          <strong style="color:var(--gold);">Learning Objective:</strong> Walk out with 2-3 portfolio-ready AI finance projects, a compelling interview narrative about AI skills, and a playbook for cracking BFSI/IB/Risk roles at ₹20–30 LPA+ packages.
-        </div>
-      </div>
-
-      <div class="lessons-grid">
-        <!-- Lesson 3.1 -->
-        <div class="lesson-card" style="border-color:rgba(244,196,48,0.2);">
-          <div class="lesson-duration">30 min</div>
-          <div class="lesson-num">3.1</div>
-          <div class="lesson-title">🚀 Build: AI Equity Research Bot</div>
-          <div class="lesson-desc">Full live build — enter a stock name, get AI-generated: business overview, financial highlights, DCF valuation, risk factors, and buy/sell recommendation.</div>
-          <div class="lesson-tags">
-            <span class="lesson-tag">Live Build</span>
-            <span class="lesson-tag">Equity Research</span>
-            <span class="lesson-tag">DCF Automation</span>
-          </div>
-        </div>
-
-        <!-- Lesson 3.2 -->
-        <div class="lesson-card" style="border-color:rgba(244,196,48,0.2);">
-          <div class="lesson-duration">25 min</div>
-          <div class="lesson-num">3.2</div>
-          <div class="lesson-title">🏗️ Build: Credit Scoring Dashboard</div>
-          <div class="lesson-desc">Python + Streamlit dashboard — upload annual report PDF, auto-extract key ratios, generate credit score with AI-written risk narrative. GitHub-ready.</div>
-          <div class="lesson-tags">
-            <span class="lesson-tag">Streamlit</span>
-            <span class="lesson-tag">Credit Scoring</span>
-            <span class="lesson-tag">PDF AI</span>
-          </div>
-        </div>
-
-        <!-- Lesson 3.3 -->
-        <div class="lesson-card" style="border-color:rgba(244,196,48,0.2);">
-          <div class="lesson-duration">20 min</div>
-          <div class="lesson-num">3.3</div>
-          <div class="lesson-title">📱 Build: Personal Finance AI Advisor</div>
-          <div class="lesson-desc">Conversational AI chatbot for personal financial planning — budget analysis, SIP optimizer, tax planning prompts. Perfect for wealth management interviews.</div>
-          <div class="lesson-tags">
-            <span class="lesson-tag">Chatbot</span>
-            <span class="lesson-tag">Wealth Tech</span>
-            <span class="lesson-tag">SIP Optimizer</span>
-          </div>
-        </div>
-
-        <!-- Lesson 3.4 -->
-        <div class="lesson-card" style="border-color:rgba(244,196,48,0.2);">
-          <div class="lesson-duration">20 min</div>
-          <div class="lesson-num">3.4</div>
-          <div class="lesson-title">🎯 Interview War Room</div>
-          <div class="lesson-desc">Role-play interview questions for IB, Credit, Risk, and Portfolio roles. Use AI to practice and improve answers in real-time. Recruiter-tested framework.</div>
-          <div class="lesson-tags">
-            <span class="lesson-tag">Interview Prep</span>
-            <span class="lesson-tag">Role Play</span>
-            <span class="lesson-tag">AI Coaching</span>
-          </div>
-        </div>
-
-        <!-- Lesson 3.5 -->
-        <div class="lesson-card" style="border-color:rgba(244,196,48,0.2);">
-          <div class="lesson-duration">15 min</div>
-          <div class="lesson-num">3.5</div>
-          <div class="lesson-title">📄 AI Resume & LinkedIn Optimizer</div>
-          <div class="lesson-desc">Use Claude to tailor your resume for each JD, add quantified impacts, and optimize LinkedIn for BFSI recruiter searches. Live demo + template.</div>
-          <div class="lesson-tags">
-            <span class="lesson-tag">Resume AI</span>
-            <span class="lesson-tag">LinkedIn SEO</span>
-            <span class="lesson-tag">JD Matching</span>
-          </div>
-        </div>
-
-        <!-- Lesson 3.6 -->
-        <div class="lesson-card" style="border-color:rgba(244,196,48,0.2);">
-          <div class="lesson-duration">30 min</div>
-          <div class="lesson-num">3.6</div>
-          <div class="lesson-title">🏆 Hackathon: 30-Minute AI Finance Sprint</div>
-          <div class="lesson-desc">Teams compete — pick a finance problem (credit, risk, investment), build a minimum viable AI solution in 30 minutes, present to the group. Top team wins.</div>
-          <div class="lesson-tags">
-            <span class="lesson-tag">Hackathon</span>
-            <span class="lesson-tag">Team Competition</span>
-            <span class="lesson-tag">AI Sprint</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="tag-row" style="margin-top:20px;">
-        <div class="tag tag-gold-fill">Portfolio Projects</div>
-        <div class="tag tag-gold-fill">GitHub Showcase</div>
-        <div class="tag tag-blue-fill">Interview Strategy</div>
-        <div class="tag tag-green-fill">Resume Builder</div>
-        <div class="tag tag-purple-fill">Hackathon</div>
-        <div class="tag tag-blue-fill">Streamlit</div>
-      </div>
-    </div>
-
-  </div><!-- /modules-timeline -->
-</section>
-
-<!-- ═══════════════════════════════════════
-     AI TOOLS SHOWCASE
-═══════════════════════════════════════ -->
-<section id="tools" style="background:var(--bg2);padding:100px 48px;max-width:100%;">
-<div style="max-width:1400px;margin:0 auto;">
-  <div class="section-label">🛠️ Your AI Toolkit</div>
-  <h2 class="section-title reveal">Tools You'll<br><span class="gradient-text">Master</span></h2>
-  <p class="section-desc reveal">Every tool covered in the course — with specific finance use cases for each one.</p>
-
-  <div class="tools-grid reveal">
-
-    <div class="tool-card" style="border-color:rgba(0,212,255,0.3);">
-      <div class="tool-glow" style="background:#00D4FF;"></div>
-      <div class="tool-logo" style="background:rgba(0,212,255,0.1);">🤖</div>
-      <div class="tool-name">ChatGPT / GPT-4o</div>
-      <div class="tool-desc">OpenAI's flagship model — your all-purpose finance analyst assistant for research, drafting, and calculations.</div>
-      <div class="tool-use-cases">
-        <span class="tool-use-case">Equity Notes</span>
-        <span class="tool-use-case">DCF Drafting</span>
-        <span class="tool-use-case">Earnings Summary</span>
-        <span class="tool-use-case">Financial Modelling</span>
-      </div>
-    </div>
-
-    <div class="tool-card" style="border-color:rgba(244,196,48,0.3);">
-      <div class="tool-glow" style="background:#F4C430;"></div>
-      <div class="tool-logo" style="background:rgba(244,196,48,0.1);">⚡</div>
-      <div class="tool-name">Claude (Anthropic)</div>
-      <div class="tool-desc">Best for long document analysis — process 200-page annual reports, extract key financials, and generate credit memos.</div>
-      <div class="tool-use-cases">
-        <span class="tool-use-case">Annual Report AI</span>
-        <span class="tool-use-case">Credit Memos</span>
-        <span class="tool-use-case">Risk Reports</span>
-        <span class="tool-use-case">IPS Writing</span>
-      </div>
-    </div>
-
-    <div class="tool-card" style="border-color:rgba(0,255,136,0.2);">
-      <div class="tool-glow" style="background:#00FF88;"></div>
-      <div class="tool-logo" style="background:rgba(0,255,136,0.08);">🐍</div>
-      <div class="tool-name">Python + Finance Stack</div>
-      <div class="tool-desc">yfinance, pandas, numpy, scipy, matplotlib — the quant finance stack that every buy-side analyst uses.</div>
-      <div class="tool-use-cases">
-        <span class="tool-use-case">yfinance</span>
-        <span class="tool-use-case">Backtrader</span>
-        <span class="tool-use-case">QuantLib</span>
-        <span class="tool-use-case">Pandas</span>
-      </div>
-    </div>
-
-    <div class="tool-card" style="border-color:rgba(155,89,182,0.3);">
-      <div class="tool-glow" style="background:#9B59B6;"></div>
-      <div class="tool-logo" style="background:rgba(155,89,182,0.1);">🤗</div>
-      <div class="tool-name">Hugging Face (FinBERT)</div>
-      <div class="tool-desc">Pre-trained financial language models — sentiment analysis on earnings calls, news, and 10-K filings with minimal code.</div>
-      <div class="tool-use-cases">
-        <span class="tool-use-case">Earnings Sentiment</span>
-        <span class="tool-use-case">News Scoring</span>
-        <span class="tool-use-case">10-K Analysis</span>
-      </div>
-    </div>
-
-    <div class="tool-card" style="border-color:rgba(244,196,48,0.2);">
-      <div class="tool-glow" style="background:#F4C430;"></div>
-      <div class="tool-logo" style="background:rgba(244,196,48,0.08);">📊</div>
-      <div class="tool-name">Streamlit</div>
-      <div class="tool-desc">Turn Python scripts into beautiful finance dashboards in hours — no web development experience needed. Perfect for portfolio projects.</div>
-      <div class="tool-use-cases">
-        <span class="tool-use-case">Credit Dashboard</span>
-        <span class="tool-use-case">Portfolio Tracker</span>
-        <span class="tool-use-case">Risk Monitor</span>
-      </div>
-    </div>
-
-    <div class="tool-card" style="border-color:rgba(0,212,255,0.2);">
-      <div class="tool-glow" style="background:#00D4FF;"></div>
-      <div class="tool-logo" style="background:rgba(0,212,255,0.08);">📰</div>
-      <div class="tool-name">Bloomberg GPT / Terminal AI</div>
-      <div class="tool-desc">Industry-standard — learn how Bloomberg's 50B parameter finance LLM works and how banks are integrating it into workflows.</div>
-      <div class="tool-use-cases">
-        <span class="tool-use-case">Bloomberg Terminal</span>
-        <span class="tool-use-case">Market Data AI</span>
-        <span class="tool-use-case">News Analytics</span>
-      </div>
-    </div>
-
-    <div class="tool-card" style="border-color:rgba(0,255,136,0.2);">
-      <div class="tool-glow" style="background:#00FF88;"></div>
-      <div class="tool-logo" style="background:rgba(0,255,136,0.08);">📓</div>
-      <div class="tool-name">Google Colab / Jupyter</div>
-      <div class="tool-desc">Free cloud notebooks — run all course code without any local setup. Collaborate in real-time and share projects with recruiters via link.</div>
-      <div class="tool-use-cases">
-        <span class="tool-use-case">Free GPU Access</span>
-        <span class="tool-use-case">Shareable Code</span>
-        <span class="tool-use-case">No Setup</span>
-      </div>
-    </div>
-
-    <div class="tool-card" style="border-color:rgba(155,89,182,0.2);">
-      <div class="tool-glow" style="background:#9B59B6;"></div>
-      <div class="tool-logo" style="background:rgba(155,89,182,0.08);">🐱</div>
-      <div class="tool-name">GitHub</div>
-      <div class="tool-desc">Host your AI finance projects publicly — a GitHub portfolio is now expected by top BFSI, IB, and quant fund interviewers.</div>
-      <div class="tool-use-cases">
-        <span class="tool-use-case">Portfolio Hosting</span>
-        <span class="tool-use-case">Code Showcase</span>
-        <span class="tool-use-case">Open Source</span>
-      </div>
-    </div>
-
   </div>
 </div>
 </section>
 
-<!-- ═══════════════════════════════════════
-     AI PROJECTS FOR FINANCE ROLES
-═══════════════════════════════════════ -->
-<section id="projects">
-  <div class="section-label">💡 Campus Project Ideas</div>
-  <h2 class="section-title reveal">AI Projects That<br><span class="gradient-text">Get You Hired</span></h2>
-  <p class="section-desc reveal">Build these projects during the course — each one targets a specific SCMHRD finance placement role.</p>
-
-  <div class="projects-grid reveal">
-
-    <div class="project-card">
-      <div class="project-header" style="background:linear-gradient(135deg,rgba(0,212,255,0.15),rgba(0,50,150,0.3));">
-        <span class="project-icon">📊</span>
-        <div class="project-difficulty diff-beginner">Beginner</div>
-        <div class="project-title">AI Equity Research Report Generator</div>
-      </div>
-      <div class="project-body">
-        <div class="project-desc">Enter any NSE/BSE ticker → AI generates a full 5-page equity research report: business model, financials, DCF valuation, risks, and recommendation.</div>
-        <div class="project-stack">
-          <span class="stack-tag">Python</span>
-          <span class="stack-tag">yfinance</span>
-          <span class="stack-tag">ChatGPT API</span>
-          <span class="stack-tag">Streamlit</span>
-        </div>
-        <div class="project-role">🎯 Target Role: Equity Research Analyst · Associate Researcher</div>
-      </div>
-    </div>
-
-    <div class="project-card">
-      <div class="project-header" style="background:linear-gradient(135deg,rgba(244,196,48,0.12),rgba(180,100,0,0.2));">
-        <span class="project-icon">💳</span>
-        <div class="project-difficulty diff-intermediate">Intermediate</div>
-        <div class="project-title">AI Credit Scoring & Risk Dashboard</div>
-      </div>
-      <div class="project-body">
-        <div class="project-desc">Upload a company's annual report PDF → AI extracts financials, computes 15 credit ratios, generates a credit score, and produces a CRISIL-style risk narrative.</div>
-        <div class="project-stack">
-          <span class="stack-tag">Claude API</span>
-          <span class="stack-tag">PDF parsing</span>
-          <span class="stack-tag">Pandas</span>
-          <span class="stack-tag">Streamlit</span>
-        </div>
-        <div class="project-role">🎯 Target Role: Credit Analyst · Risk Manager</div>
-      </div>
-    </div>
-
-    <div class="project-card">
-      <div class="project-header" style="background:linear-gradient(135deg,rgba(155,89,182,0.15),rgba(80,20,120,0.3));">
-        <span class="project-icon">📈</span>
-        <div class="project-difficulty diff-intermediate">Intermediate</div>
-        <div class="project-title">AI Portfolio Optimizer + Rebalancer</div>
-      </div>
-      <div class="project-body">
-        <div class="project-desc">Markowitz mean-variance optimizer with AI-generated commentary. Input stocks → get optimal weights, efficient frontier visualization, and monthly rebalancing alerts.</div>
-        <div class="project-stack">
-          <span class="stack-tag">scipy</span>
-          <span class="stack-tag">matplotlib</span>
-          <span class="stack-tag">GPT-4</span>
-          <span class="stack-tag">Streamlit</span>
-        </div>
-        <div class="project-role">🎯 Target Role: Portfolio Manager · Wealth Manager</div>
-      </div>
-    </div>
-
-    <div class="project-card">
-      <div class="project-header" style="background:linear-gradient(135deg,rgba(255,68,68,0.12),rgba(120,20,20,0.25));">
-        <span class="project-icon">⚠️</span>
-        <div class="project-difficulty diff-advanced">Advanced</div>
-        <div class="project-title">Real-Time Market Risk Dashboard</div>
-      </div>
-      <div class="project-body">
-        <div class="project-desc">Live VaR, CVaR, and Monte Carlo simulation dashboard. Pulls real-time data, runs 10,000 simulations, generates AI-written stress test narrative for CRO reports.</div>
-        <div class="project-stack">
-          <span class="stack-tag">Monte Carlo</span>
-          <span class="stack-tag">yfinance</span>
-          <span class="stack-tag">Claude API</span>
-          <span class="stack-tag">Plotly</span>
-        </div>
-        <div class="project-role">🎯 Target Role: Risk Manager · Market Risk Analyst</div>
-      </div>
-    </div>
-
-    <div class="project-card">
-      <div class="project-header" style="background:linear-gradient(135deg,rgba(0,255,136,0.1),rgba(0,100,60,0.2));">
-        <span class="project-icon">🤝</span>
-        <div class="project-difficulty diff-beginner">Beginner</div>
-        <div class="project-title">AI M&A Deal Screener</div>
-      </div>
-      <div class="project-body">
-        <div class="project-desc">Scrapes NSE/BSE data to screen potential M&A targets by sector/size. AI generates a 1-page acquisition rationale — exactly what analysts prepare in IB.</div>
-        <div class="project-stack">
-          <span class="stack-tag">Web Scraping</span>
-          <span class="stack-tag">GPT-4</span>
-          <span class="stack-tag">Pandas</span>
-          <span class="stack-tag">Excel Export</span>
-        </div>
-        <div class="project-role">🎯 Target Role: Investment Banking Analyst · Corporate Finance</div>
-      </div>
-    </div>
-
-    <div class="project-card">
-      <div class="project-header" style="background:linear-gradient(135deg,rgba(0,212,255,0.1),rgba(0,80,160,0.2));">
-        <span class="project-icon">💬</span>
-        <div class="project-difficulty diff-beginner">Beginner</div>
-        <div class="project-title">Personal Wealth AI Chatbot</div>
-      </div>
-      <div class="project-body">
-        <div class="project-desc">WhatsApp-style chatbot for personal finance — income/expense tracking, SIP planning, tax saving, goal projections. Robo-advisor for the masses.</div>
-        <div class="project-stack">
-          <span class="stack-tag">Claude API</span>
-          <span class="stack-tag">Streamlit</span>
-          <span class="stack-tag">LangChain</span>
-        </div>
-        <div class="project-role">🎯 Target Role: Relationship Manager · Wealth Manager</div>
-      </div>
-    </div>
-
-    <div class="project-card">
-      <div class="project-header" style="background:linear-gradient(135deg,rgba(244,196,48,0.1),rgba(160,100,0,0.2));">
-        <span class="project-icon">📰</span>
-        <div class="project-difficulty diff-intermediate">Intermediate</div>
-        <div class="project-title">FinNews Sentiment Tracker</div>
-      </div>
-      <div class="project-body">
-        <div class="project-desc">Pulls financial news from multiple sources, runs FinBERT sentiment scoring, correlates with stock price movements, and generates daily market briefing.</div>
-        <div class="project-stack">
-          <span class="stack-tag">FinBERT</span>
-          <span class="stack-tag">News API</span>
-          <span class="stack-tag">Plotly</span>
-          <span class="stack-tag">Streamlit</span>
-        </div>
-        <div class="project-role">🎯 Target Role: Equity Research · Quant Analyst</div>
-      </div>
-    </div>
-
-    <div class="project-card">
-      <div class="project-header" style="background:linear-gradient(135deg,rgba(155,89,182,0.12),rgba(80,20,120,0.2));">
-        <span class="project-icon">🎯</span>
-        <div class="project-difficulty diff-advanced">Advanced</div>
-        <div class="project-title">AI Bond Pricing & Duration Tool</div>
-      </div>
-      <div class="project-body">
-        <div class="project-desc">QuantLib-based bond pricer with AI explanation engine — input ISIN, get price, duration, convexity, and AI-written fixed income commentary. CFA-level output.</div>
-        <div class="project-stack">
-          <span class="stack-tag">QuantLib</span>
-          <span class="stack-tag">GPT-4</span>
-          <span class="stack-tag">Fixed Income</span>
-          <span class="stack-tag">Streamlit</span>
-        </div>
-        <div class="project-role">🎯 Target Role: Fixed Income · Treasury Analyst</div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════
-     PROMPT LIBRARY
-═══════════════════════════════════════ -->
-<section id="prompts" style="background:var(--bg2);padding:100px 48px;max-width:100%;">
-<div style="max-width:1400px;margin:0 auto;">
-  <div class="section-label">💬 Prompt Engineering Lab</div>
-  <h2 class="section-title reveal">Finance Prompt<br><span class="gradient-text">Starter Kit</span></h2>
-  <p class="section-desc reveal">Copy-paste these battle-tested prompts for your target roles. Click any card to copy.</p>
-
-  <div class="prompts-grid reveal">
-
-    <div class="prompt-card" onclick="copyPrompt(this)">
-      <button class="prompt-copy">Copy</button>
-      <div class="prompt-role">📊 Equity Research</div>
-      <div class="prompt-text">You are a CFA-level equity research analyst at Morgan Stanley. Analyze [COMPANY NAME] using the following framework: 1) Business model & competitive moat (Porter's Five Forces), 2) Last 3 years financial performance (revenue CAGR, EBITDA margins, ROCE), 3) DCF valuation with base/bull/bear cases, 4) Key risks, 5) 12-month target price and recommendation. Write in the style of a tier-1 equity research report.</div>
-    </div>
-
-    <div class="prompt-card" onclick="copyPrompt(this)">
-      <button class="prompt-copy">Copy</button>
-      <div class="prompt-role">💳 Credit Analysis</div>
-      <div class="prompt-text">You are a senior credit analyst at ICICI Bank. Based on these financial statements: [PASTE FINANCIALS]. Calculate and interpret: Current Ratio, Debt/EBITDA, Interest Coverage, DSCR, Net Profit Margin, and Altman Z-Score. Provide a credit rating recommendation (AAA to D) with detailed justification and key monitoring triggers.</div>
-    </div>
-
-    <div class="prompt-card" onclick="copyPrompt(this)">
-      <button class="prompt-copy">Copy</button>
-      <div class="prompt-role">🏦 Investment Banking</div>
-      <div class="prompt-text">You are an M&A analyst at Goldman Sachs India. Screen the following Indian companies as potential acquisition targets for a strategic buyer in the [SECTOR] space: Target criteria — Revenue ₹500Cr-₹2000Cr, EBITDA margins >15%, low leverage. For each target, provide: Strategic rationale, estimated EV/EBITDA multiple, synergies, and deal risks. Format as a pitchbook slide.</div>
-    </div>
-
-    <div class="prompt-card" onclick="copyPrompt(this)">
-      <button class="prompt-copy">Copy</button>
-      <div class="prompt-role">⚠️ Risk Management</div>
-      <div class="prompt-text">You are a Chief Risk Officer. The portfolio consists of: [PORTFOLIO DETAILS]. Conduct a comprehensive risk assessment including: 1) Market risk (VaR 95% 1-day), 2) Credit risk concentration, 3) Liquidity risk, 4) Scenario analysis for 2008 GFC, COVID-2020, and 2022 rate hike. Present findings in a CRO board report format with RAG status for each risk category.</div>
-    </div>
-
-    <div class="prompt-card" onclick="copyPrompt(this)">
-      <button class="prompt-copy">Copy</button>
-      <div class="prompt-role">💎 Wealth Management</div>
-      <div class="prompt-text">You are a certified financial planner. My client is: Age 28, annual income ₹24 LPA, monthly expenses ₹60,000, existing: ₹5L FD, ₹2L mutual funds. Goals: Buy home in 5 years (₹80L), retire at 50. Create a detailed Investment Policy Statement (IPS) with: Risk profile, asset allocation, specific fund/instrument recommendations, SIP amounts, and annual review milestones.</div>
-    </div>
-
-    <div class="prompt-card" onclick="copyPrompt(this)">
-      <button class="prompt-copy">Copy</button>
-      <div class="prompt-role">📋 Interview Prep</div>
-      <div class="prompt-text">I am interviewing for a [ROLE] position at [COMPANY]. My background: SCMHRD MBA Finance, internship at [COMPANY]. Ask me 10 technical and behavioral interview questions for this role, then after I answer each one, give me detailed feedback — what I got right, what I missed, and a model answer. Start with: "Walk me through a DCF valuation."</div>
-    </div>
-
-  </div>
-</div>
-</section>
-
-<!-- ═══════════════════════════════════════
-     CTA
-═══════════════════════════════════════ -->
+<!-- ═══ CTA ═══ -->
 <section id="cta">
   <div class="cta-glow"></div>
   <div style="position:relative;z-index:2;">
-    <div class="hero-badge" style="margin:0 auto 28px;display:inline-flex;">
-      <span class="hero-badge-dot"></span>
-      6 Hours · 3 Modules · ∞ Career Impact
-    </div>
-    <h2 class="section-title reveal" style="font-size:clamp(36px,5vw,72px);text-align:center;margin-bottom:24px;">
-      Your ₹30 LPA+<br><span class="gradient-text">Journey Starts Now</span>
-    </h2>
-    <p style="font-size:18px;color:var(--muted);max-width:560px;margin:0 auto 48px;text-align:center;line-height:1.6;">
-      SCMHRD Finance students who build AI projects and demonstrate these skills consistently land in the top 25% salary bracket.
-    </p>
-    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
-      <button class="btn-primary" onclick="document.getElementById('modules').scrollIntoView({behavior:'smooth'});toggleJarvis()">
-        🤖 Ask JARVIS to Guide Me
-      </button>
-      <button class="btn-secondary" onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})">
-        💡 Browse AI Projects
-      </button>
+    <div class="pill pill-gold" style="margin:0 auto 24px;display:inline-flex;"><span class="pill-dot"></span>6 Hours · 3 Modules · Career-Defining Skills</div>
+    <h2 class="sh rv" style="text-align:center;font-size:clamp(34px,5vw,64px);margin-bottom:20px;">The Finance of Tomorrow<br><span class="gtext">Starts Today</span></h2>
+    <p style="font-size:17px;color:var(--muted);max-width:520px;margin:0 auto 44px;text-align:center;line-height:1.65;">LLMs, RAG, and MCP aren't buzzwords — they're already inside JPMorgan, Goldman, and Morgan Stanley. This course puts them in your hands.</p>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+      <button class="btn-p" onclick="scrollTo('modules')">📚 Go to Modules</button>
+      <button class="btn-s" onclick="jToggle()">🤖 Ask JARVIS</button>
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">⚡ AI Finance — SCMHRD</div>
-  <div class="footer-sub">Designed by Tejas Jadhav CFA FRM · For SCMHRD MBA Finance Batch 2023-25</div>
-  <div class="footer-links">
-    <a href="#hero">Home</a>
-    <a href="#placement">Placements</a>
-    <a href="#modules">Modules</a>
-    <a href="#tools">Tools</a>
-    <a href="#projects">Projects</a>
-    <a href="#prompts">Prompts</a>
-    <a href="https://tejasgjadhav.github.io/AIFINANCE/" target="_blank">Previous Course</a>
-    <a href="https://tejasgjadhav.github.io/" target="_blank">Author</a>
+  <div class="fl">⚡ AI Finance — SCMHRD</div>
+  <div class="fs">Designed by Tejas Jadhav CFA FRM · SCMHRD MBA Finance · 2nd Year Intensive</div>
+  <div class="flinks">
+    <a href="#overview">Overview</a><a href="#industry">Industry AI</a><a href="#modules">Modules</a>
+    <a href="#concepts">Concepts</a><a href="#tools">Tools</a><a href="#prompts">Prompts</a><a href="#about">Instructor</a>
+    <a href="https://tejasgjadhav.github.io/AIFINANCE/" target="_blank">Prev Course</a>
+    <a href="https://tejasgjadhav.github.io/" target="_blank">tejasjadhav.github.io</a>
   </div>
-  <div class="footer-bottom">
-    © 2025 SCMHRD × Tejas Jadhav · Placement data sourced from SCMHRD Final Placement Report 2023–25
-  </div>
+  <div class="fcopy">© 2025 SCMHRD × Tejas Jadhav CFA FRM · Industry data sourced from McKinsey, CFA Institute, Bloomberg, MIT Sloan</div>
 </footer>
 
-<!-- ═══════════════════════════════════════
-     JAVASCRIPT
-═══════════════════════════════════════ -->
 <script>
 // ── Matrix Canvas ──
-const canvas = document.getElementById('matrix-canvas');
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-const chars = '01アイウエオカキクケコABCDEF0123456789';
-const cols = Math.floor(canvas.width / 14);
-const drops = Array(cols).fill(1);
-function drawMatrix() {
-  ctx.fillStyle = 'rgba(2,4,8,0.04)';
-  ctx.fillRect(0,0,canvas.width,canvas.height);
-  ctx.fillStyle = '#00D4FF';
-  ctx.font = '12px JetBrains Mono, monospace';
-  drops.forEach((y,i) => {
-    const c = chars[Math.floor(Math.random()*chars.length)];
-    ctx.fillText(c, i*14, y*14);
-    if(y*14 > canvas.height && Math.random() > 0.975) drops[i] = 0;
-    drops[i]++;
-  });
-}
-setInterval(drawMatrix, 50);
-window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
+const cv=document.getElementById('bgcanvas');
+const cx=cv.getContext('2d');
+function rsz(){cv.width=window.innerWidth;cv.height=window.innerHeight;}
+rsz(); window.addEventListener('resize',rsz);
+const chars='01アイウエオABCDEF0123456789ΔΣΩ∫∂';
+let cols=Math.floor(cv.width/16),drops=Array(cols).fill(1);
+setInterval(()=>{
+  cx.fillStyle='rgba(2,5,9,.06)';cx.fillRect(0,0,cv.width,cv.height);
+  cx.fillStyle='#00D4FF';cx.font='11px JetBrains Mono,monospace';
+  drops.forEach((y,i)=>{const c=chars[Math.floor(Math.random()*chars.length)];cx.fillText(c,i*16,y*16);if(y*16>cv.height&&Math.random()>.975)drops[i]=0;drops[i]++;});
+},55);
 
 // ── Progress Bar ──
-window.addEventListener('scroll', () => {
-  const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
-  document.getElementById('progress-bar').style.width = pct + '%';
+window.addEventListener('scroll',()=>{
+  document.getElementById('prog').style.width=(window.scrollY/(document.body.scrollHeight-window.innerHeight)*100)+'%';
+  // nav active links
+  let cur='';
+  document.querySelectorAll('section[id],div[id]').forEach(s=>{if(window.scrollY>=s.offsetTop-200)cur=s.id;});
+  document.querySelectorAll('.nav-links a').forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+cur);});
 });
 
-// ── Scroll Reveal ──
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.1 });
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+// ── Reveal ──
+const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');}),{threshold:.1});
+document.querySelectorAll('.rv').forEach(el=>ro.observe(el));
 
-// ── Animate salary bars ──
-const barObserver = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if(e.isIntersecting) {
-      e.target.querySelectorAll('.salary-bar[data-width]').forEach(bar => {
-        setTimeout(() => { bar.style.width = bar.dataset.width + '%'; }, 200);
-      });
-    }
-  });
-}, { threshold: 0.3 });
-document.querySelectorAll('.salary-viz, .two-col').forEach(el => barObserver.observe(el));
+// ── Count Up ──
+function cUp(el){
+  const t=parseFloat(el.dataset.count),sf=el.dataset.suf||'',dur=1800,s=performance.now();
+  function u(n){const p=Math.min((n-s)/dur,1),e=1-Math.pow(1-p,4);el.textContent=Number((t*e).toFixed(0))+sf;if(p<1)requestAnimationFrame(u);}
+  requestAnimationFrame(u);
+}
+const co=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('[data-count]').forEach(cUp);co.unobserve(e.target);}}),{threshold:.3});
+document.querySelectorAll('#hero,.hero-row').forEach(el=>co.observe(el));
 
-// ── Count Up Animation ──
-function countUp(el) {
-  const target = parseFloat(el.dataset.count);
-  const suffix = el.dataset.suffix || '';
-  const duration = 2000;
-  const start = performance.now();
-  function update(now) {
-    const elapsed = now - start;
-    const progress = Math.min(elapsed / duration, 1);
-    const ease = 1 - Math.pow(1 - progress, 4);
-    const current = (target * ease).toFixed(2);
-    el.textContent = current + suffix;
-    if(progress < 1) requestAnimationFrame(update);
-    else el.textContent = target + suffix;
-  }
-  requestAnimationFrame(update);
+// ── Module Tabs ──
+function switchMod(i){
+  document.querySelectorAll('.mod-tab').forEach((t,j)=>t.classList.toggle('active',j===i));
+  document.querySelectorAll('.mod-panel').forEach((p,j)=>p.classList.toggle('active',j===i));
 }
 
-const countObserver = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if(e.isIntersecting) {
-      e.target.querySelectorAll('[data-count]').forEach(el => countUp(el));
-      countObserver.unobserve(e.target);
-    }
-  });
-}, { threshold: 0.3 });
-document.querySelectorAll('#hero, .stats-grid').forEach(el => countObserver.observe(el));
+// ── Scroll helper ──
+function scrollTo(id){document.getElementById(id)?.scrollIntoView({behavior:'smooth'});}
 
-// ── JARVIS ──
-let jarvisOpen = false;
-const jarvisMessages = {
-  welcome: "Good day. I'm J.A.R.V.I.S., your AI Finance Intelligence System. I have full access to the SCMHRD placement database and AI finance knowledge base. How may I assist you today?",
-  placement: "Analyzing SCMHRD Finance placement data... Finance average CTC: ₹19.64 LPA. Highest offer: ₹29.80 LPA (BFSI sector). Top 10% average: ₹28.97 LPA. Insight: Students with AI project portfolios are 3x more likely to receive offers above ₹25 LPA. I recommend prioritizing Module 3 projects.",
-  course: "This 6-hour intensive course is structured as 3 modules of 2 hours each. Module 1: AI Foundations — prompt engineering, Python basics, financial modeling with AI. Module 2: AI in Core Finance Roles — IB, Credit, Risk, Portfolio, Wealth. Module 3: Career Edge — build 3 projects, interview prep, hackathon. Each module is self-contained.",
-  projects: "Recommended AI projects for SCMHRD Finance roles: 1) Equity Research Bot (targets Analyst roles, ₹20-25 LPA). 2) Credit Scoring Dashboard (Credit/Risk roles, ₹22-28 LPA). 3) Portfolio Optimizer (AM/PM roles, ₹24-30 LPA). 4) Real-time Risk Dashboard (advanced, ₹28+ LPA). Start with #1 for immediate impact.",
-  salary: "Finance salary intelligence: Average ₹19.64L, Median ₹20L, Top 25% ₹25.03L, Top 10% ₹28.97L, Highest ₹29.80L. BFSI sector leads with avg ₹20.51L. To enter the ₹25L+ bracket: build 2+ AI projects, demonstrate Python skills in interviews, get a GitHub profile with real finance code."
-};
-
-function typeText(text) {
-  const el = document.getElementById('jarvis-text');
-  el.textContent = '';
-  let i = 0;
-  const interval = setInterval(() => {
-    el.textContent += text[i];
-    i++;
-    if(i >= text.length) clearInterval(interval);
-  }, 18);
-}
-
-function toggleJarvis() {
-  const panel = document.getElementById('jarvis-panel');
-  jarvisOpen = !jarvisOpen;
-  panel.style.display = jarvisOpen ? 'block' : 'none';
-  if(jarvisOpen) typeText(jarvisMessages.welcome);
-}
-
-function jarvisSay(key) {
-  typeText(jarvisMessages[key] || jarvisMessages.welcome);
-}
+// ── Toast ──
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2400);}
 
 // ── Copy Prompt ──
-function copyPrompt(card) {
-  const text = card.querySelector('.prompt-text').textContent;
-  navigator.clipboard.writeText(text).then(() => {
-    const toast = document.getElementById('toast');
-    toast.textContent = '✅ Prompt copied to clipboard!';
-    toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 2500);
-    const btn = card.querySelector('.prompt-copy');
-    btn.textContent = '✓ Copied';
-    setTimeout(() => btn.textContent = 'Copy', 2000);
+function copyP(card){
+  const txt=card.querySelector('.pr-text').textContent;
+  navigator.clipboard.writeText(txt).then(()=>{
+    toast('✅ Prompt copied to clipboard!');
+    const b=card.querySelector('.pr-copy');b.textContent='✓';setTimeout(()=>b.textContent='Copy',2000);
   });
 }
 
-// ── Lesson Card Expand ──
-document.querySelectorAll('.lesson-card').forEach(card => {
-  card.addEventListener('click', () => {
-    const toast = document.getElementById('toast');
-    const title = card.querySelector('.lesson-title').textContent;
-    toast.textContent = `📖 Opening: ${title}`;
-    toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 2000);
-  });
-});
+// ── JARVIS ──
+const jMsgs={
+  welcome:`Good day. I am J.A.R.V.I.S. — your AI Finance course intelligence.\n\nI can explain LLMs, RAG, MCP, and context windows. Ask me about Module 1 concepts, course structure, how finance companies use AI, or which tool to use for your project.\n\nClick any button below or type your question.`,
+  llm:`LARGE LANGUAGE MODELS (LLMs):\n\nLLMs are neural networks trained on trillions of text tokens using the Transformer architecture. They predict the next token given all previous context.\n\nFor finance:\n• BloombergGPT = 50B params, trained on 363B finance tokens\n• GPT-4 = general but powerful for structured output\n• Claude = 200K context window — ideal for full annual reports\n\nKey limitation: they can hallucinate financial facts. Always verify numbers.`,
+  rag:`RAG — RETRIEVAL AUGMENTED GENERATION:\n\nSolves the hallucination problem by grounding the LLM in real documents.\n\nHow it works:\n1. Documents → chunked → embedded → stored in vector database\n2. User query → embedded → retrieved from vector DB\n3. Retrieved context + query → sent to LLM\n4. LLM answers from REAL data, not training memory\n\nReal example: Morgan Stanley's AI advisor uses RAG to query 100,000+ research documents in real time for wealth advisors.`,
+  mcp:`MODEL CONTEXT PROTOCOL (MCP):\n\nAnthropoc's open standard (2024) that lets AI models connect to external tools and APIs without custom code.\n\nThink of it as USB-C for AI — one protocol to connect Claude or GPT to:\n• Bloomberg Terminal\n• Excel / Google Sheets\n• Risk databases\n• Trading APIs\n• Email / calendar\n\nThis is how JPMorgan's LLM Suite and agentic finance workflows are built. Module 1.5 covers this with a live demo.`,
+  context:`CONTEXT WINDOWS:\n\nThe "working memory" of an LLM — the maximum text it can see in one request.\n\nComparison:\n• GPT-4: 128K tokens (~96K words)\n• Claude: 200K tokens (~150K words) — fits an entire annual report\n• Gemini 1.5: 1M tokens\n\nWhy it matters for finance:\n• Long annual reports require large context\n• Context management determines output quality\n• Injecting the RIGHT data (via RAG) beats injecting ALL data\n\nModule 1.2 covers context engineering techniques for finance.`,
+  jpmorgan:`JPMORGAN AI DEPLOYMENTS:\n\n1. LLM Suite — IB pitchbook generation in 30 seconds\n2. IndexGPT — AI-powered investment thematic indices\n3. DocLLM — layout-aware LLM for financial documents\n4. Contract Intelligence (COiN) — reviews 12,000 credit agreements in seconds\n\nJPMorgan invested $17B in AI in 2026 — 10% increase YoY. They have filed 300+ AI patents and deployed 200+ AI use cases across 50,000 employees.\n\nSee: Module 2.1 for IB AI workflows.`,
+  career:`CAREER ADVICE FOR SCMHRD FINANCE:\n\nHigh-impact actions:\n1. Build the Module 3 projects → put on GitHub\n2. Add "AI tools" bullets to resume (Claude, RAG, FinBERT)\n3. For every interview: prepare how AI changes THAT function\n4. IB interviews: mention JPMorgan LLM Suite\n5. Risk interviews: mention Goldman's AI stress testing\n6. Wealth interviews: mention Morgan Stanley RAG advisor\n\nTop differentiator: students who can DEMO an AI finance tool in interviews are consistently in the top offer bracket.`
+};
 
-// ── Smooth nav highlight ──
-const sections = document.querySelectorAll('section[id]');
-window.addEventListener('scroll', () => {
-  let current = '';
-  sections.forEach(s => { if(window.scrollY >= s.offsetTop - 200) current = s.id; });
-  document.querySelectorAll('.nav-links a').forEach(a => {
-    a.style.color = a.getAttribute('href') === '#'+current ? 'var(--blue)' : 'var(--muted)';
-  });
-});
+const jLinkMap={
+  llm:[{t:'BloombergGPT Paper',u:'https://arxiv.org/abs/2303.17564'},{t:'Hugging Face FinBERT',u:'https://huggingface.co/ProsusAI/finbert'}],
+  rag:[{t:'Morgan Stanley AI @ Scale',u:'https://www.morganstanley.com/ideas/ai-wealth-management'},{t:'RAG in Finance — HatchWorks',u:'https://hatchworks.com/blog/gen-ai/rag-for-financial-services/'}],
+  mcp:[{t:'MCP Official Docs — Anthropic',u:'https://docs.anthropic.com/en/docs/build-with-claude/computer-use'},{t:'Agentic AI in Finance — CFA',u:'https://rpc.cfainstitute.org/research/the-automation-ahead-content-series/agentic-ai-for-finance'}],
+  context:[{t:'Claude Prompt Engineering',u:'https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview'},{t:'OpenAI Context Guide',u:'https://platform.openai.com/docs/guides/prompt-engineering'}],
+  jpmorgan:[{t:'JPMorgan AI — Emerj',u:'https://emerj.com/artificial-intelligence-at-jpmorgan-chase/'},{t:'Gen AI Finance — AIM',u:'https://aimultiple.com/generative-ai-finance'}],
+  career:[{t:'AI Finance Course — Tejas',u:'https://tejasgjadhav.github.io/AIFINANCE/'},{t:'Wall Street Prep AI Courses',u:'https://www.wallstreetprep.com/knowledge/best-ai-courses-for-finance-business-professionals/'}],
+  welcome:[]
+};
 
-// ── Particle hover on stat cards ──
-document.querySelectorAll('.stat-card').forEach(card => {
-  card.addEventListener('mouseenter', () => {
-    card.style.borderColor = 'var(--blue)';
-  });
-  card.addEventListener('mouseleave', () => {
-    card.style.borderColor = 'var(--border)';
-  });
-});
+let jOpen=false;
+function jToggle(){
+  jOpen=!jOpen;
+  document.getElementById('jpanel').style.display=jOpen?'block':'none';
+  if(jOpen)jType('welcome');
+}
 
-console.log('%c⚡ SCMHRD AI Finance Course', 'color:#00D4FF;font-size:20px;font-weight:bold;');
-console.log('%cBuilt by Tejas Jadhav CFA FRM · JARVIS AI System Online', 'color:#F4C430;font-size:12px;');
+function jType(key){
+  const el=document.getElementById('jtext');
+  const msg=jMsgs[key]||jMsgs.welcome;
+  const links=jLinkMap[key]||[];
+  el.textContent='';
+  let i=0;
+  clearInterval(window._jInterval);
+  window._jInterval=setInterval(()=>{el.textContent+=msg[i];i++;if(i>=msg.length){clearInterval(window._jInterval);showJLinks(links);}},16);
+}
+
+function showJLinks(links){
+  const cont=document.getElementById('jlinks');
+  cont.innerHTML='';
+  if(links.length){
+    const lbl=document.createElement('div');
+    lbl.style.cssText='font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;margin-top:8px;';
+    lbl.textContent='🔗 Useful Resources:';
+    cont.appendChild(lbl);
+    links.forEach(l=>{
+      const a=document.createElement('a');
+      a.href=l.u;a.target='_blank';a.className='jlink';a.textContent='→ '+l.t;
+      cont.appendChild(a);
+    });
+  }
+}
+
+function jSay(key){jType(key);}
+
+console.log('%c⚡ SCMHRD AI Finance Course','color:#00D4FF;font-size:18px;font-weight:900;');
+console.log('%c  LLMs · RAG · MCP · Context · Agentic AI','color:#F4C430;font-size:12px;');
+console.log('%c  by Tejas Jadhav CFA FRM','color:#9B59B6;font-size:12px;');
 </script>
 </body>
 </html>
