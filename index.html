@@ -2,925 +2,446 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>AI Finance Mastery — SCMHRD | LLMs · RAG · MCP · Agentic AI | Tejas Jadhav, CFA, FRM</title>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>AI Finance Mastery — SCMHRD | Tejas Jadhav, CFA, FRM</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
 <style>
 :root{
-  --r1:#CC0033;--r2:#FF1744;--r3:#FF6B6B;--r4:#8B0020;--r5:#4A0010;
-  --w1:#FFFFFF;--w2:#F8EEF0;--w3:#E8D0D4;
-  --g1:#FFD700;--g2:#F4C430;--g3:#C8960C;
-  --bg:#060108;--bg2:#0A0210;--bg3:#110318;
-  --card:rgba(140,0,30,.15);--card2:rgba(140,0,30,.22);
-  --border:rgba(204,0,51,.45);--border2:rgba(204,0,51,.4);
-  --text:#F5E8EA;--muted:#C8A2B2;
-  --shadow:rgba(204,0,51,.25);
+  --red:#CC0033;--red2:#A30029;--red3:#FF1744;--red-soft:#FFF0F3;--red-line:#F4C8D0;
+  --ink:#0E0A0C;--ink2:#3A2A2F;--muted:#6E5862;
+  --bg:#FFFFFF;--bg2:#FBF7F8;--bg3:#FDF4F6;
+  --gold:#B8860B;--line:#EADDE1;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
-body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;}
+a{color:inherit;text-decoration:none;}
 
-/* ── PROGRESS ── */
-#prog{position:fixed;top:0;left:0;height:3px;z-index:9999;background:linear-gradient(90deg,var(--r1),var(--r2),var(--g1));transition:width .1s;box-shadow:0 0 8px var(--r2);}
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.95);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);}
+.nav-in{max-width:1280px;margin:0 auto;padding:16px 40px;display:flex;align-items:center;justify-content:space-between;gap:24px;}
+.brand{display:flex;align-items:center;gap:12px;}
+.brand-logo{width:42px;height:42px;background:linear-gradient(135deg,var(--red),var(--red2));border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:18px;box-shadow:0 6px 18px rgba(204,0,51,.28);}
+.brand-t{font-weight:800;font-size:16px;letter-spacing:-.2px;}
+.brand-sub{font-size:11px;color:var(--muted);margin-top:1px;}
+.nav-links{display:flex;gap:28px;}
+.nav-links a{font-size:14px;color:var(--ink2);font-weight:500;transition:color .2s;}
+.nav-links a:hover{color:var(--red);}
+.nav-cta{background:var(--red);color:#fff;padding:10px 22px;border-radius:8px;font-weight:700;font-size:13px;box-shadow:0 6px 18px rgba(204,0,51,.3);transition:transform .2s;}
+.nav-cta:hover{transform:translateY(-1px);}
+@media(max-width:880px){.nav-links{display:none;}.nav-in{padding:14px 20px;}}
 
-/* ── CANVAS ── */
-#bgc{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;}
+/* HERO */
+.hero{padding:90px 40px 80px;background:linear-gradient(180deg,#fff 0%,var(--bg3) 100%);position:relative;overflow:hidden;}
+.hero::before{content:"";position:absolute;top:-150px;right:-150px;width:500px;height:500px;background:radial-gradient(circle,rgba(204,0,51,.08),transparent 70%);border-radius:50%;}
+.hero::after{content:"";position:absolute;bottom:-200px;left:-100px;width:480px;height:480px;background:radial-gradient(circle,rgba(204,0,51,.05),transparent 70%);border-radius:50%;}
+.hero-in{max-width:1100px;margin:0 auto;text-align:center;position:relative;z-index:1;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;background:var(--red-soft);border:1px solid var(--red-line);border-radius:30px;font-size:11.5px;font-weight:700;color:var(--red);letter-spacing:1.6px;text-transform:uppercase;margin-bottom:28px;}
+.hero-badge .dot{width:7px;height:7px;background:var(--red);border-radius:50%;animation:pulse 1.8s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(44px,7vw,86px);font-weight:900;line-height:1.02;letter-spacing:-1.5px;margin-bottom:24px;color:var(--ink);}
+.hero h1 .accent{color:var(--red);font-style:italic;}
+.hero-tag{font-size:clamp(16px,1.6vw,19px);color:var(--ink2);max-width:680px;margin:0 auto 36px;line-height:1.65;}
+.hero-tag strong{color:var(--red);font-weight:700;}
+.hero-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:56px;}
+.btn-p{background:var(--red);color:#fff;padding:16px 36px;border-radius:10px;font-weight:700;font-size:15px;box-shadow:0 10px 30px rgba(204,0,51,.32);transition:all .25s;}
+.btn-p:hover{background:var(--red2);transform:translateY(-2px);box-shadow:0 14px 38px rgba(204,0,51,.42);}
+.btn-s{background:#fff;color:var(--ink);padding:16px 36px;border-radius:10px;font-weight:600;font-size:15px;border:1.5px solid var(--line);transition:all .25s;}
+.btn-s:hover{border-color:var(--red);color:var(--red);}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;max-width:820px;margin:0 auto;background:#fff;padding:32px 24px;border-radius:18px;border:1px solid var(--line);box-shadow:0 20px 60px rgba(204,0,51,.08);}
+.hs-v{font-family:'Playfair Display',serif;font-size:34px;font-weight:900;color:var(--red);line-height:1;}
+.hs-l{font-size:12px;color:var(--muted);margin-top:6px;text-transform:uppercase;letter-spacing:1px;font-weight:600;}
+@media(max-width:680px){.hero-stats{grid-template-columns:repeat(2,1fr);}.hs-v{font-size:28px;}}
 
-/* ── NAV ── */
-nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:0 52px;height:64px;display:flex;align-items:center;justify-content:space-between;background:rgba(6,1,8,.82);backdrop-filter:blur(20px);border-bottom:1px solid rgba(204,0,51,.15);}
-.nav-brand{display:flex;align-items:center;gap:11px;}
-.nav-logo{width:38px;height:38px;background:linear-gradient(135deg,var(--r1),var(--r4));border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 0 16px rgba(204,0,51,.5);}
-.nav-t{font-weight:800;font-size:15px;letter-spacing:-.3px;}
-.nav-sub{font-size:10px;color:var(--muted);margin-top:1px;}
-.nav-links{display:flex;gap:26px;}
-.nav-links a{color:var(--muted);text-decoration:none;font-size:13px;font-weight:500;transition:color .2s;position:relative;}
-.nav-links a::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:1px;background:var(--r2);transform:scaleX(0);transition:transform .25s;}
-.nav-links a:hover,.nav-links a.act{color:var(--w1);}
-.nav-links a:hover::after,.nav-links a.act::after{transform:scaleX(1);}
-.nav-cta{padding:9px 22px;background:linear-gradient(135deg,var(--r1),var(--r4));color:#fff;border:none;border-radius:8px;font-weight:700;font-size:13px;cursor:pointer;transition:all .25s;font-family:'Space Grotesk',sans-serif;box-shadow:0 0 18px rgba(204,0,51,.55);}
-.nav-cta:hover{transform:translateY(-2px);box-shadow:0 0 32px rgba(204,0,51,.6);}
-@media(max-width:768px){nav{padding:0 18px;}.nav-links{display:none;}}
+/* SECTION */
+.sec{padding:90px 40px;}
+.sec-alt{background:var(--bg2);}
+.sec-in{max-width:1200px;margin:0 auto;}
+.sec-h{text-align:center;margin-bottom:60px;}
+.sec-lbl{display:inline-block;padding:6px 16px;background:var(--red-soft);border:1px solid var(--red-line);border-radius:24px;color:var(--red);font-size:11px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;margin-bottom:18px;}
+.sec-h h2{font-family:'Playfair Display',serif;font-size:clamp(32px,4.6vw,52px);font-weight:900;line-height:1.1;letter-spacing:-.8px;color:var(--ink);}
+.sec-h h2 .accent{color:var(--red);font-style:italic;}
+.sec-h p{font-size:16px;color:var(--ink2);max-width:640px;margin:18px auto 0;line-height:1.7;}
 
-/* ══ HERO ══ */
-#hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:110px 24px 80px;position:relative;overflow:hidden;}
-.h-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(204,0,51,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(204,0,51,.12) 1px,transparent 1px);background-size:64px 64px;animation:grid-drift 30s linear infinite;}
-@keyframes grid-drift{0%{background-position:0 0;}100%{background-position:64px 64px;}}
-.h-blob{position:absolute;border-radius:50%;filter:blur(90px);animation:blob-drift 12s ease-in-out infinite;pointer-events:none;}
-.blob1{width:480px;height:480px;background:radial-gradient(circle,rgba(204,0,51,.18),transparent 70%);top:10%;left:10%;animation-delay:0s;}
-.blob2{width:360px;height:360px;background:radial-gradient(circle,rgba(255,23,68,.12),transparent 70%);bottom:15%;right:10%;animation-delay:-4s;}
-.blob3{width:280px;height:280px;background:radial-gradient(circle,rgba(255,215,0,.07),transparent 70%);top:40%;left:55%;animation-delay:-8s;}
-@keyframes blob-drift{0%,100%{transform:translate(0,0) scale(1);}33%{transform:translate(30px,-20px) scale(1.05);}66%{transform:translate(-20px,15px) scale(.95);}}
+/* CURRICULUM */
+.curr-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px;}
+.curr-c{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px 20px;transition:all .25s;position:relative;overflow:hidden;}
+.curr-c:hover{border-color:var(--red);transform:translateY(-3px);box-shadow:0 14px 38px rgba(204,0,51,.12);}
+.curr-c::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--red);transform:scaleY(0);transform-origin:top;transition:transform .3s;}
+.curr-c:hover::before{transform:scaleY(1);}
+.curr-pill{display:inline-block;font-size:10px;font-weight:700;padding:3px 10px;border-radius:10px;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;}
+.p-s2{background:var(--red-soft);color:var(--red);}
+.p-s3{background:#FFF8E1;color:#B8860B;}
+.curr-t{font-weight:700;font-size:15px;color:var(--ink);margin-bottom:4px;}
+.curr-s{font-size:12.5px;color:var(--muted);}
 
-.h-badge{display:inline-flex;align-items:center;gap:7px;padding:6px 20px;background:rgba(204,0,51,.25);border:1px solid rgba(204,0,51,.55);border-radius:30px;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--r3);margin-bottom:24px;animation:fadeUp .8s ease both;}
-.bdot{width:6px;height:6px;border-radius:50%;background:var(--r2);animation:blink 1.5s infinite;box-shadow:0 0 6px var(--r2);}
-@keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
-@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+/* INDUSTRY */
+.ind-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:22px;}
+.ind-c{background:#fff;border:1px solid var(--line);border-radius:18px;padding:28px;transition:all .3s;}
+.ind-c:hover{border-color:var(--red);transform:translateY(-4px);box-shadow:0 18px 50px rgba(204,0,51,.14);}
+.ind-hd{display:flex;align-items:center;gap:14px;margin-bottom:14px;}
+.ind-ico{width:48px;height:48px;background:linear-gradient(135deg,var(--red),var(--red2));border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;color:#fff;}
+.ind-co{font-weight:800;font-size:17px;}
+.ind-tag{font-size:11px;color:var(--red);font-weight:700;letter-spacing:.8px;text-transform:uppercase;}
+.ind-c p{font-size:14px;color:var(--ink2);line-height:1.68;}
 
-h1.hh{font-family:'Inter',sans-serif;font-size:clamp(48px,9vw,110px);font-weight:900;line-height:.92;letter-spacing:-4px;margin-bottom:22px;animation:fadeUp .8s .15s ease both;}
-.rt{background:linear-gradient(135deg,var(--r2) 0%,var(--r3) 40%,var(--g1) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 30px rgba(204,0,51,.4));}
-.wt{color:var(--w1);}
+/* MODULES */
+.mod-wrap{display:grid;gap:28px;}
+.mod-c{background:#fff;border:1px solid var(--line);border-radius:22px;padding:36px;display:grid;grid-template-columns:140px 1fr;gap:32px;transition:all .3s;}
+.mod-c:hover{border-color:var(--red);box-shadow:0 20px 60px rgba(204,0,51,.1);}
+.mod-num{font-family:'Playfair Display',serif;font-size:88px;font-weight:900;color:var(--red);line-height:.85;letter-spacing:-3px;}
+.mod-num small{display:block;font-family:'Inter',sans-serif;font-size:11px;color:var(--muted);letter-spacing:2px;margin-top:4px;text-transform:uppercase;font-weight:700;}
+.mod-t{font-family:'Playfair Display',serif;font-size:28px;font-weight:800;margin-bottom:8px;letter-spacing:-.5px;}
+.mod-dur{display:inline-block;font-size:11.5px;color:var(--red);background:var(--red-soft);padding:4px 12px;border-radius:14px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:18px;}
+.mod-desc{color:var(--ink2);font-size:15px;line-height:1.72;margin-bottom:22px;}
+.les-list{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.les{padding:14px 16px;background:var(--bg3);border-left:3px solid var(--red);border-radius:8px;font-size:13.5px;color:var(--ink);font-weight:500;}
+.les b{color:var(--red);font-weight:800;margin-right:6px;}
+@media(max-width:760px){.mod-c{grid-template-columns:1fr;gap:18px;padding:28px 22px;}.mod-num{font-size:64px;}.les-list{grid-template-columns:1fr;}}
 
-.h-desc{font-size:clamp(15px,1.7vw,18px);color:var(--muted);max-width:580px;margin:0 auto 40px;line-height:1.7;animation:fadeUp .8s .3s ease both;}
-.h-kpis{display:flex;gap:44px;justify-content:center;flex-wrap:wrap;margin-bottom:44px;animation:fadeUp .8s .45s ease both;}
-.kpi{text-align:center;}
-.kpi-v{font-size:32px;font-weight:900;font-family:'Inter',sans-serif;color:#FF1744;text-shadow:0 0 20px rgba(255,23,68,.4);}
-.kpi-l{font-size:11px;color:var(--muted);margin-top:3px;text-transform:uppercase;letter-spacing:1px;}
-.h-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;animation:fadeUp .8s .6s ease both;}
-.bp{padding:16px 40px;background:linear-gradient(135deg,var(--r1),#8B0020);color:#fff;border:none;border-radius:10px;font-weight:700;font-size:14px;cursor:pointer;transition:all .3s;box-shadow:0 0 36px rgba(204,0,51,.5);font-family:'Space Grotesk',sans-serif;}
-.bp:hover{transform:translateY(-3px);box-shadow:0 0 50px rgba(204,0,51,.65);}
-.bs{padding:15px 36px;background:transparent;color:var(--w2);border:1px solid rgba(204,0,51,.55);border-radius:10px;font-weight:600;font-size:14px;cursor:pointer;transition:all .3s;font-family:'Space Grotesk',sans-serif;}
-.bs:hover{background:rgba(204,0,51,.1);border-color:var(--r2);box-shadow:0 0 20px rgba(204,0,51,.2);}
+/* PROJECTS */
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:22px;}
+.proj-c{background:#fff;border:1px solid var(--line);border-radius:18px;padding:28px;transition:all .3s;position:relative;overflow:hidden;}
+.proj-c::after{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--red),var(--red3));}
+.proj-c:hover{transform:translateY(-5px);box-shadow:0 22px 60px rgba(204,0,51,.16);border-color:var(--red);}
+.proj-ico{font-size:32px;margin-bottom:14px;}
+.proj-t{font-weight:800;font-size:17px;margin-bottom:8px;color:var(--ink);}
+.proj-d{font-size:13.5px;color:var(--ink2);line-height:1.68;margin-bottom:14px;}
+.proj-tags{display:flex;flex-wrap:wrap;gap:6px;}
+.proj-tag{font-size:10.5px;padding:4px 10px;background:var(--red-soft);color:var(--red);border-radius:12px;font-weight:600;letter-spacing:.5px;}
 
-/* ── TICKER ── */
-.tkr{background:rgba(204,0,51,.05);border-top:1px solid rgba(204,0,51,.15);border-bottom:1px solid rgba(204,0,51,.15);padding:13px 0;overflow:hidden;white-space:nowrap;position:relative;z-index:10;}
-.tkr-in{display:inline-flex;animation:tkr 38s linear infinite;}
-.ti{padding:0 32px;font-size:12px;font-family:'JetBrains Mono',monospace;color:rgba(204,0,51,.7);display:inline-flex;align-items:center;gap:9px;}
-.ti b{color:var(--g1);}
-.tsep{color:rgba(204,0,51,.2);}
-@keyframes tkr{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+/* PROMPTS */
+.pr-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:18px;}
+.pr-c{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px;cursor:pointer;transition:all .25s;position:relative;}
+.pr-c:hover{border-color:var(--red);box-shadow:0 14px 38px rgba(204,0,51,.12);}
+.pr-role{font-weight:800;font-size:14.5px;color:var(--red);margin-bottom:10px;}
+.pr-text{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;color:var(--ink2);line-height:1.65;max-height:140px;overflow:hidden;position:relative;}
+.pr-text::after{content:"";position:absolute;bottom:0;left:0;right:0;height:50px;background:linear-gradient(transparent,#fff);}
+.pr-copy{position:absolute;top:18px;right:18px;font-size:10px;background:var(--red);color:#fff;padding:5px 11px;border-radius:6px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;}
 
-/* ── LAYOUT ── */
-.wrap{max-width:1360px;margin:0 auto;padding:0 60px;}
-@media(max-width:768px){.wrap{padding:0 18px;}}
-.sec{padding:88px 0;position:relative;z-index:10;}
-.sec-alt{background:linear-gradient(180deg,var(--bg2) 0%,#0D0316 100%);}
+/* INSTRUCTOR */
+.about-grid{display:grid;grid-template-columns:380px 1fr;gap:56px;align-items:start;}
+@media(max-width:900px){.about-grid{grid-template-columns:1fr;gap:32px;}}
+.ab-card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:36px 30px;text-align:center;box-shadow:0 20px 60px rgba(204,0,51,.1);position:sticky;top:90px;}
+.ab-photo{width:152px;height:152px;border-radius:50%;overflow:hidden;margin:0 auto 22px;border:4px solid var(--red);box-shadow:0 0 0 6px var(--red-soft),0 12px 30px rgba(204,0,51,.25);}
+.ab-photo img{width:100%;height:100%;object-fit:cover;display:block;}
+.ab-name{font-family:'Playfair Display',serif;font-size:24px;font-weight:800;margin-bottom:6px;}
+.ab-role{font-size:13px;color:var(--muted);margin-bottom:18px;line-height:1.55;}
+.ab-creds{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-bottom:22px;}
+.crd{font-size:10.5px;padding:5px 11px;background:var(--red-soft);color:var(--red);border-radius:14px;font-weight:700;letter-spacing:.4px;border:1px solid var(--red-line);}
+.crd-g{background:#FFF8E1;color:#B8860B;border-color:#FCE7A3;}
+.ab-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:22px;}
+.ab-st{padding:14px 8px;background:var(--bg3);border-radius:10px;border:1px solid var(--red-line);}
+.ab-st-v{font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:var(--red);line-height:1;}
+.ab-st-l{font-size:11px;color:var(--muted);margin-top:4px;font-weight:600;}
+.ab-links{display:flex;flex-direction:column;gap:9px;}
+.ab-links a{padding:11px;background:var(--red);color:#fff;border-radius:9px;font-size:12.5px;font-weight:700;transition:all .2s;}
+.ab-links a:hover{background:var(--red2);transform:translateY(-1px);}
+.ab-links a.gold{background:#fff;color:var(--red);border:1.5px solid var(--red);}
+.ab-links a.gold:hover{background:var(--red-soft);}
+.ab-body h3{font-family:'Playfair Display',serif;font-size:clamp(26px,3vw,38px);font-weight:800;line-height:1.15;margin-bottom:20px;letter-spacing:-.5px;}
+.ab-body h3 .accent{color:var(--red);font-style:italic;}
+.ab-quote{font-size:17px;color:var(--ink);font-style:italic;line-height:1.65;border-left:4px solid var(--red);padding:6px 0 6px 22px;margin-bottom:26px;}
+.ab-bio{font-size:15px;color:var(--ink2);line-height:1.78;margin-bottom:18px;}
+.ab-bio strong{color:var(--ink);font-weight:700;}
+.ab-bio em{color:var(--red);font-style:normal;font-weight:700;}
+.exp-list{list-style:none;margin-top:28px;display:grid;gap:14px;}
+.exp{display:flex;gap:16px;padding:18px;background:#fff;border:1px solid var(--line);border-radius:12px;transition:all .25s;}
+.exp:hover{border-color:var(--red);transform:translateX(4px);}
+.exp-ic{width:44px;height:44px;flex-shrink:0;background:var(--red-soft);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;}
+.exp-t{font-weight:700;font-size:15px;color:var(--ink);margin-bottom:3px;}
+.exp-s{font-size:13.5px;color:var(--ink2);line-height:1.55;}
+.book{margin-top:26px;display:flex;gap:16px;align-items:center;padding:22px;background:linear-gradient(135deg,var(--red-soft),#fff);border:1px solid var(--red-line);border-radius:14px;}
+.book-i{font-size:36px;}
+.book-t{font-weight:800;font-size:16px;margin-bottom:3px;}
+.book-s{font-size:12.5px;color:var(--muted);margin-bottom:6px;}
+.book-tag{display:inline-block;font-size:10px;background:var(--red);color:#fff;padding:3px 10px;border-radius:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;}
 
-.slbl{display:inline-flex;align-items:center;gap:8px;padding:6px 18px;background:rgba(204,0,51,.3);border:1px solid rgba(204,0,51,.6);border-radius:28px;font-size:10px;font-weight:700;color:#FF1744;letter-spacing:2.2px;text-transform:uppercase;margin-bottom:18px;}
-h2.sh{font-family:'Inter',sans-serif;font-size:clamp(30px,4vw,54px);font-weight:800;line-height:1.06;margin-bottom:18px;}
-.sdesc{font-size:16px;color:#D4B5C8;max-width:560px;line-height:1.7;margin-bottom:44px;font-weight:400;}
+/* CTA */
+.cta{padding:90px 40px;background:linear-gradient(135deg,var(--red),var(--red2));color:#fff;text-align:center;}
+.cta h2{font-family:'Playfair Display',serif;font-size:clamp(34px,5vw,58px);font-weight:900;line-height:1.1;margin-bottom:20px;letter-spacing:-.8px;}
+.cta p{font-size:17px;opacity:.92;max-width:560px;margin:0 auto 36px;line-height:1.65;}
+.cta .btn-w{background:#fff;color:var(--red);padding:18px 42px;border-radius:10px;font-weight:800;font-size:15px;display:inline-block;box-shadow:0 14px 40px rgba(0,0,0,.2);transition:transform .25s;}
+.cta .btn-w:hover{transform:translateY(-3px);}
 
-/* ── CARDS ── */
-.card{background:var(--card);border:2px solid var(--border);border-radius:18px;transition:all .3s;position:relative;overflow:hidden;}
-.card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(204,0,51,.12),transparent);opacity:0;transition:opacity .3s;pointer-events:none;}
-.card:hover{transform:translateY(-5px);border-color:rgba(204,0,51,.6);box-shadow:0 20px 60px rgba(204,0,51,.25);}
-.card:hover::before{opacity:1;}
-.card-glow{position:absolute;width:100px;height:100px;border-radius:50%;top:-25px;right:-25px;opacity:.12;filter:blur(28px);background:var(--r2);}
+/* FOOTER */
+footer{background:#0E0A0C;color:#C8A2B2;padding:48px 40px;text-align:center;}
+footer .ft-brand{color:#fff;font-weight:800;font-size:18px;margin-bottom:10px;}
+footer p{font-size:13px;line-height:1.7;}
+footer a{color:#FF6B85;}
 
-/* ── PILL ── */
-.pill{display:inline-flex;align-items:center;gap:6px;padding:6px 16px;border-radius:20px;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;border:1px solid currentColor;}
-.pr{background:rgba(204,0,51,.25);border:1px solid rgba(204,0,51,.3);color:var(--r3);}
-.pg{background:rgba(255,215,0,.1);border:1px solid rgba(255,215,0,.3);color:var(--g1);}
-.pw{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);color:var(--w2);}
-
-/* ── REVEAL ── */
-.rv{opacity:1;transform:translateY(0);transition:opacity .7s ease,transform .7s ease;}
-.rv.vis{opacity:1;transform:translateY(0);}
-.rv2{opacity:0;transform:translateX(-24px);transition:opacity .7s ease,transform .7s ease;}
-.rv2.vis{opacity:1;transform:translateX(0);}
-
-/* ══ SYLLABUS ══ */
-.syl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin-bottom:48px;}
-.syl-c{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px 18px;transition:all .25s;}
-.syl-c:hover{border-color:rgba(204,0,51,.5);transform:translateY(-3px);box-shadow:0 12px 36px rgba(204,0,51,.25);}
-.syl-ico{font-size:26px;margin-bottom:10px;}
-.syl-n{font-size:13px;font-weight:700;margin-bottom:4px;}
-.syl-m{font-size:11px;color:var(--muted);}
-
-/* ══ INDUSTRY ══ */
-.istat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));border:1px solid var(--border);border-radius:18px;overflow:hidden;margin-bottom:52px;}
-.ist{text-align:center;padding:36px 20px;border-right:1px solid rgba(204,0,51,.18);}
-.ist:last-child{border-right:none;}
-.ist-n{font-size:46px;font-weight:900;font-family:'Inter',sans-serif;line-height:1;}
-.ist-l{font-size:13px;color:var(--muted);margin-top:8px;line-height:1.4;}
-.ist-s{font-size:10px;color:rgba(160,120,128,.45);margin-top:5px;font-family:'JetBrains Mono',monospace;}
-.c-r{color:var(--r2);text-shadow:0 0 20px rgba(255,23,68,.4);}
-.c-g{color:var(--g1);text-shadow:0 0 20px rgba(255,215,0,.35);}
-.c-w{color:var(--w2);}
-
-/* ══ COMPANY CARDS ══ */
-.co-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px;}
-.co-c{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:28px 24px;transition:all .3s;position:relative;overflow:hidden;}
-.co-c:hover{transform:translateY(-5px);border-color:rgba(204,0,51,.45);box-shadow:0 22px 60px rgba(204,0,51,.14);}
-.co-hd{display:flex;align-items:center;gap:14px;margin-bottom:14px;}
-.co-logo{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;background:rgba(204,0,51,.1);border:1px solid rgba(204,0,51,.2);}
-.co-nm{font-size:17px;font-weight:700;}
-.co-tl{font-size:11px;color:var(--r3);font-family:'JetBrains Mono',monospace;margin-top:2px;}
-.co-desc{font-size:13px;color:var(--muted);line-height:1.57;}
-.co-stat{font-size:18px;font-weight:800;color:var(--g1);font-family:'Inter',sans-serif;margin-top:12px;}
-
-/* ══ CONCEPTS ══ */
-.con-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:24px;}
-.con-c{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:30px 26px;transition:all .3s;position:relative;overflow:hidden;}
-.con-c:hover{transform:translateY(-6px);border-color:var(--border2);box-shadow:0 24px 60px rgba(204,0,51,.16);}
-.con-ico{font-size:38px;margin-bottom:14px;}
-.con-n{font-size:19px;font-weight:800;margin-bottom:8px;}
-.con-d{font-size:13px;color:var(--muted);line-height:1.57;margin-bottom:14px;}
-.con-f{font-size:12px;font-weight:600;padding:7px 12px;background:rgba(204,0,51,.18);border:1px solid rgba(204,0,51,.2);border-radius:8px;}
-.con-gl{position:absolute;width:120px;height:120px;border-radius:50%;top:-30px;right:-30px;opacity:.1;filter:blur(35px);background:var(--r2);}
-
-/* ── LLM FLOW DIAGRAM ── */
-.flow-wrap{background:rgba(10,2,16,.9);border:1px solid rgba(204,0,51,.2);border-radius:18px;padding:32px;}
-.flow-lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:2px;font-weight:700;margin-bottom:20px;}
-.flow-row{display:flex;align-items:center;gap:0;flex-wrap:wrap;justify-content:center;}
-.fb{padding:12px 16px;border-radius:10px;font-size:12px;font-weight:700;text-align:center;min-width:88px;}
-.fb-r{background:rgba(204,0,51,.25);border:1px solid rgba(204,0,51,.4);color:var(--r3);}
-.fb-g{background:rgba(255,215,0,.07);border:1px solid rgba(255,215,0,.3);color:var(--g1);}
-.fb-w{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.15);color:var(--w2);}
-.fb-gr{background:rgba(0,200,100,.06);border:1px solid rgba(0,200,100,.25);color:#00C864;}
-.farr{font-size:18px;color:rgba(204,0,51,.55);padding:0 6px;}
-
-/* ══ MODULE TABS ══ */
-.mod-tabs{display:flex;gap:8px;margin-bottom:44px;flex-wrap:wrap;}
-.mtab{padding:11px 24px;border:1px solid var(--border);border-radius:30px;font-size:13px;font-weight:600;cursor:pointer;transition:all .25s;background:transparent;color:var(--muted);font-family:'Space Grotesk',sans-serif;}
-.mtab.active,.mtab:hover{background:rgba(204,0,51,.25);border-color:var(--r2);color:var(--w1);box-shadow:0 0 18px rgba(204,0,51,.2);}
-.mpanel{display:none;}
-.mpanel.active{display:block;}
-
-.mod-layout{display:grid;grid-template-columns:1fr 2fr;gap:40px;align-items:start;}
-@media(max-width:768px){.mod-layout{grid-template-columns:1fr;}}
-.mod-meta{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:28px;position:sticky;top:80px;}
-.mod-tag{display:inline-flex;padding:4px 13px;border-radius:18px;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px;}
-.mtag-r{background:rgba(204,0,51,.25);color:var(--r3);border:1px solid rgba(204,0,51,.3);}
-.mtag-g{background:rgba(255,215,0,.1);color:var(--g1);border:1px solid rgba(255,215,0,.3);}
-.mod-ttl{font-size:clamp(20px,2.2vw,27px);font-weight:800;font-family:'Inter',sans-serif;margin-bottom:8px;}
-.mod-sub{font-size:13px;color:var(--muted);line-height:1.58;margin-bottom:18px;}
-.mchips{display:flex;flex-wrap:wrap;gap:6px;}
-.mchip{padding:4px 11px;border-radius:16px;font-size:10px;font-weight:600;background:rgba(204,0,51,.18);color:var(--r3);border:1px solid rgba(204,0,51,.18);}
-.mod-out{margin-top:18px;padding:14px;background:rgba(204,0,51,.05);border:1px solid rgba(204,0,51,.15);border-radius:10px;}
-.mod-out-l{font-size:10px;color:var(--g1);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;}
-.mod-out-t{font-size:12px;color:var(--muted);line-height:1.6;}
-
-/* ── LESSON CARDS ── */
-.lc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:14px;}
-.lc{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;transition:all .3s;position:relative;overflow:hidden;cursor:default;}
-.lc::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(204,0,51,.12),transparent);opacity:0;transition:opacity .3s;pointer-events:none;}
-.lc:hover{transform:translateY(-3px);border-color:rgba(204,0,51,.4);box-shadow:0 14px 40px rgba(204,0,51,.25);}
-.lc:hover::after{opacity:1;}
-.lc-num{font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-bottom:6px;}
-.lc-dur{position:absolute;top:14px;right:14px;font-size:9px;color:var(--muted);background:rgba(204,0,51,.18);padding:2px 8px;border-radius:6px;font-family:'JetBrains Mono',monospace;}
-.lc-ttl{font-size:14px;font-weight:700;margin-bottom:7px;}
-.lc-desc{font-size:12px;color:var(--muted);line-height:1.57;}
-.lc-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px;}
-.ltag{padding:2px 9px;border-radius:12px;font-size:9px;font-weight:700;background:rgba(204,0,51,.16);color:var(--r3);border:1px solid rgba(204,0,51,.15);}
-.ltag-g{background:rgba(255,215,0,.07);color:var(--g2);border-color:rgba(255,215,0,.18);}
-.ltag-w{background:rgba(255,255,255,.05);color:var(--w3);border-color:rgba(255,255,255,.12);}
-
-/* ── AGENT DIAGRAM ── */
-.agent-flow{background:rgba(10,2,16,.9);border:1px solid rgba(204,0,51,.2);border-radius:18px;padding:28px;margin-top:18px;}
-.af-title{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:2px;font-weight:700;margin-bottom:18px;}
-.af-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;}
-.af-box{background:rgba(204,0,51,.18);border:1px solid rgba(204,0,51,.25);border-radius:10px;padding:12px;text-align:center;}
-.af-box-g{background:rgba(255,215,0,.06);border-color:rgba(255,215,0,.25);}
-.af-ico{font-size:20px;margin-bottom:6px;}
-.af-lbl{font-size:11px;font-weight:700;color:var(--r3);}
-.af-lbl-g{color:var(--g2);}
-.af-sub{font-size:10px;color:var(--muted);margin-top:3px;}
-
-/* ══ PROJECTS ══ */
-.proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:22px;}
-.proj-c{background:var(--card);border:1px solid var(--border);border-radius:22px;overflow:hidden;transition:all .35s;position:relative;}
-.proj-c:hover{transform:translateY(-7px);box-shadow:0 30px 80px rgba(204,0,51,.18);border-color:rgba(204,0,51,.45);}
-.proj-hd{padding:28px 28px 20px;position:relative;min-height:150px;display:flex;flex-direction:column;justify-content:flex-end;}
-.proj-ico{font-size:44px;display:block;margin-bottom:14px;}
-.proj-diff{position:absolute;top:18px;right:18px;padding:4px 12px;border-radius:18px;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:1px;}
-.dif-b{background:rgba(0,200,100,.12);color:#00C864;border:1px solid rgba(0,200,100,.3);}
-.dif-i{background:rgba(255,215,0,.1);color:var(--g1);border:1px solid rgba(255,215,0,.25);}
-.dif-a{background:rgba(255,23,68,.12);color:var(--r2);border:1px solid rgba(255,23,68,.25);}
-.proj-ttl{font-size:18px;font-weight:700;margin-bottom:0;}
-.proj-bd{padding:14px 28px 26px;}
-.proj-desc{font-size:13px;color:var(--muted);line-height:1.55;margin-bottom:14px;}
-.proj-stack{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;}
-.stk{padding:4px 10px;border-radius:6px;font-size:10px;font-weight:700;background:rgba(204,0,51,.18);color:var(--r3);font-family:'JetBrains Mono',monospace;border:1px solid rgba(204,0,51,.15);}
-.proj-role{font-size:12px;color:var(--g1);font-weight:600;}
-
-/* ══ TOOLS ══ */
-.tl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:16px;}
-.tl-c{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;transition:all .3s;position:relative;overflow:hidden;}
-.tl-c:hover{transform:translateY(-4px);border-color:rgba(204,0,51,.4);box-shadow:0 16px 48px rgba(204,0,51,.25);}
-.tl-logo{width:50px;height:50px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:14px;background:rgba(204,0,51,.1);border:1px solid rgba(204,0,51,.2);}
-.tl-nm{font-size:16px;font-weight:700;margin-bottom:6px;}
-.tl-desc{font-size:12px;color:var(--muted);line-height:1.52;margin-bottom:12px;}
-.tl-uses{display:flex;flex-wrap:wrap;gap:5px;}
-.tl-use{padding:3px 10px;border-radius:12px;font-size:10px;font-weight:600;background:rgba(255,215,0,.07);color:var(--g2);border:1px solid rgba(255,215,0,.18);}
-
-/* ══ PROMPTS ══ */
-.pr-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px;}
-.pr-c{background:rgba(10,2,16,.95);border:1px solid rgba(204,0,51,.14);border-radius:14px;padding:18px;cursor:pointer;transition:all .3s;position:relative;}
-.pr-c:hover{border-color:rgba(204,0,51,.4);background:rgba(204,0,51,.05);}
-.pr-role{font-size:9px;color:var(--g1);font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:7px;}
-.pr-text{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text);line-height:1.68;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;}
-.pr-cp{position:absolute;top:12px;right:12px;background:transparent;border:1px solid var(--border);color:var(--muted);padding:3px 9px;border-radius:6px;font-size:9px;cursor:pointer;transition:all .2s;font-family:'Space Grotesk',sans-serif;}
-.pr-cp:hover{border-color:var(--r2);color:var(--r3);}
-
-/* ══ ABOUT ══ */
-.about-inner{display:grid;grid-template-columns:360px 1fr;gap:56px;align-items:start;}
-@media(max-width:900px){.about-inner{grid-template-columns:1fr;}}
-.about-card{background:rgba(10,2,16,.9);border:1px solid rgba(204,0,51,.45);border-radius:24px;padding:36px;text-align:center;position:relative;overflow:hidden;}
-.about-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(204,0,51,.12),rgba(255,215,0,.02));pointer-events:none;}
-.ab-photo{width:128px;height:128px;border-radius:50%;overflow:hidden;margin:0 auto 18px;border:3px solid rgba(204,0,51,.5);box-shadow:0 0 40px rgba(204,0,51,.55),0 0 80px rgba(204,0,51,.15);}
-.ab-photo img{width:100%;height:100%;object-fit:cover;}
-.ab-name{font-size:23px;font-weight:800;margin-bottom:4px;}
-.ab-creds{display:flex;gap:7px;justify-content:center;flex-wrap:wrap;margin-bottom:14px;}
-.crd{padding:4px 11px;border-radius:18px;font-size:10px;font-weight:700;background:rgba(255,215,0,.1);color:var(--g1);border:1px solid rgba(255,215,0,.3);}
-.crd-g{background:rgba(0,200,100,.08);color:#00C864;border-color:rgba(0,200,100,.25);}
-.ab-role{font-size:13px;color:var(--muted);line-height:1.55;margin-bottom:18px;}
-.ab-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px;}
-.abst{background:rgba(204,0,51,.06);border:1px solid rgba(204,0,51,.14);border-radius:10px;padding:14px;text-align:center;}
-.abst-n{font-size:22px;font-weight:900;color:var(--g1);font-family:'Inter',sans-serif;}
-.abst-l{font-size:10px;color:var(--muted);margin-top:2px;}
-.ab-links{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin-top:18px;}
-.abl{padding:8px 18px;border-radius:8px;font-size:12px;font-weight:600;text-decoration:none;transition:all .22s;}
-.abl-r{background:rgba(204,0,51,.1);border:1px solid rgba(204,0,51,.3);color:var(--r3);}
-.abl-r:hover{background:rgba(204,0,51,.2);}
-.abl-g{background:rgba(255,215,0,.08);border:1px solid rgba(255,215,0,.28);color:var(--g1);}
-.abl-g:hover{background:rgba(255,215,0,.16);}
-.book-c{background:linear-gradient(135deg,rgba(255,215,0,.07),rgba(204,0,51,.05));border:1px solid rgba(255,215,0,.22);border-radius:14px;padding:18px;display:flex;align-items:center;gap:14px;margin-top:20px;transition:all .3s;}
-.book-c:hover{border-color:var(--g1);transform:translateY(-2px);}
-.book-cov{width:50px;height:65px;background:linear-gradient(135deg,var(--g1),var(--g3));border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:4px 4px 12px rgba(0,0,0,.4);}
-.book-t{font-size:13px;font-weight:700;margin-bottom:4px;}
-.book-m{font-size:11px;color:var(--muted);}
-.book-tag{display:inline-flex;margin-top:5px;padding:2px 9px;background:rgba(0,200,100,.09);color:#00C864;border:1px solid rgba(0,200,100,.22);border-radius:9px;font-size:10px;font-weight:700;}
-
-.about-body h3{font-size:clamp(22px,3vw,36px);font-weight:800;font-family:'Inter',sans-serif;margin-bottom:16px;}
-.about-q{font-size:clamp(15px,1.5vw,17px);color:var(--muted);line-height:1.72;font-style:italic;border-left:3px solid var(--r2);padding-left:20px;margin-bottom:26px;}
-.about-bio{font-size:15px;color:var(--muted);line-height:1.72;margin-bottom:20px;}
-.exp-list{list-style:none;}
-.exp-list li{display:flex;align-items:flex-start;gap:14px;padding:14px 0;border-bottom:1px solid rgba(204,0,51,.16);}
-.exp-list li:last-child{border-bottom:none;}
-.exp-ico{width:34px;height:34px;background:rgba(204,0,51,.18);border:1px solid rgba(204,0,51,.18);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
-.exp-t{font-size:14px;font-weight:700;}
-.exp-s{font-size:12px;color:var(--muted);margin-top:2px;}
-
-/* ══ CTA ══ */
-#cta{text-align:center;padding:110px 24px;position:relative;overflow:hidden;}
-.cta-gl{position:absolute;width:600px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(204,0,51,.06),transparent 70%);left:50%;top:50%;transform:translate(-50%,-50%);pointer-events:none;}
-.cta-gl2{position:absolute;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(255,215,0,.04),transparent 70%);left:40%;top:40%;transform:translate(-50%,-50%);pointer-events:none;}
-
-/* ══ FOOTER ══ */
-footer{background:var(--bg2);border-top:1px solid rgba(204,0,51,.25);padding:44px;text-align:center;position:relative;z-index:10;}
-.fl{font-size:21px;font-weight:800;margin-bottom:6px;}
-.fs{font-size:12px;color:var(--muted);margin-bottom:20px;}
-.flinks{display:flex;gap:22px;justify-content:center;flex-wrap:wrap;margin-bottom:18px;}
-.flinks a{color:var(--muted);text-decoration:none;font-size:12px;transition:color .2s;}
-.flinks a:hover{color:var(--r3);}
-.fcopy{font-size:11px;color:rgba(160,120,128,.35);}
-
-/* ── SCROLLBAR ── */
-::-webkit-scrollbar{width:5px;}
-::-webkit-scrollbar-track{background:var(--bg);}
-::-webkit-scrollbar-thumb{background:rgba(204,0,51,.4);border-radius:3px;}
-::-webkit-scrollbar-thumb:hover{background:var(--r2);}
-
-/* ── TOAST ── */
-#toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(80px);background:rgba(204,0,51,.14);border:1px solid rgba(204,0,51,.45);border-radius:10px;padding:11px 22px;font-size:12px;z-index:2000;transition:transform .3s;backdrop-filter:blur(14px);color:var(--r3);}
-#toast.show{transform:translateX(-50%) translateY(0);}
-
-.sep{height:1px;background:linear-gradient(90deg,transparent,rgba(204,0,51,.2),transparent);margin:0;}
-
-/* ── MARQUEE ── */
-.mq-wrap{overflow:hidden;padding:32px 0;}
-.mq-in{display:flex;gap:20px;animation:mq 30s linear infinite;width:max-content;}
-.mq-chip{background:rgba(204,0,51,.16);border:1px solid rgba(204,0,51,.2);border-radius:10px;padding:10px 20px;font-size:13px;font-weight:600;white-space:nowrap;transition:all .2s;}
-.mq-chip:hover{background:rgba(204,0,51,.15);border-color:var(--r2);}
-@keyframes mq{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
-
-/* ── HIGHLIGHT BOX ── */
-.hbox{background:rgba(204,0,51,.05);border:1px solid rgba(204,0,51,.15);border-radius:16px;padding:24px 28px;}
-.hbox-t{font-size:12px;color:var(--g1);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
-.hbox-c{font-size:14px;color:var(--muted);line-height:1.6;}
+/* toast */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:12px 22px;border-radius:24px;font-size:13px;font-weight:600;opacity:0;transition:opacity .25s;z-index:200;pointer-events:none;}
+.toast.show{opacity:1;}
 </style>
 </head>
 <body>
 
-<div id="prog"></div>
-<canvas id="bgc"></canvas>
-<div id="toast"></div>
-
-<!-- ══ NAV ══ -->
-<nav id="nav">
-  <div class="nav-brand">
-    <div class="nav-logo"><svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" width="22" height="22"><rect x="2" y="22" width="24" height="2.5" rx="1" fill="white"/><rect x="3.5" y="10" width="4" height="12" rx="0.5" fill="white"/><rect x="12" y="10" width="4" height="12" rx="0.5" fill="white"/><rect x="20.5" y="10" width="4" height="12" rx="0.5" fill="white"/><rect x="2" y="8" width="24" height="2" rx="0.5" fill="white"/><polygon points="14,2 3,8 25,8" fill="#FFD700"/><line x1="6" y1="7" x2="22" y2="7" stroke="#FFD700" stroke-width="0.5"/></svg></div>
-    <div><div class="nav-t">AI Finance — SCMHRD</div><div class="nav-sub">Tejas Jadhav, CFA, FRM</div></div>
+<nav>
+  <div class="nav-in">
+    <div class="brand">
+      <div class="brand-logo">₹</div>
+      <div>
+        <div class="brand-t">AI Finance — SCMHRD</div>
+        <div class="brand-sub">Tejas Jadhav, CFA, FRM</div>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a href="#overview">Overview</a>
+      <a href="#industry">Industry</a>
+      <a href="#modules">Modules</a>
+      <a href="#projects">Projects</a>
+      <a href="#prompts">Prompts</a>
+      <a href="#about">Instructor</a>
+    </div>
+    <a href="#modules" class="nav-cta">Start Learning →</a>
   </div>
-  <div class="nav-links">
-    <a href="#overview">Overview</a>
-    <a href="#industry">Industry AI</a>
-    <a href="#modules">Modules</a>
-    <a href="#concepts">Concepts</a>
-    <a href="#projects">Projects</a>
-    <a href="#about">Instructor</a>
-  </div>
-  <button class="nav-cta" onclick="document.getElementById('modules').scrollIntoView({behavior:'smooth'})">Start Learning →</button>
 </nav>
 
-<!-- ══ HERO ══ -->
-<section id="hero">
-  <div class="h-grid"></div>
-  <div class="h-blob blob1"></div>
-  <div class="h-blob blob2"></div>
-  <div class="h-blob blob3"></div>
-  <div style="position:relative;z-index:2;">
-    <div class="h-badge"><span class="bdot"></span>SCMHRD MBA Finance · Semester 3 Batch · 6-Hour Intensive</div>
-    <h1 class="hh"><span class="wt">AI</span><br><span class="rt">Finance</span><br><span class="wt">Mastery</span></h1>
-    <p class="h-desc">Master LLMs, RAG, Context Windows & MCP. Build automated finance agents. Deploy earning dashboards, wealth management bots, and Basel IV compliance tools — the exact stack top BFSI employers are hiring for.</p>
-    <div class="h-kpis">
-      <div class="kpi"><div class="kpi-v">6 Hrs</div><div class="kpi-l">Duration</div></div>
-      <div class="kpi"><div class="kpi-v">3 Modules</div><div class="kpi-l">Deep Dives</div></div>
-      <div class="kpi"><div class="kpi-v">18 Lessons</div><div class="kpi-l">Lessons</div></div>
-      <div class="kpi"><div class="kpi-v">8 Builds</div><div class="kpi-l">Live Projects</div></div>
+<section class="hero">
+  <div class="hero-in">
+    <div class="hero-badge"><span class="dot"></span>SCMHRD · MBA Finance · Semester 3 Intensive</div>
+    <h1>AI Finance<br><span class="accent">Mastery</span></h1>
+    <p class="hero-tag">A <strong>6-hour practitioner intensive</strong> on LLMs, RAG, MCP, and Agentic AI — engineered for the Semester 3 Finance batch. Build real systems banks pay for: <strong>Basel IV reports, earning dashboards, wealth bots, and risk agents</strong>.</p>
+    <div class="hero-cta">
+      <a href="#modules" class="btn-p">Explore Modules →</a>
+      <a href="#about" class="btn-s">About Instructor</a>
     </div>
-    <div class="h-btns">
-      <button class="bp" onclick="document.getElementById('modules').scrollIntoView({behavior:'smooth'})">🚀 Explore the Course</button>
-      <button class="bs" onclick="document.getElementById('concepts').scrollIntoView({behavior:'smooth'})">🧠 AI Concepts →</button>
+    <div class="hero-stats">
+      <div><div class="hs-v">6 Hrs</div><div class="hs-l">Duration</div></div>
+      <div><div class="hs-v">3</div><div class="hs-l">Modules</div></div>
+      <div><div class="hs-v">18</div><div class="hs-l">Lessons</div></div>
+      <div><div class="hs-v">8</div><div class="hs-l">Live Builds</div></div>
     </div>
   </div>
 </section>
 
-<!-- TICKER -->
-<div class="tkr">
-  <div class="tkr-in">
-    <span class="ti">🧠 LLM <b>Large Language Models</b></span><span class="tsep">·</span>
-    <span class="ti">📚 RAG <b>Retrieval Augmented Generation</b></span><span class="tsep">·</span>
-    <span class="ti">⚙️ MCP <b>Model Context Protocol</b></span><span class="tsep">·</span>
-    <span class="ti">🤖 Agents <b>Autonomous Finance Bots</b></span><span class="tsep">·</span>
-    <span class="ti">🏦 JPMorgan <b>LLM Suite — IB in 30 sec</b></span><span class="tsep">·</span>
-    <span class="ti">⚖️ Basel IV <b>AI-Powered Compliance Reports</b></span><span class="tsep">·</span>
-    <span class="ti">📊 Earning Dashboard <b>Live AI Analytics</b></span><span class="tsep">·</span>
-    <span class="ti">💎 Wealth AI <b>Robo-Advisor Agents</b></span><span class="tsep">·</span>
-    <span class="ti">🧠 LLM <b>Large Language Models</b></span><span class="tsep">·</span>
-    <span class="ti">📚 RAG <b>Retrieval Augmented Generation</b></span><span class="tsep">·</span>
-    <span class="ti">⚙️ MCP <b>Model Context Protocol</b></span><span class="tsep">·</span>
-    <span class="ti">🤖 Agents <b>Autonomous Finance Bots</b></span><span class="tsep">·</span>
-    <span class="ti">🏦 JPMorgan <b>LLM Suite — IB in 30 sec</b></span><span class="tsep">·</span>
-    <span class="ti">⚖️ Basel IV <b>AI-Powered Compliance Reports</b></span><span class="tsep">·</span>
-    <span class="ti">📊 Earning Dashboard <b>Live AI Analytics</b></span><span class="tsep">·</span>
-    <span class="ti">💎 Wealth AI <b>Robo-Advisor Agents</b></span><span class="tsep">·</span>
-  </div>
-</div>
-
-<!-- ══ OVERVIEW ══ -->
 <section class="sec" id="overview">
-<div class="wrap">
-  <div class="slbl">📐 Academic Design</div>
-  <h2 class="sh rv">Designed for<br><span class="rt">Semester 3 Finance Batch</span></h2>
-  <p class="sdesc rv" style="max-width:680px;">Purpose-built for SCMHRD's 2nd Year Finance specialisation. Every module maps directly to Semester 2 &amp; 3 subjects — then extends each with the AI tools JPMorgan, Goldman Sachs and Morgan Stanley are deploying today. Benchmarked against Wharton, Harvard, LBS, and MIT Sloan.</p>
-
-  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:32px;">
-    <span style="padding:5px 14px;background:rgba(204,0,51,.1);border:1px solid rgba(204,0,51,.3);border-radius:20px;font-size:11px;font-weight:700;color:var(--r3);letter-spacing:1px;text-transform:uppercase;">Sem 2 Foundation</span>
-    <span style="padding:5px 14px;background:rgba(255,215,0,.08);border:1px solid rgba(255,215,0,.3);border-radius:20px;font-size:11px;font-weight:700;color:var(--g1);letter-spacing:1px;text-transform:uppercase;">Sem 3 Advanced</span>
-  </div>
-
-  <div class="syl-grid rv">
-    <div class="syl-c"><div class="syl-ico">📊</div><div class="syl-n">Financial Management</div><div class="syl-m">AI for DCF, Valuation, Capital Structure</div><div style="font-size:9px;color:var(--r3);font-weight:700;margin-top:6px;text-transform:uppercase;letter-spacing:1px;">Sem 2</div></div>
-    <div class="syl-c"><div class="syl-ico">📉</div><div class="syl-n">Corporate Finance</div><div class="syl-m">M&A Screening, Deal Structuring Bots</div><div style="font-size:9px;color:var(--r3);font-weight:700;margin-top:6px;text-transform:uppercase;letter-spacing:1px;">Sem 2</div></div>
-    <div class="syl-c"><div class="syl-ico">⚠️</div><div class="syl-n">Risk Management</div><div class="syl-m">Basel IV, VaR, AI Stress Testing</div><div style="font-size:9px;color:var(--r3);font-weight:700;margin-top:6px;text-transform:uppercase;letter-spacing:1px;">Sem 2</div></div>
-    <div class="syl-c"><div class="syl-ico">🌐</div><div class="syl-n">Macroeconomics</div><div class="syl-m">AI Macro Signal Extraction, FX Models</div><div style="font-size:9px;color:var(--r3);font-weight:700;margin-top:6px;text-transform:uppercase;letter-spacing:1px;">Sem 2</div></div>
-    <div class="syl-c" style="border-color:rgba(255,215,0,.25);background:rgba(255,215,0,.04);"><div class="syl-ico">📈</div><div class="syl-n">Security Analysis &amp; Portfolio Mgmt</div><div class="syl-m">Markowitz MPT + ML Factor Models + AI Screeners</div><div style="font-size:9px;color:var(--g1);font-weight:700;margin-top:6px;text-transform:uppercase;letter-spacing:1px;">Sem 3</div></div>
-    <div class="syl-c" style="border-color:rgba(255,215,0,.25);background:rgba(255,215,0,.04);"><div class="syl-ico">🔀</div><div class="syl-n">Derivatives &amp; Risk Management</div><div class="syl-m">Options Pricing AI, FRM Automation, Hedging Bots</div><div style="font-size:9px;color:var(--g1);font-weight:700;margin-top:6px;text-transform:uppercase;letter-spacing:1px;">Sem 3</div></div>
-    <div class="syl-c" style="border-color:rgba(255,215,0,.25);background:rgba(255,215,0,.04);"><div class="syl-ico">🏦</div><div class="syl-n">Investment Banking</div><div class="syl-m">AI Pitchbooks, CIM Automation, Deal Memos</div><div style="font-size:9px;color:var(--g1);font-weight:700;margin-top:6px;text-transform:uppercase;letter-spacing:1px;">Sem 3</div></div>
-    <div class="syl-c" style="border-color:rgba(255,215,0,.25);background:rgba(255,215,0,.04);"><div class="syl-ico">🌍</div><div class="syl-n">International Finance</div><div class="syl-m">AI FX Forecasting, Cross-Border Capital Flow Analysis</div><div style="font-size:9px;color:var(--g1);font-weight:700;margin-top:6px;text-transform:uppercase;letter-spacing:1px;">Sem 3</div></div>
-    <div class="syl-c" style="border-color:rgba(255,215,0,.25);background:rgba(255,215,0,.04);"><div class="syl-ico">💎</div><div class="syl-n">Wealth Management</div><div class="syl-m">AI IPS Generator, Robo-Advisor, HNI Report Bots</div><div style="font-size:9px;color:var(--g1);font-weight:700;margin-top:6px;text-transform:uppercase;letter-spacing:1px;">Sem 3</div></div>
-    <div class="syl-c" style="border-color:rgba(255,215,0,.25);background:rgba(255,215,0,.04);"><div class="syl-ico">🏛️</div><div class="syl-n">Capital Markets &amp; Securities</div><div class="syl-m">SEBI Compliance AI, IPO Analysis, Market Microstructure</div><div style="font-size:9px;color:var(--g1);font-weight:700;margin-top:6px;text-transform:uppercase;letter-spacing:1px;">Sem 3</div></div>
-    <div class="syl-c" style="border-color:rgba(255,215,0,.25);background:rgba(255,215,0,.04);"><div class="syl-ico">🏗️</div><div class="syl-n">Corporate Restructuring &amp; M&A</div><div class="syl-m">AI Deal Screeners, Synergy Models, Valuation Automation</div><div style="font-size:9px;color:var(--g1);font-weight:700;margin-top:6px;text-transform:uppercase;letter-spacing:1px;">Sem 3</div></div>
-    <div class="syl-c" style="border-color:rgba(255,215,0,.25);background:rgba(255,215,0,.04);"><div class="syl-ico">🏦</div><div class="syl-n">Treasury &amp; Fund Management</div><div class="syl-m">ALM Automation, Liquidity AI, Cash Flow Forecasting</div><div style="font-size:9px;color:var(--g1);font-weight:700;margin-top:6px;text-transform:uppercase;letter-spacing:1px;">Sem 3</div></div>
-  </div>
-
-  <div class="hbox rv" style="display:flex;align-items:center;gap:22px;flex-wrap:wrap;">
-    <div style="font-size:34px;">🎓</div>
-    <div>
-      <div style="font-weight:700;font-size:15px;margin-bottom:6px;">Benchmarked Against the World's Best</div>
-      <div style="font-size:13px;color:var(--muted);line-height:1.58;"><strong style="color:var(--text);">Wharton FNCE 6110/6130</strong> · <strong style="color:var(--text);">Harvard Finance I &amp; II</strong> · <strong style="color:var(--text);">LBS Finance Core</strong> · <strong style="color:var(--text);">MIT Sloan AI for Finance</strong> — adapted for SCMHRD's Semester 2 &amp; 3 Finance specialisation and Indian capital markets.</div>
+  <div class="sec-in">
+    <div class="sec-h">
+      <div class="sec-lbl">Curriculum Map</div>
+      <h2>Designed for the <span class="accent">Sem 3 Finance Batch</span></h2>
+      <p>Every module maps directly to SCMHRD Semester 2 + Semester 3 Finance subjects — so AI augments, not replaces, your core knowledge.</p>
     </div>
-    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-left:auto;">
-      <span class="pill pg">Wharton</span><span class="pill pg">Harvard</span><span class="pill pg">LBS</span><span class="pill pg">MIT Sloan</span>
+    <div class="curr-grid">
+      <div class="curr-c"><span class="curr-pill p-s2">Sem 2</span><div class="curr-t">Security Analysis & PM</div><div class="curr-s">Markowitz → ML factor models</div></div>
+      <div class="curr-c"><span class="curr-pill p-s2">Sem 2</span><div class="curr-t">Financial Modelling</div><div class="curr-s">DCF → Agent-driven valuation</div></div>
+      <div class="curr-c"><span class="curr-pill p-s2">Sem 2</span><div class="curr-t">Corporate Finance</div><div class="curr-s">Capital structure with LLM advisor</div></div>
+      <div class="curr-c"><span class="curr-pill p-s2">Sem 2</span><div class="curr-t">Financial Derivatives</div><div class="curr-s">Greeks + Monte Carlo agents</div></div>
+      <div class="curr-c"><span class="curr-pill p-s2">Sem 2</span><div class="curr-t">Banking & Insurance</div><div class="curr-s">RAG over policy + product docs</div></div>
+      <div class="curr-c"><span class="curr-pill p-s2">Sem 2</span><div class="curr-t">Fixed Income</div><div class="curr-s">Yield curves + duration bots</div></div>
+      <div class="curr-c"><span class="curr-pill p-s3">Sem 3</span><div class="curr-t">Risk Management</div><div class="curr-s">Basel IV · FRTB · SA-CVA</div></div>
+      <div class="curr-c"><span class="curr-pill p-s3">Sem 3</span><div class="curr-t">Wealth Management</div><div class="curr-s">IPS auto-generator + tax planner</div></div>
+      <div class="curr-c"><span class="curr-pill p-s3">Sem 3</span><div class="curr-t">Equity Research</div><div class="curr-s">Earning dashboards + memos</div></div>
+      <div class="curr-c"><span class="curr-pill p-s3">Sem 3</span><div class="curr-t">M&amp;A and Restructuring</div><div class="curr-s">Synergy models + deal screen</div></div>
+      <div class="curr-c"><span class="curr-pill p-s3">Sem 3</span><div class="curr-t">Treasury & Forex</div><div class="curr-s">FX agents + hedge optimisation</div></div>
+      <div class="curr-c"><span class="curr-pill p-s3">Sem 3</span><div class="curr-t">Behavioural Finance</div><div class="curr-s">FinBERT sentiment + signals</div></div>
     </div>
   </div>
-</div>
 </section>
 
-<div class="sep"></div>
-
-<!-- ══ INDUSTRY AI ══ -->
 <section class="sec sec-alt" id="industry">
-<div class="wrap">
-  <div class="slbl">🏢 Real-World AI in Finance</div>
-  <h2 class="sh rv">What Top Banks<br><span class="rt">Are Building Now</span></h2>
-  <p class="sdesc rv">These aren't predictions. JPMorgan, Goldman Sachs and Morgan Stanley are deploying these systems today. Your interviewers built them.</p>
-
-  <div class="istat-row rv">
-    <div class="ist"><div class="ist-n c-g">$17B</div><div class="ist-l">JPMorgan AI investment in 2026</div><div class="ist-s">Bloomberg</div></div>
-    <div class="ist"><div class="ist-n c-r">95%</div><div class="ist-l">PE firms adopting Agentic AI by 2026</div><div class="ist-s">CFA Institute</div></div>
-    <div class="ist"><div class="ist-n c-w">$1T</div><div class="ist-l">Annual value AI adds to banking</div><div class="ist-s">McKinsey Global</div></div>
-    <div class="ist"><div class="ist-n c-g">73%</div><div class="ist-l">YC finance startups are agentic AI</div><div class="ist-s">Jan 2024–Jun 2025</div></div>
-  </div>
-
-  <div class="co-grid rv">
-    <div class="co-c"><div class="co-glow" style="background:var(--r2);position:absolute;width:80px;height:80px;border-radius:50%;top:-20px;right:-20px;opacity:.1;filter:blur(22px);"></div><div class="co-hd"><div class="co-logo">🏦</div><div><div class="co-nm">JPMorgan Chase</div><div class="co-tl">LLM Suite · IndexGPT · DocLLM</div></div></div><div class="co-desc">LLM Suite builds IB pitchbooks in <strong style="color:var(--text);">30 seconds</strong>. DocLLM processes contracts and prospectuses. 200+ AI use cases across 50,000 employees. Basel IV compliance automated with agentic workflows.</div><div class="co-stat">B AI investment · 2026</div></div>
-    <div class="co-c"><div class="co-hd"><div class="co-logo">📊</div><div><div class="co-nm">Morgan Stanley</div><div class="co-tl">AI @ Scale · RAG Research Assistant</div></div></div><div class="co-desc">RAG-powered research assistant deployed to <strong style="color:var(--text);">900 wealth advisors</strong>. Synthesizes 100,000+ research documents for real-time personalized client insights. Wealth management report generation automated.</div><div class="co-stat">900 advisors · 100K+ docs</div></div>
-    <div class="co-c"><div class="co-hd"><div class="co-logo">💰</div><div><div class="co-nm">Goldman Sachs</div><div class="co-tl">Gen AI · Earnings Dashboard AI</div></div></div><div class="co-desc">Gen AI central to all IB workflows. Automated earnings analysis dashboards that pull results, run comparisons, and generate commentary. MCP-based agent integrations for real-time market data.</div><div class="co-stat">Central to all dev · 2026</div></div>
-    <div class="co-c"><div class="co-hd"><div class="co-logo">⚖️</div><div><div class="co-nm">Global MNC Banks</div><div class="co-tl">Basel IV · FRM Automation</div></div></div><div class="co-desc">Major banks deploying AI to automate <strong style="color:var(--text);">Basel IV Pillar 3 disclosures</strong>, calculate FRTB capital charges, run SA-CVA and IMA models — tasks that previously required teams of FRM analysts.</div><div class="co-stat">FRTB · SA-CVA · IMA</div></div>
-    <div class="co-c"><div class="co-hd"><div class="co-logo">🇮🇳</div><div><div class="co-nm">Kotak · HDFC · Axis</div><div class="co-tl">Wealth Bots · Credit AI</div></div></div><div class="co-desc">Indian BFSI leaders deploying AI for credit underwriting automation, AI wealth management report generation, and conversational robo-advisors that create personalised IPS for HNI clients.</div><div class="co-stat">₹20.51L avg BFSI CTC</div></div>
-    <div class="co-c"><div class="co-hd"><div class="co-logo">📰</div><div><div class="co-nm">Bloomberg</div><div class="co-tl">BloombergGPT · Terminal AI</div></div></div><div class="co-desc">50B parameter LLM trained on <strong style="color:var(--text);">363B finance tokens</strong>. Outperforms general models on every finance NLP task. Earnings call sentiment, headline classification, and macro signal extraction.</div><div class="co-stat">50B params · 363B tokens</div></div>
-  </div>
-</div>
-</section>
-
-<div class="sep"></div>
-
-<!-- ══ CONCEPTS ══ -->
-<section class="sec" id="concepts">
-<div class="wrap">
-  <div class="slbl">🧠 Core AI Concepts</div>
-  <h2 class="sh rv">LLM · RAG · Context<br><span class="rt">MCP · Agents</span></h2>
-  <p class="sdesc rv">The five pillars of Module 1 — demystified for finance professionals with no prior coding background.</p>
-
-  <div class="con-grid rv">
-    <div class="con-c"><div class="con-gl"></div><div class="con-ico">🧠</div><div class="con-n">Large Language Models</div><div class="con-d">Neural networks trained on trillions of tokens. Transformers predict the next word given context. BloombergGPT is finance-specific — 50B params on 363B finance tokens — outperforming GPT-4 on financial NLP tasks.</div><div class="con-f"><span style="color:var(--r3);">Finance:</span> DCF commentary, earnings summarisation, credit memo drafting</div></div>
-    <div class="con-c"><div class="con-gl"></div><div class="con-ico">📚</div><div class="con-n">RAG — Retrieval Augmented Generation</div><div class="con-d">Grounds LLM in real documents. A retriever fetches relevant chunks from a vector database, injects them as context, then the LLM answers from actual data — not training memory. Eliminates hallucination.</div><div class="con-f"><span style="color:var(--r3);">Finance:</span> Annual report Q&A, Basel IV policy retrieval, live research queries</div></div>
-    <div class="con-c"><div class="con-gl"></div><div class="con-ico">🔍</div><div class="con-n">Context Window Engineering</div><div class="con-d">The LLM's working memory — up to 200K tokens in Claude. Injecting the RIGHT data matters more than prompt wording. Context strategy determines output quality for long-form financial documents.</div><div class="con-f"><span style="color:var(--r3);">Finance:</span> Full annual report analysis, multi-year comparison, deal room docs</div></div>
-    <div class="con-c"><div class="con-gl"></div><div class="con-ico">⚙️</div><div class="con-n">Model Context Protocol (MCP)</div><div class="con-d">Anthropic's open standard for connecting AI to external tools, databases and APIs. Like USB-C for AI — one protocol connects Claude to Bloomberg Terminal, Excel, risk databases, or trading APIs.</div><div class="con-f" style="color:var(--g1);background:rgba(255,215,0,.05);border-color:rgba(255,215,0,.2);">Finance: Live data feeds, automated report generation, agentic deal workflows</div></div>
-    <div class="con-c"><div class="con-gl"></div><div class="con-ico">🤖</div><div class="con-n">Agentic AI & Finance Bots</div><div class="con-d">AI that doesn't just respond — it acts. Multi-step agents pull live data, run analysis, generate reports, and take actions. 95% of PE firms deploying agentic AI in 2026. The future of every finance function.</div><div class="con-f"><span style="color:var(--r3);">Finance:</span> Earnings dashboard bots, wealth report automation, compliance agents</div></div>
-  </div>
-
-  <!-- Flow Diagram -->
-  <div class="flow-wrap rv" style="margin-top:36px;">
-    <div class="flow-lbl">AI Finance Pipeline — How They Work Together</div>
-    <div class="flow-row">
-      <div class="fb fb-w">📄<br><span style="font-size:10px;">Annual Report<br>/ Live Data</span></div>
-      <div class="farr">→</div>
-      <div class="fb fb-r">📚<br><span style="font-size:10px;">RAG<br>Vector DB</span></div>
-      <div class="farr">→</div>
-      <div class="fb fb-w">🔍<br><span style="font-size:10px;">Context<br>Injection</span></div>
-      <div class="farr">→</div>
-      <div class="fb fb-r" style="background:rgba(204,0,51,.2);border-color:rgba(204,0,51,.6);">🧠<br><span style="font-size:10px;">LLM<br>Claude/GPT</span></div>
-      <div class="farr">→</div>
-      <div class="fb fb-g">⚙️<br><span style="font-size:10px;">MCP<br>Tools</span></div>
-      <div class="farr">→</div>
-      <div class="fb fb-r">🤖<br><span style="font-size:10px;">Agent<br>Orchestrator</span></div>
-      <div class="farr">→</div>
-      <div class="fb fb-gr">✅<br><span style="font-size:10px;">Basel Report<br>Wealth IPS</span></div>
+  <div class="sec-in">
+    <div class="sec-h">
+      <div class="sec-lbl">Industry Signal</div>
+      <h2>What Top Banks <span class="accent">Are Building Now</span></h2>
+      <p>The same systems you'll learn to build are being deployed at scale across global finance — right now.</p>
     </div>
-    <div style="margin-top:14px;font-size:11px;color:var(--muted);text-align:center;">This pipeline powers JPMorgan's LLM Suite, Morgan Stanley's RAG advisor, and Goldman's earnings dashboard automation</div>
-  </div>
-</div>
-</section>
-
-<div class="sep"></div>
-
-<!-- ══ MODULES ══ -->
-<section class="sec sec-alt" id="modules">
-<div class="wrap">
-  <div class="slbl">📚 6-Hour Intensive</div>
-  <h2 class="sh rv">Three Modules.<br><span class="rt">Total Transformation.</span></h2>
-  <p class="sdesc rv">2 hours each. Application-first. Zero filler. Every lesson connects directly to a finance function, a real company deployment, or a project you'll build.</p>
-
-  <div class="mod-tabs rv">
-    <button class="mtab active" onclick="swM(0)">⚡ Module 1 · LLM / RAG / MCP</button>
-    <button class="mtab" onclick="swM(1)">🤖 Module 2 · Agents & Finance Functions</button>
-    <button class="mtab" onclick="swM(2)">🚀 Module 3 · Build & Get Hired</button>
-  </div>
-
-  <!-- M1 -->
-  <div class="mpanel active" id="m0">
-    <div class="mod-layout">
-      <div class="mod-meta">
-        <div class="mod-tag mtag-r">MODULE 1 · 2 HOURS</div>
-        <div class="mod-ttl" style="margin-top:10px;">LLMs, RAG, Context<br>& MCP for Finance</div>
-        <div class="mod-sub">No coding background needed. Understand the exact AI architecture deployed by JPMorgan, Goldman, and Morgan Stanley — and use it yourself by end of Hour 2.</div>
-        <div class="mchips">
-          <span class="mchip">LLMs</span><span class="mchip">RAG</span><span class="mchip">Context Engineering</span><span class="mchip">MCP</span><span class="mchip">BloombergGPT</span><span class="mchip">Agentic AI</span>
-        </div>
-        <div class="mod-out">
-          <div class="mod-out-l">🎯 Module Outcome</div>
-          <div class="mod-out-t">Explain LLMs, RAG, MCP to a Goldman recruiter — and demo a live Annual Report AI bot you built in class.</div>
-        </div>
-        <div style="margin-top:14px;padding:14px;background:rgba(255,215,0,.04);border:1px solid rgba(255,215,0,.15);border-radius:10px;">
-          <div style="font-size:11px;color:var(--g1);font-weight:700;margin-bottom:4px;">🏦 INDUSTRY LINK</div>
-          <div style="font-size:12px;color:var(--muted);line-height:1.6;">Morgan Stanley's RAG advisor (900 advisors, 100K+ docs) uses exactly the architecture covered in Lesson 1.3.</div>
-        </div>
-      </div>
-      <div>
-        <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:14px;">HOUR 1 — THE AI STACK</div>
-        <div class="lc-grid" style="grid-template-columns:1fr 1fr;margin-bottom:22px;">
-          <div class="lc"><div class="lc-dur">25 min</div><div class="lc-num">1.1</div><div class="lc-ttl">How LLMs Work</div><div class="lc-desc">Tokens, transformers, attention. How GPT-4, Claude, and BloombergGPT differ. Why finance LLMs outperform general ones on ratio analysis and earnings sentiment.</div><div class="lc-tags"><span class="ltag">Transformers</span><span class="ltag">BloombergGPT</span><span class="ltag ltag-g">FinGPT</span></div></div>
-          <div class="lc"><div class="lc-dur">20 min</div><div class="lc-num">1.2</div><div class="lc-ttl">Context Windows & Prompting</div><div class="lc-desc">Why 200K context outperforms clever prompting. Engineer prompts for DCF, credit memos, risk reports. Chain-of-thought for financial multi-step reasoning.</div><div class="lc-tags"><span class="ltag">Context Mgmt</span><span class="ltag ltag-g">Chain-of-Thought</span><span class="ltag">Finance Prompts</span></div></div>
-          <div class="lc"><div class="lc-dur">25 min</div><div class="lc-num">1.3</div><div class="lc-ttl">RAG — Retrieval Augmented Generation</div><div class="lc-desc">Morgan Stanley's architecture for querying 100K+ research docs. Build a prospectus Q&A bot using RAG pattern in Google Colab — prompt-driven, no database setup.</div><div class="lc-tags"><span class="ltag">RAG Pipeline</span><span class="ltag">Vector DB</span><span class="ltag ltag-g">Morgan Stanley</span></div></div>
-          <div class="lc"><div class="lc-dur">10 min</div><div class="lc-num">1.4</div><div class="lc-ttl">Hallucination & Grounding</div><div class="lc-desc">Why LLMs invent financial figures. Verification strategies for valuations, regulatory data, earnings numbers. Critical for avoiding costly errors in live workflows.</div><div class="lc-tags"><span class="ltag ltag-g">Risk</span><span class="ltag">Grounding</span><span class="ltag">Verification</span></div></div>
-        </div>
-        <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:14px;">HOUR 2 — MCP & LIVE BUILD</div>
-        <div class="lc-grid" style="grid-template-columns:1fr 1fr;">
-          <div class="lc"><div class="lc-dur">25 min</div><div class="lc-num">1.5</div><div class="lc-ttl">MCP — Model Context Protocol</div><div class="lc-desc">Anthropic's open standard — the USB-C for AI tools. Connect Claude to Bloomberg, Excel, risk databases, trading APIs. How JPMorgan LLM Suite and Goldman's dev platform use this.</div><div class="lc-tags"><span class="ltag ltag-g">MCP</span><span class="ltag">Agent Tools</span><span class="ltag">Anthropic</span></div></div>
-          <div class="lc"><div class="lc-dur">20 min</div><div class="lc-num">1.6</div><div class="lc-ttl">Agentic Finance — When AI Acts</div><div class="lc-desc">Multi-step agents that pull data, analyse, generate report, and email stakeholders. 95% of PE firms deploying by 2026. The future of every finance back-office function.</div><div class="lc-tags"><span class="ltag">Multi-Agent</span><span class="ltag ltag-g">Orchestration</span><span class="ltag">Automation</span></div></div>
-          <div class="lc" style="grid-column:1/-1;background:rgba(204,0,51,.06);border-color:rgba(204,0,51,.3);"><div class="lc-dur">20 min</div><div class="lc-num">1.7</div><div class="lc-ttl">🔧 Live Build: Annual Report AI Bot</div><div class="lc-desc">Use Claude + RAG prompt pattern to Q&A any company's annual report. Ask: "What is the debt-to-equity trend?" "Summarise key risks." "Flag red flags for a credit analyst." No database — just Claude and structured prompts.</div><div class="lc-tags"><span class="ltag ltag-g">Hands-On</span><span class="ltag">Claude API</span><span class="ltag">RAG Pattern</span></div></div>
-        </div>
-      </div>
+    <div class="ind-grid">
+      <div class="ind-c"><div class="ind-hd"><div class="ind-ico">🏦</div><div><div class="ind-co">JPMorgan Chase</div><div class="ind-tag">$17B AI Spend · 2025</div></div></div><p>LLM Suite live for 200K+ employees. IndexGPT for research. AI-driven trading desks across FICC.</p></div>
+      <div class="ind-c"><div class="ind-hd"><div class="ind-ico">📊</div><div><div class="ind-co">Morgan Stanley</div><div class="ind-tag">RAG Advisor Pipeline</div></div></div><p>GPT-4 over 100K+ wealth documents — advisors retrieve compliance-approved insights in seconds.</p></div>
+      <div class="ind-c"><div class="ind-hd"><div class="ind-ico">💼</div><div><div class="ind-co">Goldman Sachs</div><div class="ind-tag">Agent Pilots Live</div></div></div><p>Marcus AI for retail. Internal coder-agents for the trading floor. 95% PE adoption forecast by 2026.</p></div>
+      <div class="ind-c"><div class="ind-hd"><div class="ind-ico">🌐</div><div><div class="ind-co">Global MNC Banks</div><div class="ind-tag">Basel IV · FRTB Stack</div></div></div><p>Citi, Deutsche, UBS — SA-FRTB capital, SA-CVA, Pillar 3 disclosures all moving to agentic pipelines.</p></div>
+      <div class="ind-c"><div class="ind-hd"><div class="ind-ico">🇮🇳</div><div><div class="ind-co">Kotak · HDFC · Axis</div><div class="ind-tag">India AI Banking</div></div></div><p>Wealth bots, KYC automation, Hindi/regional FinBERT, and credit underwriting agents in production.</p></div>
+      <div class="ind-c"><div class="ind-hd"><div class="ind-ico">📡</div><div><div class="ind-co">Bloomberg / Refinitiv</div><div class="ind-tag">BloombergGPT · 50B</div></div></div><p>Domain-specialised LLM trained on 363B finance tokens — the future of terminal workflows.</p></div>
     </div>
   </div>
+</section>
 
-  <!-- M2 -->
-  <div class="mpanel" id="m1">
-    <div class="mod-layout">
-      <div class="mod-meta">
-        <div class="mod-tag mtag-r">MODULE 2 · 2 HOURS</div>
-        <div class="mod-ttl" style="margin-top:10px;">Agents & AI Across<br>Core Finance Functions</div>
-        <div class="mod-sub">Python agent bots, automated earning dashboards, wealth management report generators, and Basel IV tools — mapped to your target roles at BFSI, IB, and risk firms.</div>
-        <div class="mchips">
-          <span class="mchip">Python Agents</span><span class="mchip">Earning Dashboards</span><span class="mchip">Wealth Reports</span><span class="mchip">IB AI</span><span class="mchip">Risk Bots</span><span class="mchip">Basel IV</span>
-        </div>
-        <div class="mod-out">
-          <div class="mod-out-l">🎯 Module Outcome</div>
-          <div class="mod-out-t">Walk into any finance interview and demo an automated agent bot you built — earning dashboard, wealth report generator, or IB screener.</div>
-        </div>
-        <!-- Agent Architecture Diagram -->
-        <div class="agent-flow">
-          <div class="af-title">Python Finance Agent Architecture</div>
-          <div class="af-row">
-            <div class="af-box"><div class="af-ico">📡</div><div class="af-lbl">Data Agent</div><div class="af-sub">yfinance / Bloomberg API</div></div>
-            <div class="af-box"><div class="af-ico">🧠</div><div class="af-lbl">LLM Core</div><div class="af-sub">Claude / GPT-4</div></div>
-            <div class="af-box af-box-g"><div class="af-ico">⚙️</div><div class="af-lbl af-lbl-g">MCP Tools</div><div class="af-sub">Excel, DB, Email</div></div>
-            <div class="af-box af-box-g"><div class="af-ico">📊</div><div class="af-lbl af-lbl-g">Output Agent</div><div class="af-sub">Dashboard / Report</div></div>
+<section class="sec" id="modules">
+  <div class="sec-in">
+    <div class="sec-h">
+      <div class="sec-lbl">The 3 Modules</div>
+      <h2>Three Modules. <span class="accent">Total Transformation.</span></h2>
+      <p>Each module is a 2-hour deep dive — concept, demo, and live build. No fluff. No theory-only slides.</p>
+    </div>
+    <div class="mod-wrap">
+
+      <div class="mod-c">
+        <div class="mod-num">01<small>2 Hours</small></div>
+        <div>
+          <div class="mod-dur">Foundations of AI in Finance</div>
+          <div class="mod-t">LLMs · RAG · Context · MCP</div>
+          <div class="mod-desc">From transformer architecture to retrieval pipelines — understand the stack powering BloombergGPT, Morgan Stanley advisors, and JPMorgan's LLM Suite. Then learn MCP, the open protocol connecting AI to real bank systems.</div>
+          <div class="les-list">
+            <div class="les"><b>1.1</b> Transformer architecture · BloombergGPT (50B / 363B tokens)</div>
+            <div class="les"><b>1.2</b> Context window engineering · 200K-token strategies</div>
+            <div class="les"><b>1.3</b> RAG: vector DBs, embeddings, grounding</div>
+            <div class="les"><b>1.4</b> Hallucination control for finance use cases</div>
+            <div class="les"><b>1.5</b> Model Context Protocol (MCP) — Anthropic's open standard</div>
+            <div class="les"><b>1.6</b> Live: connect Claude to live market data via MCP</div>
           </div>
         </div>
       </div>
-      <div>
-        <div class="lc-grid" style="grid-template-columns:1fr 1fr;">
-          <div class="lc"><div class="lc-dur">22 min</div><div class="lc-num">2.1</div><div class="lc-ttl">🏦 AI in Investment Banking + Bots</div><div class="lc-desc">JPMorgan's LLM Suite builds pitchbooks in 30 seconds. Build a Python M&A screener bot: pulls NSE/BSE data, filters by criteria, generates 1-page AI acquisition rationale — full automation.</div><div class="lc-tags"><span class="ltag">IB Bot</span><span class="ltag">M&A Screener</span><span class="ltag ltag-g">Python Agent</span></div></div>
-          <div class="lc"><div class="lc-dur">25 min</div><div class="lc-num">2.2</div><div class="lc-ttl">📊 Automated Earning Dashboard</div><div class="lc-desc">Build a live earnings analysis agent: pulls quarterly results via API, computes YoY/QoQ metrics, generates AI commentary on beats/misses, and outputs a formatted Streamlit dashboard — fully automated Python bot.</div><div class="lc-tags"><span class="ltag ltag-g">Earnings Bot</span><span class="ltag">Streamlit</span><span class="ltag">API Agent</span></div></div>
-          <div class="lc"><div class="lc-dur">22 min</div><div class="lc-num">2.3</div><div class="lc-ttl">💎 Wealth Management Report Generator</div><div class="lc-desc">Python agent that takes client profile input, runs goal-based allocation logic, and auto-generates a formatted PDF wealth management report with IPS, asset allocation, SIP recommendations, and tax planning — in under 60 seconds.</div><div class="lc-tags"><span class="ltag ltag-g">Wealth Bot</span><span class="ltag">PDF Gen</span><span class="ltag">IPS Automation</span></div></div>
-          <div class="lc"><div class="lc-dur">20 min</div><div class="lc-num">2.4</div><div class="lc-ttl">📈 Portfolio Management & AI Alpha</div><div class="lc-desc">Markowitz optimiser with AI commentary agent. Alternative data (earnings call sentiment via FinBERT) as alpha signal. Python bot that monitors portfolio drift and emails rebalancing alerts.</div><div class="lc-tags"><span class="ltag">MPT Bot</span><span class="ltag ltag-g">FinBERT</span><span class="ltag">Rebalancing Agent</span></div></div>
-          <div class="lc"><div class="lc-dur">20 min</div><div class="lc-num">2.5</div><div class="lc-ttl">⚠️ Risk Bots — VaR & Stress Testing</div><div class="lc-desc">Monte Carlo simulation agent: runs 10,000 paths, computes VaR/CVaR, generates AI-written CRO stress test narrative. Goldman uses this exact pattern for synthetic scenario generation in Basel IV models.</div><div class="lc-tags"><span class="ltag">VaR Bot</span><span class="ltag ltag-g">Monte Carlo</span><span class="ltag">CRO Reports</span></div></div>
-          <div class="lc" style="background:rgba(204,0,51,.05);border-color:rgba(204,0,51,.25);"><div class="lc-dur">11 min</div><div class="lc-num">2.6</div><div class="lc-ttl">📡 Macro Intelligence Agent</div><div class="lc-desc">BloombergGPT-style macro signal extraction. FinBERT on Fed minutes and RBI policy documents. Python bot that scores macro sentiment and maps it to asset class positioning — like a quant macro fund's NLP stack.</div><div class="lc-tags"><span class="ltag ltag-g">FinBERT</span><span class="ltag">NLP Bot</span><span class="ltag">BloombergGPT</span></div></div>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <!-- M3 -->
-  <div class="mpanel" id="m2">
-    <div class="mod-layout">
-      <div class="mod-meta">
-        <div class="mod-tag mtag-g">MODULE 3 · 2 HOURS</div>
-        <div class="mod-ttl" style="margin-top:10px;">Build, Deploy<br>& Get Hired</div>
-        <div class="mod-sub">Prototype 2 full AI finance tools. Get a GitHub portfolio, a recruiter-ready narrative, and the confidence to demo your bot live in any BFSI or IB interview.</div>
-        <div class="mchips">
-          <span class="mchip">Portfolio Projects</span><span class="mchip">Live Builds</span><span class="mchip">Interview Prep</span><span class="mchip">Hackathon</span>
-        </div>
-        <div class="mod-out">
-          <div class="mod-out-l">🎯 Module Outcome</div>
-          <div class="mod-out-t">2 deployed GitHub projects, a practised "AI in my target role" interview answer, and a winning 30-minute hackathon demo.</div>
-        </div>
-      </div>
-      <div>
-        <div class="lc-grid" style="grid-template-columns:1fr 1fr;">
-          <div class="lc"><div class="lc-dur">30 min</div><div class="lc-num">3.1</div><div class="lc-ttl">🔨 Build: AI Equity Research Bot</div><div class="lc-desc">Claude prompt chain: input NSE/BSE ticker → AI generates structured equity report: business overview, 3-year financials, DCF commentary, risks, recommendation. No code — pure prompt engineering + Google Docs.</div><div class="lc-tags"><span class="ltag ltag-g">Live Build</span><span class="ltag">Claude</span><span class="ltag">Equity Bot</span></div></div>
-          <div class="lc"><div class="lc-dur">25 min</div><div class="lc-num">3.2</div><div class="lc-ttl">🔨 Build: Earning Dashboard Agent</div><div class="lc-desc">Python + Streamlit: auto-pull quarterly earnings, compute beat/miss vs estimates, generate AI commentary, output live interactive dashboard. Shareable GitHub link = instant interview proof.</div><div class="lc-tags"><span class="ltag ltag-g">Streamlit Bot</span><span class="ltag">Earnings API</span><span class="ltag">Agent</span></div></div>
-          <div class="lc"><div class="lc-dur">22 min</div><div class="lc-num">3.3</div><div class="lc-ttl">🎯 Interview War Room</div><div class="lc-desc">Role-play with Claude: IB, credit, risk, portfolio, wealth — real technical + behavioural questions. "Walk me through how you'd use AI in this role" — you leave with a killer, demo-backed answer.</div><div class="lc-tags"><span class="ltag ltag-g">Interview Prep</span><span class="ltag">Role Play</span><span class="ltag">AI Coach</span></div></div>
-          <div class="lc"><div class="lc-dur">15 min</div><div class="lc-num">3.4</div><div class="lc-ttl">📄 AI Resume & LinkedIn Optimizer</div><div class="lc-desc">Use Claude to match resume to any JD, quantify AI project bullets, and optimise LinkedIn for BFSI recruiter searches. "Built Python earnings agent using Claude API + Streamlit" = instant shortlist.</div><div class="lc-tags"><span class="ltag ltag-g">Resume AI</span><span class="ltag">LinkedIn SEO</span><span class="ltag">JD Match</span></div></div>
-          <div class="lc" style="grid-column:1/-1;background:rgba(255,215,0,.04);border-color:rgba(255,215,0,.25);"><div class="lc-dur">28 min</div><div class="lc-num">3.5</div><div class="lc-ttl">🏆 AI Finance Sprint Hackathon</div><div class="lc-desc">Teams pick a finance problem — earnings dashboard, wealth report, IB screener, or risk bot. 30 minutes to build an MVP using Claude + prompts + any free tool. Present live. The winning demo goes straight to GitHub and becomes your interview centrepiece.</div><div class="lc-tags"><span class="ltag ltag-g">Hackathon</span><span class="ltag">Teams</span><span class="ltag">Live Demo</span><span class="ltag">GitHub</span></div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-</div>
-</section>
-
-<div class="sep"></div>
-
-<!-- ══ PROJECTS ══ -->
-<section class="sec" id="projects">
-<div class="wrap">
-  <div class="slbl">💡 Portfolio Projects</div>
-  <h2 class="sh rv">AI Projects That<br><span class="rt">Get You Hired</span></h2>
-  <p class="sdesc rv">Build these during the course. Each maps to a real SCMHRD finance placement role — and each is a live demo you can open on your laptop in any interview.</p>
-
-  <div class="proj-grid rv">
-    <div class="proj-c">
-      <div class="proj-hd" style="background:linear-gradient(135deg,rgba(204,0,51,.15),rgba(100,0,20,.25));">
-        <span class="proj-ico">📊</span>
-        <div class="proj-diff dif-b">Beginner</div>
-        <div class="proj-ttl">AI Equity Research Report Bot</div>
-      </div>
-      <div class="proj-bd">
-        <div class="proj-desc">Enter any NSE/BSE ticker → AI generates a full equity report: business model, 3-year financials, DCF commentary, key risks, and buy/sell recommendation. Pure Claude prompt-chain — no code.</div>
-        <div class="proj-stack"><span class="stk">Claude API</span><span class="stk">yfinance</span><span class="stk">Google Docs</span></div>
-        <div class="proj-role">🎯 Equity Research Analyst · Associate Researcher</div>
-      </div>
-    </div>
-
-    <div class="proj-c">
-      <div class="proj-hd" style="background:linear-gradient(135deg,rgba(255,215,0,.1),rgba(160,100,0,.2));">
-        <span class="proj-ico">📈</span>
-        <div class="proj-diff dif-i">Intermediate</div>
-        <div class="proj-ttl">Automated Earning Dashboard Agent</div>
-      </div>
-      <div class="proj-bd">
-        <div class="proj-desc">Python bot pulls quarterly earnings, computes beats/misses vs consensus, generates AI commentary on each metric, and outputs a live interactive Streamlit dashboard — fully automated, zero manual input.</div>
-        <div class="proj-stack"><span class="stk">Python</span><span class="stk">Streamlit</span><span class="stk">Claude API</span><span class="stk">Earnings API</span></div>
-        <div class="proj-role">🎯 Equity Research · Business Analyst · Corporate Finance</div>
-      </div>
-    </div>
-
-    <div class="proj-c">
-      <div class="proj-hd" style="background:linear-gradient(135deg,rgba(204,0,51,.12),rgba(80,0,60,.2));">
-        <span class="proj-ico">💎</span>
-        <div class="proj-diff dif-i">Intermediate</div>
-        <div class="proj-ttl">Wealth Management Report Generator</div>
-      </div>
-      <div class="proj-bd">
-        <div class="proj-desc">Client profile input → Python agent runs goal-based allocation, generates formatted PDF wealth report with IPS, asset allocation, SIP plan, and tax-saving recommendations in under 60 seconds.</div>
-        <div class="proj-stack"><span class="stk">Python</span><span class="stk">Claude API</span><span class="stk">ReportLab PDF</span><span class="stk">LangChain</span></div>
-        <div class="proj-role">🎯 Relationship Manager · Wealth Manager · Robo-Advisor</div>
-      </div>
-    </div>
-
-    <div class="proj-c">
-      <div class="proj-hd" style="background:linear-gradient(135deg,rgba(255,23,68,.12),rgba(100,0,20,.22));">
-        <span class="proj-ico">⚖️</span>
-        <div class="proj-diff dif-a">Advanced</div>
-        <div class="proj-ttl">Basel IV FRM Compliance Report — MNC Bank</div>
-      </div>
-      <div class="proj-bd">
-        <div class="proj-desc">Flagship project. Python agent processes a bank's trading book positions, computes SA-FRTB capital charges, runs CVA calculations, generates Pillar 3 disclosure narrative using Claude, and outputs a board-ready Basel IV compliance report. This is the exact workflow at Citi, HSBC, and Deutsche Bank.</div>
-        <div class="proj-stack"><span class="stk">Python</span><span class="stk">Claude API</span><span class="stk">FRTB Engine</span><span class="stk">RAG Pattern</span><span class="stk">MCP Tools</span></div>
-        <div class="proj-role">🎯 Risk Manager · FRM Analyst · Market Risk · RegTech</div>
-      </div>
-    </div>
-
-    <div class="proj-c">
-      <div class="proj-hd" style="background:linear-gradient(135deg,rgba(0,200,100,.08),rgba(0,60,40,.18));">
-        <span class="proj-ico">🤝</span>
-        <div class="proj-diff dif-b">Beginner</div>
-        <div class="proj-ttl">AI M&A Screener Bot</div>
-      </div>
-      <div class="proj-bd">
-        <div class="proj-desc">Python agent scrapes NSE/BSE, filters acquisition targets by sector/size/leverage, and generates a 1-page AI acquisition rationale for each — exactly what IB analysts prepare before every pitch.</div>
-        <div class="proj-stack"><span class="stk">Python</span><span class="stk">yfinance</span><span class="stk">GPT-4</span><span class="stk">Excel Export</span></div>
-        <div class="proj-role">🎯 Investment Banking Analyst · Corporate Finance</div>
-      </div>
-    </div>
-
-    <div class="proj-c">
-      <div class="proj-hd" style="background:linear-gradient(135deg,rgba(204,0,51,.1),rgba(80,0,40,.2));">
-        <span class="proj-ico">⚠️</span>
-        <div class="proj-diff dif-a">Advanced</div>
-        <div class="proj-ttl">Real-Time Market Risk Dashboard</div>
-      </div>
-      <div class="proj-hd" style="display:none;"></div>
-      <div class="proj-bd" style="padding-top:0;">
-        <div class="proj-desc">Live VaR/CVaR + Monte Carlo simulation dashboard. 10,000 simulation paths, real-time data, AI-generated CRO stress test narrative. Goldman's pattern for synthetic scenario generation under Basel IV.</div>
-        <div class="proj-stack"><span class="stk">Monte Carlo</span><span class="stk">Claude API</span><span class="stk">Plotly</span><span class="stk">Streamlit</span></div>
-        <div class="proj-role">🎯 Risk Manager · Market Risk Analyst · FRM</div>
-      </div>
-    </div>
-
-    <div class="proj-c">
-      <div class="proj-hd" style="background:linear-gradient(135deg,rgba(255,215,0,.08),rgba(100,60,0,.15));">
-        <span class="proj-ico">📰</span>
-        <div class="proj-diff dif-i">Intermediate</div>
-        <div class="proj-ttl">FinNews Sentiment & Macro Agent</div>
-      </div>
-      <div class="proj-bd">
-        <div class="proj-desc">FinBERT sentiment on financial news, earnings calls, and RBI/Fed policy documents. Python bot correlates sentiment shifts with price moves, generates daily macro briefing — BloombergGPT use case demo.</div>
-        <div class="proj-stack"><span class="stk">FinBERT</span><span class="stk">News API</span><span class="stk">Plotly</span><span class="stk">Streamlit</span></div>
-        <div class="proj-role">🎯 Equity Research · Quant Analyst · Macro Fund</div>
-      </div>
-    </div>
-
-    <div class="proj-c">
-      <div class="proj-hd" style="background:linear-gradient(135deg,rgba(204,0,51,.12),rgba(60,0,80,.2));">
-        <span class="proj-ico">📈</span>
-        <div class="proj-diff dif-i">Intermediate</div>
-        <div class="proj-ttl">AI Portfolio Optimizer + Rebalancing Bot</div>
-      </div>
-      <div class="proj-bd">
-        <div class="proj-desc">Markowitz mean-variance optimizer with AI commentary. Factor model construction. Drift monitoring bot that emails rebalancing alerts with AI-generated rationale. Production-grade wealth management tooling.</div>
-        <div class="proj-stack"><span class="stk">scipy</span><span class="stk">matplotlib</span><span class="stk">Claude API</span><span class="stk">Email Agent</span></div>
-        <div class="proj-role">🎯 Portfolio Manager · Wealth Manager · Fund Admin</div>
-      </div>
-    </div>
-  </div>
-</div>
-</section>
-
-<div class="sep"></div>
-
-<!-- ══ TOOLS ══ -->
-<section class="sec sec-alt" id="tools">
-<div class="wrap">
-  <div class="slbl">🛠️ AI Toolkit</div>
-  <h2 class="sh rv">Tools You'll<br><span class="rt">Master in the Course</span></h2>
-  <p class="sdesc rv">All free-tier. All browser-accessible. Zero local setup — everything runs in Google Colab or directly with Claude.</p>
-  <div class="tl-grid rv">
-    <div class="tl-c"><div class="tl-logo">⚡</div><div class="tl-nm">Claude (Anthropic)</div><div class="tl-desc">200K context window — processes full annual reports. RAG patterns, MCP tool calls, and agentic workflows. Used in every module build.</div><div class="tl-uses"><span class="tl-use">Annual Reports</span><span class="tl-use">MCP Agents</span><span class="tl-use">RAG Bot</span></div></div>
-    <div class="tl-c"><div class="tl-logo">🧠</div><div class="tl-nm">ChatGPT / GPT-4o</div><div class="tl-desc">All-purpose finance analyst assistant. Best for structured output — balance sheet analysis, DCF tables, equity research sections, earnings commentary.</div><div class="tl-uses"><span class="tl-use">DCF Drafting</span><span class="tl-use">Equity Notes</span><span class="tl-use">IB Decks</span></div></div>
-    <div class="tl-c"><div class="tl-logo">🐍</div><div class="tl-nm">Python Agent Stack</div><div class="tl-desc">yfinance, pandas, requests, reportlab — the agent framework for all Module 2 bots. Google Colab runs everything free with no install.</div><div class="tl-uses"><span class="tl-use">yfinance</span><span class="tl-use">Pandas</span><span class="tl-use">ReportLab</span></div></div>
-    <div class="tl-c"><div class="tl-logo">📊</div><div class="tl-nm">Streamlit</div><div class="tl-desc">Turn Python agent scripts into professional dashboards in hours. Earning dashboards, risk monitors, portfolio trackers — all deployed as shareable links for interviews.</div><div class="tl-uses"><span class="tl-use">Earning Dashboard</span><span class="tl-use">Risk Monitor</span><span class="tl-use">Wealth Tool</span></div></div>
-    <div class="tl-c"><div class="tl-logo">🤗</div><div class="tl-nm">Hugging Face (FinBERT)</div><div class="tl-desc">Pre-trained finance NLP. FinBERT scores earnings calls and news. Zero-code via Inference API — paste text, get sentiment. Used in macro agent and earnings bot.</div><div class="tl-uses"><span class="tl-use">Earnings Sentiment</span><span class="tl-use">News Scoring</span><span class="tl-use">Policy NLP</span></div></div>
-    <div class="tl-c"><div class="tl-logo">🐱</div><div class="tl-nm">GitHub</div><div class="tl-desc">Host all projects publicly. A GitHub portfolio with live finance AI bots is now expected by BFSI, IB, and quant fund interviewers. Your earning dashboard link = your interview edge.</div><div class="tl-uses"><span class="tl-use">Project Showcase</span><span class="tl-use">Portfolio</span><span class="tl-use">Deployment</span></div></div>
-  </div>
-</div>
-</section>
-
-<div class="sep"></div>
-
-<!-- ══ PROMPTS ══ -->
-<section class="sec" id="prompts">
-<div class="wrap">
-  <div class="slbl">💬 Prompt Engineering Lab</div>
-  <h2 class="sh rv">Finance Prompt<br><span class="rt">Starter Kit</span></h2>
-  <p class="sdesc rv">Battle-tested prompts for your target roles — including agents, Basel IV, earning dashboards, and wealth reports. Click to copy.</p>
-  <div class="pr-grid rv">
-    <div class="pr-c" onclick="cpP(this)"><button class="pr-cp">Copy</button><div class="pr-role">🤖 Agentic AI — Finance Workflow (MCP Pattern)</div><div class="pr-text">You are an AI finance agent with tools: [get_stock_data(ticker, years=3)], [get_earnings(ticker, quarters=8)], [calculate_dcf(fcf_list, wacc, g)], [send_report(email, report_text)]. Task: Analyse [COMPANY] for a buy/sell recommendation. Step 1: Fetch 3yr financials. Step 2: Pull last 8 quarters earnings vs estimates. Step 3: Run DCF base/bull/bear. Step 4: Generate investment memo and send to analyst@firm.com.</div></div>
-    <div class="pr-c" onclick="cpP(this)"><button class="pr-cp">Copy</button><div class="pr-role">📊 Automated Earning Dashboard — AI Commentary</div><div class="pr-text">You are a sell-side equity analyst. Given the following quarterly earnings data: [PASTE: Revenue, EBITDA, PAT, EPS actual vs estimate for 8 quarters]. Generate: 1) Beat/miss analysis for each quarter with percentage variance, 2) Key drivers of outperformance or disappointment, 3) Trend narrative (improving/deteriorating), 4) One-sentence forward guidance sentiment. Format for a Bloomberg-style earnings dashboard panel.</div></div>
-    <div class="pr-c" onclick="cpP(this)"><button class="pr-cp">Copy</button><div class="pr-role">⚖️ Basel IV / FRM — Pillar 3 Disclosure Agent</div><div class="pr-text">You are an FRM-certified risk analyst at [BANK NAME]. Using the following trading book positions and risk parameters: [PASTE DATA]. Generate a Basel IV Pillar 3 disclosure that includes: 1) SA-FRTB capital charge calculation, 2) CVA risk charge under SA-CVA, 3) Capital adequacy ratios (CET1, Tier 1, Total Capital), 4) Risk-weighted asset breakdown by asset class, 5) Board-ready risk narrative. Format per Basel Committee disclosure requirements.</div></div>
-    <div class="pr-c" onclick="cpP(this)"><button class="pr-cp">Copy</button><div class="pr-role">💎 Wealth Management Report Generator</div><div class="pr-text">You are a certified financial planner generating a formal Investment Policy Statement. Client profile: Age [X], Income ₹[X] LPA, Risk tolerance: [moderate/aggressive], Goals: [Goal 1 with timeline and amount], [Goal 2]. Current portfolio: [DETAILS]. Generate a complete IPS including: Risk profile rationale, Strategic asset allocation with %, Specific instrument recommendations (MF categories, bonds, equity), SIP amounts per goal, Tax optimisation strategy (ELSS, NPS, 80C), Annual review triggers. Format as a professional wealth management report.</div></div>
-    <div class="pr-c" onclick="cpP(this)"><button class="pr-cp">Copy</button><div class="pr-role">📚 RAG Pattern — Annual Report Q&A</div><div class="pr-text">You are a credit analyst. Answer the following questions using ONLY information from the annual report extract below. Do not use external knowledge. For each answer, cite the page/section. Questions: 1) Debt/EBITDA for last 3 years, 2) All disclosed covenant risks, 3) Liquidity position and current ratio trend, 4) Management's stated growth strategy, 5) Top 3 risk factors. Flag any answer where the document is insufficient. Annual Report Extract: [PASTE TEXT]</div></div>
-    <div class="pr-c" onclick="cpP(this)"><button class="pr-cp">Copy</button><div class="pr-role">🎯 Interview Prep — AI in Finance Role Play</div><div class="pr-text">I am interviewing for [ROLE] at [COMPANY]. Interview me on how AI is transforming this role. Ask one question at a time. After my answer: 1) Rate it 1-10, 2) What I nailed, 3) What a top-10% candidate would add, 4) Model answer. Questions to cover: How AI changes daily workflows, a specific AI tool relevant to this role, a project I've built, risks of AI in this function, and how I would implement an AI solution in my first 90 days. Begin.</div></div>
-  </div>
-</div>
-</section>
-
-<!-- RECRUITER MARQUEE -->
-<div style="background:var(--bg2);border-top:1px solid rgba(204,0,51,.1);border-bottom:1px solid rgba(204,0,51,.1);position:relative;z-index:10;">
-<div class="mq-wrap"><div class="mq-in">
-  <div class="mq-chip">Kotak Mahindra Bank</div><div class="mq-chip">Goldman Sachs</div><div class="mq-chip">JPMorgan Chase</div><div class="mq-chip">Morgan Stanley</div><div class="mq-chip">HDFC Bank</div><div class="mq-chip">Axis Bank</div><div class="mq-chip">Deutsche Bank</div><div class="mq-chip">Nomura</div><div class="mq-chip">Aditya Birla Capital</div><div class="mq-chip">ICICI Bank</div><div class="mq-chip">Motilal Oswal</div><div class="mq-chip">Angel One</div><div class="mq-chip">Bajaj Finance</div><div class="mq-chip">IDFC First Bank</div><div class="mq-chip">Deloitte</div><div class="mq-chip">EY</div><div class="mq-chip">KPMG</div><div class="mq-chip">Citi</div>
-  <div class="mq-chip">Kotak Mahindra Bank</div><div class="mq-chip">Goldman Sachs</div><div class="mq-chip">JPMorgan Chase</div><div class="mq-chip">Morgan Stanley</div><div class="mq-chip">HDFC Bank</div><div class="mq-chip">Axis Bank</div><div class="mq-chip">Deutsche Bank</div><div class="mq-chip">Nomura</div><div class="mq-chip">Aditya Birla Capital</div><div class="mq-chip">ICICI Bank</div><div class="mq-chip">Motilal Oswal</div><div class="mq-chip">Angel One</div><div class="mq-chip">Bajaj Finance</div><div class="mq-chip">IDFC First Bank</div><div class="mq-chip">Deloitte</div><div class="mq-chip">EY</div><div class="mq-chip">KPMG</div><div class="mq-chip">Citi</div>
-</div></div>
-</div>
-
-<div class="sep"></div>
-
-<!-- ══ ABOUT ══ -->
-<section class="sec" id="about">
-<div class="wrap">
-  <div class="slbl">👤 Your Instructor</div>
-  <div class="about-inner rv">
-    <div class="about-card">
-      <div class="ab-photo"><img src="data:image/png;base64,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AgQIEBCwvAcIECBAgAABAnMWELDmDKo6AgQIECBAgICA5T1AgAABAgQIEJizgIA1Z1DVESBAgAABAgQELO8BAgQIECBAgMCcBSpgXTnnOlVHgAABAgQIEBiywJUC1pAPv74TIECAAAECixDYHbB+soia1UmAAAECBAgQGKjAT2oES8Aa6NHXbQIECBAgQGAhArsD1mULqVqlBAgQIECAAIFhClxWI1gC1jAPvl4TIECAAAECixHYHbAuXUzdaiVAgAABAgQIDFLg0hrBumSQXddpAgQIECBAgMBiBC6pgHXxYupWKwECBAgQIEBgkAIXC1iDPO46TYAAAQIECCxQYHfA+tECd6BqAgQIECBAgMDQBH5UI1g/HFqv9ZcAAQIECBAgsECBHwpYC9RVNQECBAgQIDBIgd0B66JBdl2nCRAgQIAAAQKLEbioRrAErMXgqpUAAQIECBAYpsDugPW9YfZdrwkQIECAAAECCxH4Xo1gCVgLsVUpAQIECBAgMFCB3QHruwPtvG4TIECAAAECBBYh8N0awfrOImpWJwECBAgQIEBgoALfqYD17YF2XrcJECBAgAABAosQ+PY+u3btOig1+8HnRfCqkwABAgQIEBiiwMFX32effS5Nz38wxN7rMwECBAgQIEBgzgI/qGxVpwhruvCnM/8lQIAAAQIECBCYQWB3phKwZhC0KQECBAgQIEBgg8C6gPX1DS96SoAAAQIECBAgMLnA7kw1GsESsCYHtAUBAgQIECBAYKPAuoD11Y2vek6AAAECBAgQIDCxwO5MNRrBErAm9rMBAQIECBAgQGAvgXUB6yt7vWwBAQIECBAgQIDApAK7M9VoBOuCSbe2PgECBAgQIECAwF4CuzPVPrU4d3M/ILO6m/socNViEwECBAgQIECAwPgCV2XVg3Oj0ct3B6p6kAX+knB8QGsSIECAAAECBDYKfL3JVOtGrM7buJbnBAgQIECAAAECYwucN1pz7SnBc0cLzQkQIECAAAECBCYW2JOl1gasL01cjQ0IECBAgAABAgRGAnuylIA1IjEnQIAAAQIECMwmcM5o87UB64ujheYECBAgQIAAAQITC2wasM6euBobECBAgAABAgQIjAT2ZKnd98EaLc39sL6fx4eOnpsTIECAAAECBAiMJXBRbtFwndGaa08R1rJ/Hb1gToAAAQIECBAgMLbAugy1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" alt="Tejas Jadhav, CFA, FRM"/></div>
-      <div class="ab-name">Tejas Jadhav, CFA, FRM</div>
-      <div class="ab-creds">
-        <span class="crd">MMS · SIMSREE Mumbai</span>
-        <span class="crd crd-g">CMAT 99.92 Percentile</span>
-        <span class="crd crd-g">MAT 800/800 × 4</span>
-      </div>
-      <div class="ab-role">AI in Finance Author · Course Architect · 12+ years across Wealth, Risk & Banking</div>
-      <div class="ab-stats">
-        <div class="abst"><div class="abst-n">12+</div><div class="abst-l">Years in Finance</div></div>
-        <div class="abst"><div class="abst-n">3</div><div class="abst-l">Global Institutions</div></div>
-        <div class="abst"><div class="abst-n">2</div><div class="abst-l">Amazon Bestsellers</div></div>
-        <div class="abst"><div class="abst-n">5</div><div class="abst-l">Finance Domains</div></div>
-      </div>
-      <div class="book-c">
-        <div class="book-cov">📘</div>
+      <div class="mod-c">
+        <div class="mod-num">02<small>2 Hours</small></div>
         <div>
-          <div class="book-t">Claude AI for Finance Professionals</div>
-          <div class="book-m">Amazon · AI in Finance Series</div>
-          <span class="book-tag">Amazon Bestseller</span>
+          <div class="mod-dur">Build · Automate · Report</div>
+          <div class="mod-t">Agents · Dashboards · Reports</div>
+          <div class="mod-desc">Move from prompts to autonomous Python agents. Build earning dashboards, wealth report bots, and the Basel IV FRM pipeline that MNC banks pay six figures for.</div>
+          <div class="les-list">
+            <div class="les"><b>2.1</b> Agentic AI architecture · planner-executor-critic</div>
+            <div class="les"><b>2.2</b> Earning Dashboard bot (yfinance + Claude + Streamlit)</div>
+            <div class="les"><b>2.3</b> Wealth Management Report Generator (PDF + IPS)</div>
+            <div class="les"><b>2.4</b> Basel IV / FRTB capital-charge automation</div>
+            <div class="les"><b>2.5</b> FinBERT sentiment + factor signals</div>
+            <div class="les"><b>2.6</b> CRO-grade Monte Carlo VaR / CVaR reports</div>
+          </div>
         </div>
       </div>
-      <div class="ab-links">
-        <a href="https://tejasgjadhav.github.io/" target="_blank" class="abl abl-r">🌐 Website</a>
-        <a href="https://tejasgjadhav.github.io/AIFINANCE/" target="_blank" class="abl abl-g">⚡ AI Finance Course</a>
+
+      <div class="mod-c">
+        <div class="mod-num">03<small>2 Hours</small></div>
+        <div>
+          <div class="mod-dur">Career · Interviews · Hackathon</div>
+          <div class="mod-t">Live Builds · Interviews · Hackathon</div>
+          <div class="mod-desc">Turn skills into placements. Live builds for portfolio, interview drills for AI-in-finance roles, and a closing mini-hackathon judged on production-readiness.</div>
+          <div class="les-list">
+            <div class="les"><b>3.1</b> Portfolio engineering for Sem 3 placements</div>
+            <div class="les"><b>3.2</b> Live: Equity research memo agent</div>
+            <div class="les"><b>3.3</b> Live: Credit underwriting bot</div>
+            <div class="les"><b>3.4</b> Interview drills — JPMorgan, GS, Citi, BlackRock</div>
+            <div class="les"><b>3.5</b> Resume + LinkedIn for AI-Finance roles</div>
+            <div class="les"><b>3.6</b> Hackathon · pitch · jury feedback</div>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <div class="about-body">
-      <h3>Not a visiting lecturer.<br><span class="rt">The architect.</span></h3>
-      <div class="about-q">"I spent 12 years building the exact systems students will learn — from live trading desks to fund automation at institutional level. This course is not theory. It's a practitioner's field guide."</div>
-      <div class="about-bio">Tejas Jadhav, CFA, FRM is a finance professional with 12+ years spanning wealth management, market risk, climate risk technology, and banking at Citi, HDFC Bank, and leading Swiss institutions. He holds an MMS from <strong style="color:var(--text);">SIMSREE (Sydenham Institute of Management & Research), Mumbai</strong> — where he scored <strong style="color:var(--g1);">99.92 percentile in CMAT</strong> and an <strong style="color:var(--g1);">unprecedented 800/800 in MAT for 4 consecutive attempts</strong>.</div>
-      <div class="about-bio">As course architect for <strong style="color:var(--text);">Agentic AI & Advanced Analytics in Finance</strong> at ISBMS Pune, he designed curriculum benchmarked against Wharton, Harvard, and LBS. Author of <strong style="color:var(--text);">"Claude AI for Finance Professionals"</strong> — Amazon bestseller used by analysts across India and the US.</div>
-      <ul class="exp-list">
-        <li><div class="exp-ico">🏦</div><div><div class="exp-t">Market Risk & FRTB</div><div class="exp-s">Built FRTB Basel IV market risk solutions at institutional level — Citi & Swiss Banking</div></div></li>
-        <li><div class="exp-ico">🌿</div><div><div class="exp-t">ESG & Climate Risk Technology</div><div class="exp-s">Designed AI-powered ESG and climate risk platforms for institutional finance</div></div></li>
-        <li><div class="exp-ico">💼</div><div><div class="exp-t">Wealth Management</div><div class="exp-s">Managed HNI portfolios — equities, structured products, fixed income, direct P&L accountability</div></div></li>
-        <li><div class="exp-ico">🤖</div><div><div class="exp-t">AI Finance Author & Educator</div><div class="exp-s">Bestselling books, course architect at ISBMS — teaching MBA Finance at SCMHRD & beyond</div></div></li>
-      </ul>
-    </div>
-  </div>
-</div>
-</section>
-
-<div class="sep"></div>
-
-<!-- ══ CTA ══ -->
-<section id="cta">
-  <div class="cta-gl"></div><div class="cta-gl2"></div>
-  <div style="position:relative;z-index:2;">
-    <div class="h-badge" style="margin:0 auto 24px;display:inline-flex;"><span class="bdot"></span>6 Hours · 3 Modules · 8 Live Builds</div>
-    <h2 class="sh rv" style="text-align:center;font-size:clamp(34px,5vw,68px);margin-bottom:18px;">The Finance of Tomorrow<br><span class="rt">Starts Today</span></h2>
-    <p style="font-size:17px;color:var(--muted);max-width:500px;margin:0 auto 44px;text-align:center;line-height:1.68;">LLMs, RAG, MCP, and agentic bots are already inside JPMorgan, Goldman, and Morgan Stanley. This course puts them in your hands — with live demos you can open in any interview.</p>
-    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
-      <button class="bp" onclick="document.getElementById('modules').scrollIntoView({behavior:'smooth'})">📚 Go to Modules</button>
-      <button class="bs" onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})">💡 Browse Projects →</button>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
+<section class="sec sec-alt" id="projects">
+  <div class="sec-in">
+    <div class="sec-h">
+      <div class="sec-lbl">8 Live Builds</div>
+      <h2>AI Projects That <span class="accent">Get You Hired</span></h2>
+      <p>Every project ships as a working Python repo + PDF report — portfolio-ready for placements.</p>
+    </div>
+    <div class="proj-grid">
+      <div class="proj-c"><div class="proj-ico">🏛️</div><div class="proj-t">Basel IV / FRTB Report Bot</div><div class="proj-d">Automated SA-FRTB capital, SA-CVA, Pillar 3 disclosures + CET1 dashboard for an MNC bank book.</div><div class="proj-tags"><span class="proj-tag">FRM</span><span class="proj-tag">Risk</span><span class="proj-tag">Regulatory</span></div></div>
+      <div class="proj-c"><div class="proj-ico">📈</div><div class="proj-t">Earning Dashboard Agent</div><div class="proj-d">Streamlit + Claude bot — pulls yfinance data, runs ratios, writes the earnings memo. End-to-end.</div><div class="proj-tags"><span class="proj-tag">Equity</span><span class="proj-tag">Agent</span><span class="proj-tag">Streamlit</span></div></div>
+      <div class="proj-c"><div class="proj-ico">💎</div><div class="proj-t">Wealth Report Generator</div><div class="proj-d">Client profile → IPS, allocation, SIP plan, tax optimisation. Auto-PDF in under 60 seconds.</div><div class="proj-tags"><span class="proj-tag">Wealth</span><span class="proj-tag">PDF</span><span class="proj-tag">IPS</span></div></div>
+      <div class="proj-c"><div class="proj-ico">🧠</div><div class="proj-t">FinBERT Sentiment Engine</div><div class="proj-d">Real-time news → bull/bear scoring → factor signal feeding a long-short portfolio model.</div><div class="proj-tags"><span class="proj-tag">NLP</span><span class="proj-tag">FinBERT</span></div></div>
+      <div class="proj-c"><div class="proj-ico">📊</div><div class="proj-t">Monte Carlo VaR / CVaR</div><div class="proj-d">10K-path simulation engine producing CRO-grade tail-risk reports with stress scenarios.</div><div class="proj-tags"><span class="proj-tag">Market Risk</span><span class="proj-tag">VaR</span></div></div>
+      <div class="proj-c"><div class="proj-ico">🤝</div><div class="proj-t">M&amp;A Synergy Modeller</div><div class="proj-d">Multi-agent deal screen — accretion/dilution, control premium, synergy buckets, fairness memo.</div><div class="proj-tags"><span class="proj-tag">IB</span><span class="proj-tag">M&amp;A</span></div></div>
+      <div class="proj-c"><div class="proj-ico">💱</div><div class="proj-t">Treasury / FX Hedge Bot</div><div class="proj-d">Live FX, exposure aggregation, optimal forwards/options hedge recommendation with P&amp;L impact.</div><div class="proj-tags"><span class="proj-tag">Treasury</span><span class="proj-tag">FX</span></div></div>
+      <div class="proj-c"><div class="proj-ico">📚</div><div class="proj-t">Equity Research RAG</div><div class="proj-d">RAG over annual reports + concalls + filings — answers any question with citations, like an analyst.</div><div class="proj-tags"><span class="proj-tag">RAG</span><span class="proj-tag">Equity</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="prompts">
+  <div class="sec-in">
+    <div class="sec-h">
+      <div class="sec-lbl">Take-Home Toolkit</div>
+      <h2>Finance Prompt <span class="accent">Starter Kit</span></h2>
+      <p>Six battle-tested prompts you'll use on day one. Click any card to copy.</p>
+    </div>
+    <div class="pr-grid">
+      <div class="pr-c" onclick="cpP(this)"><span class="pr-copy">Copy</span><div class="pr-role">🤖 Agentic AI Research Analyst</div><div class="pr-text">You are a senior equity research analyst at a top-tier I-bank. Given ticker [TICKER] and the latest 10-K, produce: 1) 3-line investment thesis, 2) financial summary (revenue, EBITDA margin, FCF), 3) valuation triangulation (DCF, EV/EBITDA, P/E), 4) key risks, 5) BUY/HOLD/SELL with 12-month price target. Cite sources inline.</div></div>
+      <div class="pr-c" onclick="cpP(this)"><span class="pr-copy">Copy</span><div class="pr-role">📈 Earning Dashboard Generator</div><div class="pr-text">Build a Streamlit earning dashboard for [COMPANY]. Fetch via yfinance: 5Y revenue, EBITDA, net income, FCF. Compute YoY growth, margin trends, ROCE, ROE. Plot interactive charts. Add a Claude-powered memo at the bottom summarising the quarter in 200 words.</div></div>
+      <div class="pr-c" onclick="cpP(this)"><span class="pr-copy">Copy</span><div class="pr-role">🏛️ Basel IV FRTB Report</div><div class="pr-text">You are a market risk officer at an MNC bank. Given trading-book exposures across FX, IR, Equity, Credit, Commodity buckets, generate the SA-FRTB capital charge — delta, vega, curvature components. Include SA-CVA. Output: Pillar 3 disclosure draft + CET1 impact dashboard.</div></div>
+      <div class="pr-c" onclick="cpP(this)"><span class="pr-copy">Copy</span><div class="pr-role">💎 Wealth Management IPS</div><div class="pr-text">You are a certified financial planner. Client: age [X], income ₹[X] LPA, goals [G1, G2]. Generate a complete Investment Policy Statement: risk profile, strategic asset allocation, instrument shortlist (MF, bonds, equity), SIP per goal, tax optimisation (ELSS, NPS, 80C), annual review triggers. Format as a formal wealth report.</div></div>
+      <div class="pr-c" onclick="cpP(this)"><span class="pr-copy">Copy</span><div class="pr-role">📚 RAG over Annual Report</div><div class="pr-text">You are an analyst with access to [COMPANY]'s annual report via RAG. Answer the question: "[Q]". Always cite the page and section. If unsupported by the document, say so. Avoid extrapolation. Output: answer + verbatim citation + page no.</div></div>
+      <div class="pr-c" onclick="cpP(this)"><span class="pr-copy">Copy</span><div class="pr-role">🎯 Interview Prep — AI in Finance</div><div class="pr-text">Act as a hiring manager at JPMorgan / Goldman / Citi for an AI-in-Finance analyst role. Ask me 5 questions covering: (1) LLM fundamentals, (2) RAG vs fine-tune, (3) Basel IV intuition, (4) a Python case, (5) ethics/hallucination. After each answer, give a calibrated 1-5 score with the gap.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec-alt" id="about">
+  <div class="sec-in">
+    <div class="sec-h">
+      <div class="sec-lbl">👤 Your Instructor</div>
+      <h2>Not a visiting lecturer. <span class="accent">The architect.</span></h2>
+    </div>
+    <div class="about-grid">
+
+      <aside class="ab-card">
+        <div class="ab-photo"><img src="data:image/png;base64,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AgQIEBCwvAcIECBAgAABAnMWELDmDKo6AgQIECBAgICA5T1AgAABAgQIEJizgIA1Z1DVESBAgAABAgQELO8BAgQIECBAgMCcBSpgXTnnOlVHgAABAgQIEBiywJUC1pAPv74TIECAAAECixDYHbB+soia1UmAAAECBAgQGKjAT2oES8Aa6NHXbQIECBAgQGAhArsD1mULqVqlBAgQIECAAIFhClxWI1gC1jAPvl4TIECAAAECixHYHbAuXUzdaiVAgAABAgQIDFLg0hrBumSQXddpAgQIECBAgMBiBC6pgHXxYupWKwECBAgQIEBgkAIXC1iDPO46TYAAAQIECCxQYHfA+tECd6BqAgQIECBAgMDQBH5UI1g/HFqv9ZcAAQIECBAgsECBHwpYC9RVNQECBAgQIDBIgd0B66JBdl2nCRAgQIAAAQKLEbioRrAErMXgqpUAAQIECBAYpsDugPW9YfZdrwkQIECAAAECCxH4Xo1gCVgLsVUpAQIECBAgMFCB3QHruwPtvG4TIECAAAECBBYh8N0awfrOImpWJwECBAgQIEBgoALfqYD17YF2XrcJECBAgAABAosQ+PY+u3btOig1+8HnRfCqkwABAgQIEBiiwMFX32effS5Nz38wxN7rMwECBAgQIEBgzgI/qGxVpwhruvCnM/8lQIAAAQIECBCYQWB3phKwZhC0KQECBAgQIEBgg8C6gPX1DS96SoAAAQIECBAgMLnA7kw1GsESsCYHtAUBAgQIECBAYKPAuoD11Y2vek6AAAECBAgQIDCxwO5MNRrBErAm9rMBAQIECBAgQGAvgXUB6yt7vWwBAQIECBAgQIDApAK7M9VoBOuCSbe2PgECBAgQIECAwF4CuzPVPrU4d3M/ILO6m/socNViEwECBAgQIECAwPgCV2XVg3Oj0ct3B6p6kAX+knB8QGsSIECAAAECBDYKfL3JVOtGrM7buJbnBAgQIECAAAECYwucN1pz7SnBc0cLzQkQIECAAAECBCYW2JOl1gasL01cjQ0IECBAgAABAgRGAnuylIA1IjEnQIAAAQIECMwmcM5o87UB64ujheYECBAgQIAAAQITC2wasM6euBobECBAgAABAgQIjAT2ZKnd98EaLc39sL6fx4eOnpsTIECAAAECBAiMJXBRbtFwndGaa08R1rJ/Hb1gToAAAQIECBAgMLbAugy1MWB9YexqrEiAAAECBAgQIDAS+PzoQc03BqzPrX3RYwIECBAgQIAAgbEEBKyxmKxEgAABAgQIEBhfYN0g1cYRrM+OX481CRAgQIAAAQIEGoF1GWrjXxHul5V+lHIgLgIECBAgQIAAgbEELsta18xfEV4xWnvdCFbzwrpziKMVzQkQIECAAAECBDYV+PzacFVrrAtYzSaf2XRTCwkQIECAAAECBDYT2Cs7bRaw/nmzLS0jQIAAAQIECBDYVGCv7CRgbepkIQECBAgQIEBgbIGxAtanxq7OigQIECBAgAABAntlp71GsHKR1oVx+jorAgQIECBAgACBHQW+3mSndSvuFbCaV/9p3VqeECBAgAABAgQIbCawaWbaKmCduVkNlhEgQIAAAQIECKwT2DQzCVjrjDwhQIAAAQIECEwkMFHA+sREVVuZAAECBAgQIDBMgU0z07qfylnrsmvXrq/m+Y3XLvOYAAECBAgQIEBgj8DXcoH7TfY8W/Ngq1OEtcrH1qznIQECBAgQIECAwHqBLbOSgLUeyjMCBAgQIECAwLgCUwWsj4xbu/UIECBAgAABAgMU2DIrbXcN1jUD9b2U/QYIpssECBAgQIAAge0ErsiLh+UarB9tttKWpwibDfb6dejNKrGMAAECBAgQIDAwgc9sFa7KYcuA1SB9aGBYukuAAAECBAgQGEdg24wkYI1DaB0CBAgQIECAwHqBbQPWltdgVR25F9ZNM7tgfX2eESBAgAABAgQGL3BkThF+ZSuFbUewmg3P3WpjywkQIECAAAECAxT40nbhqjy2DVgN2AcGCKfLBAgQIECAAIGtBM7Y6oXRcgFrJGFOgAABAgQIEBhPYMfBp3EC1unj7ctaBAgQIECAAIFBCJy+Uy93DFg5x3heKqliIkCAAAECBAgMXeC8Jhtt67BjwGq2fv+2tXiRAAECBAgQIDAMgbEy0bgB633DMNNLAgQIECBAgMC2AmNlom3vgzWqPvfDOiKPv54y1vqj7cwJECBAgAABAj0S2JW+3CinCC/cqU9jjWA1Ffldwp00vU6AAAECBAj0WaB+f3DHcFUAYwWsRuo9fRbTNwIECBAgQIDADgJjZyEBawdJLxMgQIAAAQIEGoGxA9bY11TlOqyDUvl3Ug7BTIAAAQIECBAYmMDF6e/1corw0nH6PfYIVlPh6eNUah0CBAgQIECAQM8ETh83XFW/xw5YDdK7eoalOwQIECBAgACBcQTeOc5Ko3XGPkVYG+Q04S0yO2e0sTkBAgQIECBAYCACt8wI1pfG7etEI1hNxZ8bt3LrESBAgAABAgR6IPC5ScJV9XeigNUA/V0PoHSBAAECBAgQIDCuwMTZZ5qA9bfjtsZ6BAgQIECAAIEeCEycfSa6BquAch3Wvpl9I+Xwem4iQIAAAQIECPRY4Nvp2w1zivDKSfo48QhWs4N3TLIT6xIgQIAAAQIEOirwjknDVfVz4oDV4Ly1o0iaTYAAAQIECBCYRGCqzDPxKcJqUU4T1t3cv5Xiru4FYiJAgAABAgT6KFB3b79+RrBqPtE01QhWs6N3T7QnKxMgQIAAAQIEuiXw7mnCVXVxqoDV2Ly5W0ZaS4AAAQIECBCYSGDqrDPVKcJqWk4THprZhSkH1nMTAQIECBAgQKBHApelL0dkBOuiafo09QhWs8O/n2antiFAgAABAgQItFzg76cNV9WvqQNWg/KmluNoHgECBAgQIEBgGoGZMs7UpwirpU4TTnO8bEOAAAECBAi0XGCm04PVt5lGsJqhM39N2PJ3ieYRIECAAAECEwnUXw9Ode3VaC8zBaymktePKjMnQIAAAQIECPRAYOZsM9MpwgLMacJrZFZ/TVhzEwECBAgQIECgywI/TuPrrwdrPvU08whW04C3Td0CGxIgQIAAAQIE2iPwtlnDVXVl5oDVeLymPS5aQoAAAQIECBCYWmAumWbmU4TV/Jwm3D+zr6TcoJ6bCBAgQIAAAQIdFPhm2nzTjGD9ZNa2z2UEq2nIG2ZtjO0JECBAgAABAisUeMM8wlW1fy4Bq4H46xWC2DUBAgQIECBAYFaBuWWZuZwiHPUmpwrPyuPbj56bEyBAgAABAgQ6IvDZjF4dO6+2znMEq9p08rwaph4CBAgQIECAwBIF5pph5j2CdeNAnJ+y3xJB7IoAAQIECBAgMIvAldn4ZhnB+toslazddq4jWE3DTl27A48JECBAgAABAi0XqJ/GmVu4qr7ONWA1eC9vOaLmESBAgAABAgTWCsw9u8z1FGG1NBe6H5DZBSnuiVUgJgIECBAgQKDNAnXvqyMzgnX5PBs59xGspoF/Pc9GqosAAQIECBAgsCCBv553uKp2zn0EqyrNKNZtMvvcouqvfZgIECBAgAABAjMK7Mr2t0vA+sKM9ey1+dxHsGoPTUPP2GtvFhAgQIAAAQIE2iNwxiLCVXVvIQGrcfuL9vhpCQECBAgQIEBgL4GFZZWFnCKs5uc04YGZ1cXu16/nJgIECBAgQIBAiwS+lbbUxe2XLaJNCxvBahr8ikU0Wp0ECBAgQIAAgRkFXrGocFXtWtgIVlWeUayjM/tiysKCXO3HRIAAAQIECBCYQOCqrHurBKxzJ9hmolUXGnyahr9johZZmQABAgQIECCwWIF3LDJcVdMXGrAamz9frJHaCRAgQIAAAQITCbxworWnWHmhpwirPTlNWPv4TMqx9dxEgAABAgQIEFihwFnZ9x0yglX3wFrYtPARrKYDL1hYD1RMgAABAgQIEBhf4AWLDlfVlIWPYNVOMop1cGZfTjm8npsIECBAgAABAisQqFsz3DwB65JF73vhI1jVgaYjL150Z9RPgAABAgQIENhG4CXLCFe1/6WMYNWOMop1g8zOTzmonpsIECBAgAABAksUuDT7qtGrby5jn0sZwaqONB06eRmdsg8CBAgQIECAwAaBk5cVrmq/SxvBqp1lFOuYzD6Xsm89NxEgQIAAAQIEliBwZfZxuwSss5ewr927WNoIVu2t6dibl9U5+yFAgAABAgQIRODNywxXJb7UEazaYUaxfjGzM+uxiQABAgQIECCwBIE7J2B9cgn72bOLpY5g1V6bDr57Tws8IECAAAECBAgsTuDdyw5X1ZWlB6zG748W56hmAgQIECBAgMAegZVkjpUErCTJf0i3T9/TdQ8IECBAgAABAvMXOL3JHPOveYcaVxKwmjY9a4e2eZkAAQIECBAgMIvAyrLG0i9yX6uUC94/kOfHr13mMQECBAgQIEBgDgJnZPTqPnOoZ6oqVjmCVQ1+5lStthEBAgQIECBAYHuBZ27/8mJfXekIVnUto1inZXbfemwiQIAAAQIECMxBoK69ut8c6pm6ijYErHun9R+cugc2JECAAAECBAisFzg+AWul2WLVpwjrvlj1F4WnrnfxjAABAgQIECAwlcCpqw5X1eqVj2BVI3Ka8C6Zfawt7ak2mQgQIECAAIHOCexKi++WgPWJVbd85SNYBdBAnLJqDPsnQIAAAQIEOi1wShvCVQm2YgSrGpJRrNtm9pmU/eq5iQABAgQIECAwgcAVWfcOCVifn2Cbha3aihGs6l0D8oqF9VTFBAgQIECAQJ8FXtGWcFXIrRnBqsZkFOvGmZ2dckg9NxEgQIAAAQIExhC4OOsck4D1tTHWXcoqrRnBqt42MM9bSs/thAABAgQIEOiLwPPaFK4KtVUjWNWgjGJdK7MaxTqinpsIECBAgAABAtsIXJjXavTqh9uss/SXWjWCVb1vgJ65dAk7JECAAAECBLoo8My2hatCbN0IVjUqo1j1l4SfSjm2npsIECBAgAABApsInJVlv5CAVX9B2KqpdSNYpdNAPb1VUhpDgAABAgQItE3g6W0MV4XUyoBVDQtY/XzOO+uxiQABAgQIECCwQeCdTVbYsLgdT1t5inBEk1OFt8njuvno/qNl5gQIECBAgMDgBX4Sgbqp6BfaKtHaEawCa+D+vK142kWAAAECBAisRODP2xyuSqTVI1jVwIxiHZpZJVS3bSgQEwECBAgQGLZA3ZbhNglYF7WZodUjWAXXAD6jzYjaRoAAAQIECCxN4BltD1cl0foRrGpkRrGqnf+Qcs96biJAgAABAgQGKfDh9PreCVi72t77TgSsQkzIulNmH0/Zt56bCBAgQIAAgUEJXJne3jXh6p+60OvWnyIcITagLx49NydAgAABAgQGJfDiroSrOiqdGcGqxjYXvH8uD29Uz00ECBAgQIDAIAS+nl7eLgGr1Re2rz0SnRnBqkY3sE9b2wGPCRAgQIAAgd4LPK1L4aqORqdGsEZvn4xk1V3eHzB6bk6AAAECBAj0VuA9CVcP7FrvuhqwbhnousP7wV0D114CBAgQIEBgbIFLsmbdsf2csbdoyYqdOkU4MmugnzV6bk6AAAECBAj0UuBZXQxXdSQ6OYJVDc9pwvp9wrptwx3ruYkAAQIECBDolcCn05u6LUP97mDnpk6OYJVyA/5beVj3xTARIECAAAEC/RGo7/bf6mq4qsPQ2YBVjQ98jWA9vx6bCBAgQIAAgd4IPL/5ju9shzp7inAknlOFh+RxDSPearTMnAABAgQIEOiswBfT8jsmYF3c2R6k4Z0ewSr45gDUqcLW/y5RtddEgAABAgQIbClQ3+V1arDT4ap61/mAVZ3IgTg9s5fUYxMBAgQIECDQWYGXNN/pne3AqOGdP0U46khOFV4zj/855ejRMnMCBAgQIECgMwLnpqU/n4D1o860eJuG9mIEq/rXHJAn5KFThdsccC8RIECAAIEWCtR39+P7Eq7KtzcBqzqTA/P+zF5cj00ECBAgQIBAZwRenO/w0zrT2jEa2ptThKO+5lThNfL4n1KOGS0zJ0CAAAECBForcHZadqcErB+3toVTNKxXI1jV/+YAPTYP3YB0ijeETQgQIECAwBIF6rv6sX0LV+XXu4BVncqB+sfMnluPTQQIECBAgEBrBZ7bfGe3toHTNqx3pwhHEM1vFX4oz+86WmZOgAABAgQItEagfo3lXglYnfytwZ0UexuwquMJWbfO7JMpdV2WiQABAgQIEGiHQF1v9YsJV//ajubMvxW9PEU4YmoO3O+NnpsTIECAAAECrRB4Sp/DVQn3egRr9BbKSNYb8vhRo+fmBAgQIECAwMoE3phw9Wsr2/uSdjyUgHVoPOvWDUcvydVuCBAgQIAAgb0Fzs2iOjX4/b1f6teSXp8iHB2qHMiL8viklMtHy8wJECBAgACBpQrUxeyPHkK4KtVBBKzqaA7oxzL77/XYRIAAAQIECCxd4Bn5Lv7o0ve6oh0O4hThyDbXYlV/35Ly0NEycwIECBAgQGDhAm/LHn41Aat+c3AQ06ACVh3RhKzDMvtEyi3quYkAAQIECBBYqMCXUvtdEq6+t9C9tKzywZwiHLk3B/iReX7paJk5AQIECBAgsBCB+q595NDCVUkOLmBVp3Og6+ajv1uPTQQIECBAgMDCBH63+c5d2A7aWvEgA1YdjBzwv8ysiokAAQIECBCYv8BfNt+186+5AzUO7hqstcck12MdmOdnpNxt7XKPCRAgQIAAgZkE6ncGj0/AGuzlOIMOWPXWSci6aWZ10fsR9dxEgAABAgQIzCRwYbaui9q/MlMtHd94sKcIR8eteQPURe+9/DXvUT/NCRAgQIDAEgTqu7Quah90uCrnwQesQsgb4YOZPaUemwgQIECAAIGpBepHnOs7dfCTgNW8BfKGeGkeVjERIECAAAECkwu8pPkunXzLHm4x+Guw1h7TXI+1f56fmnK/tcs9JkCAAAECBLYVOC2vPjABy+U2DZOAteH9kpB1vSz6SMqtNrzkKQECBAgQILC3wBez6B4JV9/Z+6XhLnGKcMOxb94gJ2bx9ze85CkBAgQIECCwXqB+/uZE4Wo9Sj0TsPY2qYveP5/F/z7FUOcmPhYRIECAAIEIjP5isL4zTRsEBKwNIKOnCVnvy+P/MnpuToAAAQIECKwT+O3mu3LdQk9+KiBgbfNOyBvnr/LyH2+zipcIECBAgMAQBZ6b70g/N7fNkXeR+zY49VIuei+j16acVM9NBAgQIEBg4AKvS/8fk4C1a+AO23ZfwNqW56cvJmTVbxbW7RvuM8bqViFAgAABAn0V+EA6VrdjuKyvHZxXvwSsMSUTsg7LqnV32mPH3MRqBAgQIECgTwJnpTPHJVzVXw6adhAQsHYAWvtyQtaRef7hlPqBaBMBAgQIEBiKQP224L0Srr48lA7P2k8XuU8gmDfWBVn9hBT3yJrAzaoECBAg0GmB+s47Qbia7BgKWJN51T2y/iWbPCTlkgk3tToBAgQIEOiaQH3XPaT57uta21faXgFrCv680eparPqrwium2NwmBAgQIECgCwL1HXdS853Xhfa2qo0C1pSHI2+4t2fT30rxZ6pTGtqMAAECBForUN9tv9V817W2kW1umIA1w9HJG++V2fzpM1RhUwIECBAg0EaB32++49rYtk60ScCa8TDlDfhnqeLZM1ZjcwIECBAg0BaBZ+e77XltaUxX2+E2DXM6crmFwwtS1VPmVJ1qCBAgQIDAKgRemHD1e6vYcd/2KWDN6YgmYJVl/S7T4+ZUpWoIECBAgMAyBV6enT0hAcu1xXNQF7DmgDiqIiFr3zx+dYrfLRyhmBMgQIBAFwRen0b+esLVlV1obBfaKGDN+SglZO2XKt+Y8qtzrlp1BAgQIEBgEQJvSaWPSrhy66E56gpYc8QcVZWQdUAevznlQaNl5gQIECBAoIUC70ibHp5wdXkL29bpJglYCzp8CVkHpeq3pjxwQbtQLQECBAgQmEXg1Gz8sISrS2epxLabCwhYm7vMZWlC1sGp6G9T7j+XClVCgAABAgTmI/C+VHNiwpWffZuP5161CFh7kcx3QULWIanx71LuN9+a1UaAAAECBKYSOC1bPTjh6uKptrbRWAJuNDoW0/QrNW/gB6eGekObCBAgQIDAKgXen50LV0s4AgLWEpDXhKz3LmF3dkGAAAECBDYTqO+gOi1o5GoznTkvE7DmDLpVdc0b+sS8/q6t1rGcAAECBAgsSKC+e4SrBeFuVq2AtZnKgpYlZNVfajwspe45YiJAgAABAssQqO8cfy24DOk1+xCw1mAs42FCVt1r5FEpdcd3EwECBAgQWKRAfdfUTUTd52qRypvULWBtgrLoRXmj191yH5vy4kXvS/0ECBAgMFiB+o55bPOdM1iEVXVcwFqRfN7wV6X8Tnb/nBU1wW4JECBAoL8Cz6nvmPqu6W8X290z98FqwfHJvbKekmb8WYrA24LjoQkECBDosEAFqqcmWL2ww33oRdMFrJYcxoSsk9KUk1PqdwxNBAgQIEBgUoG6zqpOCb5+0g2tP38BAWv+plPXmJBVP6lTPxJ97akrsSEBAgQIDFHgB+l0/Whz/QSOqQUCAlYLDsLaJiRk3THP69fNb7J2uccECBAgQGALga9m+YMSrj69xesWr0BAwFoB+k67TMg6MutUyLrDTut6nQABAgQGLfCZ9L7C1QWDVmhh511U3cKD0vxDuXea9p4WNk+TCBAgQKAdAvUdcW/hqh0HY2MrBKyNIi15nn8wdT79QSl/0ZImaQYBAgQItEegvhtq5Kq+K0wtFBCwWnhQRk3Kl1/7CAAADC9JREFUP5wrUp6U509LuXK03JwAAQIEBitQ3wVPq++G+o4YrEIHOu4arA4cpGpirsuq0azXpvgLwwIxESBAYHgCNVr1HxKs6hpdU8sFBKyWH6C1zUvIOjbP35Zyy7XLPSZAgACB3guckx4+NOHqrN73tCcddIqwQwey+Yd19zT5/R1qtqYSIECAwGwC9Zl/d+FqNsRlby1gLVt8xv3lH9h3UsUDU14wY1U2J0CAAIH2C9Rn/QObz/72t1YL9wg4RbiHonsPcsrwN9Lql6Yc3L3WazEBAgQIbCNwaV57YoLVX2+zjpdaLCBgtfjgjNO0hKw7Z71TUm4+zvrWIUCAAIHWC5yfFj4i4erM1rdUA7cUcIpwS5puvND8A7xLWvv33WixVhIgQIDANgL1WX4X4WoboY68JGB15EBt18z8Q/x2Xj8h5Y9Sdm23rtcIECBAoJUC9dldn+EnNJ/prWykRo0v4BTh+FadWDOnDB+chp6cct1ONFgjCRAgQOC7IXhsgtXfoeiPgIDVn2O5pycJWUflyRtT7rpnoQcECBAg0EaBj6dRj0q4Oq+NjdOm6QWcIpzerrVbNv9Qj0sD/7y1jdQwAgQIEKjP6OOEq36+EYxg9fO47ulVRrMekSd/mXKdPQs9IECAAIFVCnw/O398gtWbV9kI+16sgIC1WN9W1J6QdXQa8rqUugu8iQABAgRWJ/DR7PrRCVfnrq4J9rwMAacIl6G84n00/5DrlOGfply14ubYPQECBIYoUJ+99RlcpwSFqwG8A4xgDeAgr+1iRrMekOcnp9xw7XKPCRAgQGBhAt9IzfVXgu9Z2B5U3DoBI1itOySLbVDzD/yO2cs7FrsntRMgQIBABOqz9o7C1fDeCwLW8I751fIP/Zvp9okpv5tyyQAJdJkAAQKLFqjP1iennNh85i56f+pvmYBThC07IMtuTk4ZHpt9vjrlF5a9b/sjQIBATwU+lX49JsHqsz3tn26NIWAEawykPq+SD4Cz0r/660IXwPf5QOsbAQLLEBhdyH534WoZ3O3ehxGsdh+fpbYuo1nHZ4d1AfxRS92xnREgQKD7AuelC3Uh+xnd74oezEPACNY8FHtSR/PBUBfAv7InXdINAgQILEPgldlJXcguXC1DuyP7MILVkQO17GZmNOth2edLU45Y9r7tjwABAh0RqD8YemKC1Vs70l7NXKKAEawlYndpV80Hxh3S5jd2qd3aSoAAgSUJvCH7OVa4WpJ2B3djBKuDB23ZTc5o1sOzz/+X4uaky8a3PwIE2iZQNw39nQQrvyPYtiPTsvYYwWrZAWljc5oPktunbS9P2dXGNmoTAQIEFixQn331GXh74WrB0j2p3ghWTw7ksrqR0az7ZV91bdatl7VP+yFAgMCKBb6Q/T8pwer0FbfD7jskYASrQwerDU3NB8xpacfPpzwz5dIUEwECBPoqUJ9xz0ypvxA8PXMTgbEFjGCNTWXFjQIZzbpVlr0w5YSNr3lOgACBjgu8K+1/SoLVFzveD81fkYCAtSL4Pu22uaXDn6VPR/WpX/pCgMAgBc5Nr5+WYOXWC4M8/PPrtIA1P8tB15SQdXAAfj/lGSmHDBpD5wkQ6KLAxWn0n6T874Sr+qFmE4GZBASsmfhsvFEgQevILPvjlEeneH9tBPKcAIG2CdRfB74u5RkJVhe0rXHa010BX4DdPXatbnmC1j3SwP+bcs9WN1TjCBAYssCH0/mnJ1h9ZMgI+r4YAX9FuBjXwdfafGDdOxCPSjln8CAACBBok0B9JtVn072FqzYdln61xQhWv45nK3uT0awD0rAnpfzPlMNb2UiNIkBgCALfSiefk/LSBKvLh9BhfVydgIC1OvvB7TlB69rpdF0I/9SUaw4OQIcJEFiVwI+y4/pL5/+TYPWDVTXCfoclIGAN63i3orcJWkekIf8j5YkpB7aiURpBgEAfBS5Lp16W8kcJVhf2sYP61F4BAau9x6b3LUvQunk6WacNH5uyX+87rIMECCxL4Irs6OSUZydYnb+sndoPgbUCAtZaDY9XIpCgdUx2/IcpdWuHfVfSCDslQKAPAlemE69NqWB1dh86pA/dFRCwunvsetfyBK3bplM1ovVrKYJW746wDhFYmEAFqzekVLD6/ML2omICEwgIWBNgWXU5Ak3Q+oPszYjWcsjthUBXBSpY1U1C6xorwaqrR7Gn7Rawenpg+9Ct5tRh/fTOf0zZvw990gcCBOYi8JPU8uqU5zoVOBdPlSxAQMBaAKoq5yuQoFUXw/+3lMel1G8emggQGKbApen2y1P+NMHq/GES6HVXBASsrhwp7bxagtYNw/BfU+qmpYciIUBgMAJ176qXpDw/weobg+m1jnZaQMDq9OEbZuMTtK6TnlfI+r2UCl0mAgT6KVBh6gUpL0mwuqifXdSrvgoIWH09sgPoV4LWQelmXZ/19JTbDKDLukhgKAJfSEfrx+JflWBVpwVNBDonIGB17pBp8EaBBK360fITU+pneOoHpk0ECHRT4INpdgWrv02wuqqbXdBqAj8VELC8E3olkLB1t3ToaSmPSHF3+F4dXZ3pqUDddf2UlOclVH2sp33UrQEKCFgDPOhD6HKC1s3SzyenPD7lukPosz4S6JjAd9Pev0p5UYLVlzvWds0lsKOAgLUjkRW6LJCgdUjaf1LKb6fcuct90XYCPRE4M/14ccrrE6wu7kmfdIPAXgIC1l4kFvRVoDl9+J/Tvwpc1+hrP/WLQAsFfpw2vT7lZU4DtvDoaNJCBASshbCqtM0CCVrXTvvqZ3jq9OFd29xWbSPQcYGPp/11GvB1CVZ1LysTgcEICFiDOdQ6uplAwtYdsvw3Ux6TckSKiQCB2QQuzOavSXllQtVnZqvK1gS6KyBgdffYafkcBRK06rcOH5hS99V6SErdY8tEgMB4AnWvqrenvCrl1ASr+q1AE4FBCwhYgz78Or+ZQMJW/QxP3eahRrXum1L32TIRILBeoO5TdVrKa1NOSahyp/X1Pp4NXEDAGvgbQPe3F0jYunHWeGRKXRh/9xT/ZoJgGqzArvT8oyl1wfqbEqq+NlgJHSewg4Avix2AvExgJJCwdVQeV9iq4uL4IJgGIVCh6hMpb0ypUHX+IHqtkwRmFBCwZgS0+TAFmrBVpxGr3CPFv6VhvhX62usKVR9JqTus1+m/8zI3ESAwgYAvhQmwrEpgM4GErZtk+cNSHp5yfIqf6AmCqXMC9ZM1H0h5S8pbE6q+2rkeaDCBFgkIWC06GJrSfYGErfpZnhNSTkz5lZS6YN5EoK0CdWH6qSn1F4DvSqiqn68xESAwBwEBaw6IqiCwmUDCVt364V4pFbQqdNU9t/ybC4JpZQJ16q/uTfWulHenfCihyi0VAmEiMG8BH/bzFlUfgS0EErhulJd+eU2pv1A0EVi0QP2l33ub8r4EKn/5t2hx9ROIgIDlbUBgBQIJW/Vv77Yp9025X8p9Um6QYiIwq8A3U8EHUk5LOT3l8wlVNXJlIkBgiQIC1hKx7YrAVgJrAlddJH9cU2621fqWE1gj8OU8PiPlg00RqNbgeEhgVQIC1qrk7ZfADgIJXUdmlbqG655NuWPm/kIxCAOe6i/9Pp3y4ZQP1TyjUxdkbiJAoGUCAlbLDojmENhKIIHrGnntzil1R/m691YV13EFocdTXS9V96Oqu6fX/MwEqh9nbiJAoOUCAlbLD5DmEdhOIKHrpnn9LmtKBbDDt9vGa60V+HZadmZK3TV9d0mY+kprW6thBAhsKyBgbcvjRQLdE0joqhufHtuUn2vmt8/8Wimm1Qv8ME34bMpZa8q/JEy5sefqj40WEJibgIA1N0oVEWivQEJX/Vuv04nHrCm3bh7fIvODUkzzE7gsVZ2Tcvaa8q/N468lTPmrvmCYCPRZQMDq89HVNwJjCCR8XT2rVfg6OuWoTeZ1GtLF9UFYM9XF5nX67ryUczeZV4i6KstNBAgMVEDAGuiB120C4wokgFW4qtOOdduI+svGKjdMOWLD/LA87/pnSo0sfS/lGykXbpjXX+vVLRFq/tUEqApZJgIECGwq0PUPw007ZSEBAssXaIJYhazrpNR84+N6Xr/NWKcjD0w5YIz5xnWyydXq9Nvla+ZrH298bfS81rk05fspFaBGZe3z3Y8Fp+iYCBCYWeD/B087cMCuA3jvAAAAAElFTkSuQmCC" alt="Tejas Jadhav, CFA, FRM"/></div>
+        <div class="ab-name">Tejas Jadhav, CFA, FRM</div>
+        <div class="ab-role">AI in Finance Author · Course Architect<br>12+ Years · Wealth · Risk · Banking</div>
+        <div class="ab-creds">
+          <span class="crd">MMS · SIMSREE Mumbai</span>
+          <span class="crd crd-g">CMAT 99.92%ile</span>
+          <span class="crd crd-g">MAT 800/800 × 4</span>
+        </div>
+        <div class="ab-stats">
+          <div class="ab-st"><div class="ab-st-v">12+</div><div class="ab-st-l">Years in Finance</div></div>
+          <div class="ab-st"><div class="ab-st-v">3</div><div class="ab-st-l">Global Banks</div></div>
+          <div class="ab-st"><div class="ab-st-v">2</div><div class="ab-st-l">Bestsellers</div></div>
+          <div class="ab-st"><div class="ab-st-v">5</div><div class="ab-st-l">Finance Domains</div></div>
+        </div>
+        <div class="ab-links">
+          <a href="https://tejasgjadhav.github.io/" target="_blank">🌐 tejasgjadhav.github.io</a>
+          <a href="https://tejasgjadhav.github.io/AIFINANCE/" target="_blank" class="gold">⚡ Prev: AI Finance Course</a>
+        </div>
+      </aside>
+
+      <div class="ab-body">
+        <h3>Built the systems. <span class="accent">Now teaches them.</span></h3>
+        <div class="ab-quote">"I spent 12 years building the exact systems students will learn — from live trading desks to fund automation at institutional level. This course is not theory. It's a practitioner's field guide."</div>
+        <div class="ab-bio">Tejas Jadhav, CFA, FRM is a finance professional with <strong>12+ years</strong> spanning <strong>wealth management, market risk, climate risk technology, and banking</strong> at <strong>Citi, HDFC Bank, and leading Swiss institutions</strong>. He holds an <strong>MMS from SIMSREE (Sydenham Institute of Management & Research), Mumbai</strong> — where he scored <em>99.92 percentile in CMAT</em> and an <em>unprecedented 800/800 in MAT for 4 consecutive attempts</em>.</div>
+        <div class="ab-bio">As course architect for <strong>Agentic AI &amp; Advanced Analytics in Finance</strong> at ISBMS Pune, he designed curriculum benchmarked against Wharton, Harvard, and LBS. Author of <strong>"Claude AI for Finance Professionals"</strong> — an Amazon bestseller used by analysts across India and the US.</div>
+
+        <div class="book">
+          <div class="book-i">📘</div>
+          <div>
+            <div class="book-t">Claude AI for Finance Professionals</div>
+            <div class="book-s">Amazon · AI in Finance Series</div>
+            <span class="book-tag">Amazon Bestseller</span>
+          </div>
+        </div>
+
+        <ul class="exp-list">
+          <li class="exp"><div class="exp-ic">🏦</div><div><div class="exp-t">Market Risk &amp; FRTB</div><div class="exp-s">Built FRTB Basel IV market-risk solutions at institutional level — Citi &amp; Swiss Banking.</div></div></li>
+          <li class="exp"><div class="exp-ic">🌿</div><div><div class="exp-t">ESG &amp; Climate Risk Technology</div><div class="exp-s">Designed AI-powered ESG and climate risk platforms for institutional finance.</div></div></li>
+          <li class="exp"><div class="exp-ic">💼</div><div><div class="exp-t">Wealth Management</div><div class="exp-s">Managed HNI portfolios — equities, structured products, fixed income, direct P&amp;L accountability.</div></div></li>
+          <li class="exp"><div class="exp-ic">🤖</div><div><div class="exp-t">AI Finance Author &amp; Educator</div><div class="exp-s">Bestselling books · course architect at ISBMS · teaching MBA Finance at SCMHRD &amp; beyond.</div></div></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <h2>The Finance of Tomorrow<br>Starts Today.</h2>
+  <p>Six hours. Three modules. Eight builds. One transformation for your Sem 3 placement season.</p>
+  <a href="#modules" class="btn-w">Begin the Course →</a>
+</section>
+
 <footer>
-  <div class="fl">⚡ AI Finance — SCMHRD</div>
-  <div class="fs">Designed by Tejas Jadhav, CFA, FRM · SCMHRD MBA Finance · Semester 3 Intensive · 2025</div>
-  <div class="flinks">
-    <a href="#overview">Overview</a><a href="#industry">Industry AI</a><a href="#modules">Modules</a>
-    <a href="#concepts">Concepts</a><a href="#projects">Projects</a><a href="#tools">Tools</a>
-    <a href="#prompts">Prompts</a><a href="#about">Instructor</a>
-    <a href="https://tejasgjadhav.github.io/AIFINANCE/" target="_blank">Prev Course</a>
-    <a href="https://tejasgjadhav.github.io/" target="_blank">tejasjadhav.github.io</a>
-  </div>
-  <div class="fcopy">© 2025 SCMHRD × Tejas Jadhav, CFA, FRM · Industry data: McKinsey, CFA Institute, Bloomberg, MIT Sloan</div>
+  <div class="ft-brand">AI Finance Mastery — SCMHRD</div>
+  <p>Designed &amp; taught by <strong style="color:#fff;">Tejas Jadhav, CFA, FRM</strong><br>
+  <a href="https://tejasgjadhav.github.io/">tejasgjadhav.github.io</a> · <a href="https://tejasgjadhav.github.io/AIFINANCE/">AI Finance Course</a></p>
+  <p style="margin-top:16px;opacity:.65;font-size:12px;">© 2026 · For SCMHRD MBA Finance · Semester 3</p>
 </footer>
 
+<div class="toast" id="tst">✓ Prompt copied</div>
+
 <script>
-// ── Particle Canvas ──
-const cv=document.getElementById('bgc'),cx=cv.getContext('2d');
-function rs(){cv.width=window.innerWidth;cv.height=window.innerHeight;}rs();
-window.addEventListener('resize',rs);
-const P=[];
-for(let i=0;i<80;i++){P.push({x:Math.random()*window.innerWidth,y:Math.random()*window.innerHeight,vx:(Math.random()-.5)*.4,vy:(Math.random()-.5)*.4,r:Math.random()*1.5+.5});}
-function drawP(){
-  cx.clearRect(0,0,cv.width,cv.height);
-  P.forEach((p,i)=>{
-    p.x+=p.vx;p.y+=p.vy;
-    if(p.x<0||p.x>cv.width)p.vx*=-1;
-    if(p.y<0||p.y>cv.height)p.vy*=-1;
-    cx.beginPath();cx.arc(p.x,p.y,p.r,0,Math.PI*2);
-    cx.fillStyle='rgba(204,0,51,.35)';cx.fill();
-    P.forEach((q,j)=>{
-      if(j<=i)return;
-      const d=Math.hypot(p.x-q.x,p.y-q.y);
-      if(d<120){cx.beginPath();cx.moveTo(p.x,p.y);cx.lineTo(q.x,q.y);cx.strokeStyle=;cx.lineWidth=.6;cx.stroke();}
-    });
-  });
-  requestAnimationFrame(drawP);
+function cpP(c){
+  const t=c.querySelector('.pr-text').innerText;
+  navigator.clipboard.writeText(t);
+  const el=document.getElementById('tst');
+  el.classList.add('show');
+  setTimeout(()=>el.classList.remove('show'),1800);
 }
-drawP();
-
-// ── Progress ──
-window.addEventListener('scroll',()=>{
-  document.getElementById('prog').style.width=(window.scrollY/(document.body.scrollHeight-window.innerHeight)*100)+'%';
-  let c='';
-  document.querySelectorAll('section[id],div[id]').forEach(s=>{if(window.scrollY>=s.offsetTop-200)c=s.id;});
-  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.toggle('act',a.getAttribute('href')=='#'+c));
-});
-
-// ── Reveal ──
-const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');}),{threshold:.08});
-document.querySelectorAll('.rv,.rv2').forEach(el=>ro.observe(el));
-
-
-// ── Module Tabs ──
-function swM(i){
-  document.querySelectorAll('.mtab').forEach((t,j)=>t.classList.toggle('active',j===i));
-  document.querySelectorAll('.mpanel').forEach((p,j)=>p.classList.toggle('active',j===i));
-}
-
-// ── Toast ──
-function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2400);}
-
-// ── Copy Prompt ──
-function cpP(card){
-  const txt=card.querySelector('.pr-text').textContent;
-  navigator.clipboard.writeText(txt).then(()=>{
-    toast('✅ Prompt copied!');
-    const b=card.querySelector('.pr-cp');b.textContent='✓';setTimeout(()=>b.textContent='Copy',2000);
-  });
-}
-
-console.log('%c⚡ SCMHRD AI Finance Course','color:#CC0033;font-size:18px;font-weight:900;');
-console.log('%c  LLMs · RAG · MCP · Agents · Basel IV · Earning Dashboards · Wealth Bots','color:#FFD700;font-size:12px;');
-console.log('%c  by Tejas Jadhav, CFA, FRM','color:#FF6B6B;font-size:12px;');
+console.log('%cAI Finance Mastery — SCMHRD','color:#CC0033;font-size:18px;font-weight:900;');
+console.log('%cBy Tejas Jadhav, CFA, FRM','color:#666;font-size:12px;');
 </script>
 </body>
 </html>
