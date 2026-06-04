@@ -114,6 +114,15 @@ nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.95);backdrop-
 .les-list{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 .les{padding:14px 16px;background:var(--bg3);border-left:3px solid var(--red);border-radius:8px;font-size:13.5px;color:var(--ink);font-weight:500;}
 .les b{color:var(--red);font-weight:800;margin-right:6px;}
+.assess{margin-top:24px;background:linear-gradient(135deg,var(--red-soft),#fff);border:1.5px solid var(--red-line);border-radius:14px;padding:22px 22px 24px;}
+.assess-h{font-weight:800;font-size:14px;color:var(--red);letter-spacing:.3px;margin-bottom:16px;text-transform:uppercase;}
+.assess-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+@media(max-width:680px){.assess-grid{grid-template-columns:1fr;}}
+.assess-c{background:#fff;border:1px solid var(--line);border-radius:11px;padding:18px;position:relative;}
+.assess-w{font-family:'Playfair Display',serif;font-size:36px;font-weight:900;color:var(--red);line-height:1;display:inline-block;}
+.assess-l{display:inline-block;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1.2px;font-weight:700;margin-left:4px;vertical-align:top;margin-top:6px;}
+.assess-t{font-weight:800;font-size:15px;margin:8px 0 6px;color:var(--ink);}
+.assess-d{font-size:12.5px;color:var(--ink2);line-height:1.6;}
 @media(max-width:760px){.mod-c{grid-template-columns:1fr;gap:18px;padding:28px 22px;}.mod-num{font-size:64px;}.les-list{grid-template-columns:1fr;}}
 
 /* PROJECTS */
@@ -319,16 +328,33 @@ footer a{color:#FF6B85;}
       <div class="mod-c">
         <div class="mod-num">02<small>2 PM – 5 PM</small></div>
         <div>
-          <div class="mod-dur">Post-Lunch · 3 Hours · Build Day</div>
-          <div class="mod-t">Trading Algos · Earnings · Portfolio · Basel</div>
-          <div class="mod-desc">Four production-grade Python builds students leave with — live coded, repo-ready, portfolio-grade. Each build maps to a real desk at a top-tier bank.</div>
+          <div class="mod-dur">Post-Lunch · 3 Hours · Build &amp; Apply</div>
+          <div class="mod-t">Finance Applications in AI</div>
+          <div class="mod-desc">Four production-grade Python builds, then a live group case study and an AI-Finance interview round. Each build maps to a real desk at a top-tier bank; both assignments are graded for SCMHRD internal evaluation.</div>
           <div class="les-list">
             <div class="les"><b>2.1</b> Trading Algo System — Python codes (momentum, mean-reversion, signal stack)</div>
             <div class="les"><b>2.2</b> Backtesting engine — Sharpe, drawdown, turnover</div>
             <div class="les"><b>2.3</b> Earnings Dashboard — yfinance + Claude + Streamlit</div>
             <div class="les"><b>2.4</b> Portfolio Review bot — allocation, factor exposure, rebalancing memo</div>
             <div class="les"><b>2.5</b> Basel IV / FRTB Report — SA-FRTB capital, SA-CVA, Pillar 3</div>
-            <div class="les"><b>2.6</b> Pitch &amp; jury feedback — placement-ready portfolio</div>
+            <div class="les"><b>2.6</b> Group Case Study + Interview Round (graded — see Assessment)</div>
+          </div>
+          <div class="assess">
+            <div class="assess-h">📝 Graded Group Assessment · 50 marks</div>
+            <div class="assess-grid">
+              <div class="assess-c">
+                <div class="assess-w">30</div>
+                <div class="assess-l">marks</div>
+                <div class="assess-t">Live Case Study</div>
+                <div class="assess-d">Group analysis of a real AI-in-Finance scenario (e.g. JPMorgan IndexGPT roll-out, Morgan Stanley advisor RAG, Basel IV transition at an MNC bank). Submit memo + 5-min pitch.</div>
+              </div>
+              <div class="assess-c">
+                <div class="assess-w">20</div>
+                <div class="assess-l">marks</div>
+                <div class="assess-t">Interview Questions</div>
+                <div class="assess-d">Group response to a panel of AI-in-Finance interview questions (LLM intuition, RAG vs fine-tune, FRTB, Python case, ethics). Scored on accuracy + clarity.</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
