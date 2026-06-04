@@ -44,7 +44,23 @@ nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.95);backdrop-
 .hero h1 .accent{color:var(--red);font-style:italic;}
 .hero-tag{font-size:clamp(16px,1.6vw,19px);color:var(--ink2);max-width:680px;margin:0 auto 36px;line-height:1.65;}
 .hero-tag strong{color:var(--red);font-weight:700;}
+.curated{display:inline-block;font-size:13px;color:var(--ink2);background:#fff;border:1px dashed var(--red-line);padding:8px 18px;border-radius:30px;margin-bottom:34px;}
+.curated strong{color:var(--red);font-weight:800;}
 .hero-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:56px;}
+
+/* CAMPUS STRIP */
+.camp{padding:60px 40px;background:#fff;}
+.camp-in{max-width:1200px;margin:0 auto;}
+.camp-h{text-align:center;margin-bottom:32px;}
+.camp-h .sec-lbl{margin-bottom:14px;}
+.camp-h h3{font-family:'Playfair Display',serif;font-size:clamp(22px,2.6vw,32px);font-weight:800;letter-spacing:-.4px;}
+.camp-h h3 .accent{color:var(--red);font-style:italic;}
+.camp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+@media(max-width:760px){.camp-grid{grid-template-columns:1fr;}}
+.camp-c{border-radius:16px;overflow:hidden;height:240px;position:relative;border:1px solid var(--line);background:#f6eef0;}
+.camp-c img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s;}
+.camp-c:hover img{transform:scale(1.06);}
+.camp-cap{position:absolute;left:0;right:0;bottom:0;padding:14px 16px;background:linear-gradient(transparent,rgba(14,10,12,.78));color:#fff;font-size:13px;font-weight:600;letter-spacing:.3px;}
 .btn-p{background:var(--red);color:#fff;padding:16px 36px;border-radius:10px;font-weight:700;font-size:15px;box-shadow:0 10px 30px rgba(204,0,51,.32);transition:all .25s;}
 .btn-p:hover{background:var(--red2);transform:translateY(-2px);box-shadow:0 14px 38px rgba(204,0,51,.42);}
 .btn-s{background:#fff;color:var(--ink);padding:16px 36px;border-radius:10px;font-weight:600;font-size:15px;border:1.5px solid var(--line);transition:all .25s;}
@@ -203,16 +219,31 @@ footer a{color:#FF6B85;}
   <div class="hero-in">
     <div class="hero-badge"><span class="dot"></span>SCMHRD · MBA Finance · Semester 3 Intensive</div>
     <h1>AI Finance<br><span class="accent">Mastery</span></h1>
-    <p class="hero-tag">A <strong>6-hour practitioner intensive</strong> on LLMs, RAG, MCP, and Agentic AI — engineered for the Semester 3 Finance batch. Build real systems banks pay for: <strong>Basel IV reports, earning dashboards, wealth bots, and risk agents</strong>.</p>
+    <p class="hero-tag">A <strong>6-hour one-day intensive</strong> on LLMs, Agents, Agentic AI &amp; Enterprise AI — engineered for the SCMHRD Sem 3 Finance batch. Post-lunch, students ship four live builds: <strong>Trading Algos, Earnings Dashboard, Portfolio Review, and Basel Report</strong>.</p>
+    <div class="curated">Curated with the help of <strong>Dr. Dipasha Sharma</strong> · Faculty, SCMHRD</div>
     <div class="hero-cta">
       <a href="#modules" class="btn-p">Explore Modules →</a>
       <a href="#about" class="btn-s">About Instructor</a>
     </div>
     <div class="hero-stats">
       <div><div class="hs-v">6 Hrs</div><div class="hs-l">Duration</div></div>
-      <div><div class="hs-v">3</div><div class="hs-l">Modules</div></div>
-      <div><div class="hs-v">18</div><div class="hs-l">Lessons</div></div>
-      <div><div class="hs-v">8</div><div class="hs-l">Live Builds</div></div>
+      <div><div class="hs-v">2</div><div class="hs-l">Modules</div></div>
+      <div><div class="hs-v">12</div><div class="hs-l">Lessons</div></div>
+      <div><div class="hs-v">4</div><div class="hs-l">Live Builds</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="camp">
+  <div class="camp-in">
+    <div class="camp-h">
+      <div class="sec-lbl">SCMHRD Campus · Hinjewadi, Pune</div>
+      <h3>Where the <span class="accent">next generation of finance leaders</span> is built.</h3>
+    </div>
+    <div class="camp-grid">
+      <div class="camp-c"><img src="https://www.scmhrd.edu/images/SCMHRD-Campus.jpg" alt="SCMHRD Campus" onerror="this.src='https://images.unsplash.com/photo-1562774053-701939374585?w=900&auto=format&fit=crop&q=80';"/><div class="camp-cap">Symbiosis Hill Top · SCMHRD Building</div></div>
+      <div class="camp-c"><img src="https://www.scmhrd.edu/images/SCMHRD-Classroom.jpg" alt="SCMHRD Classroom" onerror="this.src='https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=900&auto=format&fit=crop&q=80';"/><div class="camp-cap">MBA Finance Classroom</div></div>
+      <div class="camp-c"><img src="https://www.scmhrd.edu/images/SCMHRD-Library.jpg" alt="SCMHRD Library" onerror="this.src='https://images.unsplash.com/photo-1568667256549-094345857637?w=900&auto=format&fit=crop&q=80';"/><div class="camp-cap">Knowledge Resource Centre</div></div>
     </div>
   </div>
 </section>
@@ -262,59 +293,42 @@ footer a{color:#FF6B85;}
 <section class="sec" id="modules">
   <div class="sec-in">
     <div class="sec-h">
-      <div class="sec-lbl">The 3 Modules</div>
-      <h2>Three Modules. <span class="accent">Total Transformation.</span></h2>
-      <p>Each module is a 2-hour deep dive — concept, demo, and live build. No fluff. No theory-only slides.</p>
+      <div class="sec-lbl">One-Day Intensive · 10 AM – 5 PM</div>
+      <h2>Two Modules. <span class="accent">One Transformative Day.</span></h2>
+      <p>Pre-lunch foundations on LLMs, Agents &amp; Enterprise AI. Post-lunch — four live Python builds: Trading Algos, Earnings Dashboard, Portfolio Review, and Basel Report.</p>
     </div>
     <div class="mod-wrap">
 
       <div class="mod-c">
-        <div class="mod-num">01<small>2 Hours</small></div>
+        <div class="mod-num">01<small>10 AM – 1 PM</small></div>
         <div>
-          <div class="mod-dur">Foundations of AI in Finance</div>
-          <div class="mod-t">LLMs · RAG · Context · MCP</div>
-          <div class="mod-desc">From transformer architecture to retrieval pipelines — understand the stack powering BloombergGPT, Morgan Stanley advisors, and JPMorgan's LLM Suite. Then learn MCP, the open protocol connecting AI to real bank systems.</div>
+          <div class="mod-dur">Pre-Lunch · 3 Hours · Foundations</div>
+          <div class="mod-t">Introduction to LLMs, Agents &amp; Enterprise AI</div>
+          <div class="mod-desc">Build the conceptual foundation: how Large Language Models work, what makes an Agent different from a chatbot, how Agentic AI plans &amp; acts, and how Enterprise AI is deployed inside banks. Closes with hands-on Prompt Engineering for finance.</div>
           <div class="les-list">
-            <div class="les"><b>1.1</b> Transformer architecture · BloombergGPT (50B / 363B tokens)</div>
-            <div class="les"><b>1.2</b> Context window engineering · 200K-token strategies</div>
-            <div class="les"><b>1.3</b> RAG: vector DBs, embeddings, grounding</div>
-            <div class="les"><b>1.4</b> Hallucination control for finance use cases</div>
-            <div class="les"><b>1.5</b> Model Context Protocol (MCP) — Anthropic's open standard</div>
-            <div class="les"><b>1.6</b> Live: connect Claude to live market data via MCP</div>
+            <div class="les"><b>1.1</b> Introduction to LLMs · transformers · GPT-4 · Claude · BloombergGPT</div>
+            <div class="les"><b>1.2</b> Agents — tool use, function calling, memory</div>
+            <div class="les"><b>1.3</b> Agentic AI — planner · executor · critic loops</div>
+            <div class="les"><b>1.4</b> Enterprise AI — security, RAG, MCP, governance in banks</div>
+            <div class="les"><b>1.5</b> Prompt Engineering for finance — patterns &amp; anti-patterns</div>
+            <div class="les"><b>1.6</b> Live demo: equity-analyst agent end-to-end</div>
           </div>
         </div>
       </div>
 
       <div class="mod-c">
-        <div class="mod-num">02<small>2 Hours</small></div>
+        <div class="mod-num">02<small>2 PM – 5 PM</small></div>
         <div>
-          <div class="mod-dur">Build · Automate · Report</div>
-          <div class="mod-t">Agents · Dashboards · Reports</div>
-          <div class="mod-desc">Move from prompts to autonomous Python agents. Build earning dashboards, wealth report bots, and the Basel IV FRM pipeline that MNC banks pay six figures for.</div>
+          <div class="mod-dur">Post-Lunch · 3 Hours · Build Day</div>
+          <div class="mod-t">Trading Algos · Earnings · Portfolio · Basel</div>
+          <div class="mod-desc">Four production-grade Python builds students leave with — live coded, repo-ready, portfolio-grade. Each build maps to a real desk at a top-tier bank.</div>
           <div class="les-list">
-            <div class="les"><b>2.1</b> Agentic AI architecture · planner-executor-critic</div>
-            <div class="les"><b>2.2</b> Earning Dashboard bot (yfinance + Claude + Streamlit)</div>
-            <div class="les"><b>2.3</b> Wealth Management Report Generator (PDF + IPS)</div>
-            <div class="les"><b>2.4</b> Basel IV / FRTB capital-charge automation</div>
-            <div class="les"><b>2.5</b> FinBERT sentiment + factor signals</div>
-            <div class="les"><b>2.6</b> CRO-grade Monte Carlo VaR / CVaR reports</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="mod-c">
-        <div class="mod-num">03<small>2 Hours</small></div>
-        <div>
-          <div class="mod-dur">Career · Interviews · Hackathon</div>
-          <div class="mod-t">Live Builds · Interviews · Hackathon</div>
-          <div class="mod-desc">Turn skills into placements. Live builds for portfolio, interview drills for AI-in-finance roles, and a closing mini-hackathon judged on production-readiness.</div>
-          <div class="les-list">
-            <div class="les"><b>3.1</b> Portfolio engineering for Sem 3 placements</div>
-            <div class="les"><b>3.2</b> Live: Equity research memo agent</div>
-            <div class="les"><b>3.3</b> Live: Credit underwriting bot</div>
-            <div class="les"><b>3.4</b> Interview drills — JPMorgan, GS, Citi, BlackRock</div>
-            <div class="les"><b>3.5</b> Resume + LinkedIn for AI-Finance roles</div>
-            <div class="les"><b>3.6</b> Hackathon · pitch · jury feedback</div>
+            <div class="les"><b>2.1</b> Trading Algo System — Python codes (momentum, mean-reversion, signal stack)</div>
+            <div class="les"><b>2.2</b> Backtesting engine — Sharpe, drawdown, turnover</div>
+            <div class="les"><b>2.3</b> Earnings Dashboard — yfinance + Claude + Streamlit</div>
+            <div class="les"><b>2.4</b> Portfolio Review bot — allocation, factor exposure, rebalancing memo</div>
+            <div class="les"><b>2.5</b> Basel IV / FRTB Report — SA-FRTB capital, SA-CVA, Pillar 3</div>
+            <div class="les"><b>2.6</b> Pitch &amp; jury feedback — placement-ready portfolio</div>
           </div>
         </div>
       </div>
@@ -426,8 +440,9 @@ footer a{color:#FF6B85;}
 <footer>
   <div class="ft-brand">AI Finance Mastery — SCMHRD</div>
   <p>Designed &amp; taught by <strong style="color:#fff;">Tejas Jadhav, CFA, FRM</strong><br>
+  Curated with the help of <strong style="color:#fff;">Dr. Dipasha Sharma</strong> · Faculty, SCMHRD<br>
   <a href="https://tejasgjadhav.github.io/">tejasgjadhav.github.io</a> · <a href="https://tejasgjadhav.github.io/AIFINANCE/">AI Finance Course</a></p>
-  <p style="margin-top:16px;opacity:.65;font-size:12px;">© 2026 · For SCMHRD MBA Finance · Semester 3</p>
+  <p style="margin-top:16px;opacity:.65;font-size:12px;">© 2026 · For SCMHRD MBA Finance · Semester 3 · Hinjewadi, Pune</p>
 </footer>
 
 <div class="toast" id="tst">✓ Prompt copied</div>
