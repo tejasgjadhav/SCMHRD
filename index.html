@@ -225,6 +225,18 @@ nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.95);backdrop-
 .pr-text::after{content:"";position:absolute;bottom:0;left:0;right:0;height:50px;background:linear-gradient(transparent,#fff);}
 .pr-copy{position:absolute;top:18px;right:18px;font-size:10px;background:var(--red);color:#fff;padding:5px 11px;border-radius:6px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;}
 
+/* CONCEPTS — TOOLS vs RAG vs MCP */
+.cmp-analogy{background:var(--ink);color:#fff;border-radius:14px;padding:18px 26px;font-size:14.5px;line-height:1.6;margin-bottom:26px;}
+.cmp-analogy strong{color:#F4C84A;}
+.cmp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin-bottom:22px;}
+.cmp-c{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px;border-top:4px solid var(--red);}
+.cmp-c h3{font-size:19px;margin-bottom:4px;color:var(--ink);}
+.cmp-q{font-size:12.5px;font-weight:800;color:var(--red);letter-spacing:.4px;margin-bottom:14px;}
+.cmp-row{padding:10px 0;border-top:1px dashed var(--line);font-size:13px;color:var(--ink2);line-height:1.55;}
+.cmp-row b{display:block;font-size:11px;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:3px;color:var(--muted);}
+.cmp-fit{background:var(--red-soft);border:1px solid var(--red-line);border-radius:14px;padding:16px 24px;font-size:14px;color:var(--ink2);line-height:1.6;}
+.cmp-fit strong{color:var(--red);}
+
 /* INSTRUCTOR */
 .about-grid{display:grid;grid-template-columns:380px 1fr;gap:56px;align-items:start;}
 @media(max-width:900px){.about-grid{grid-template-columns:1fr;gap:32px;}}
@@ -387,6 +399,7 @@ footer a{color:#FF6B85;}
       <a href="#industry">Industry</a>
       <a href="#modules">Modules</a>
       <a href="#projects">Projects</a>
+      <a href="#concepts">Concepts</a>
       <a href="#prompts">Prompts</a>
       <a href="#about">Instructor</a>
     </div>
@@ -551,6 +564,41 @@ footer a{color:#FF6B85;}
       <div class="proj-c"><div class="proj-ico">💱</div><div class="proj-t">Treasury / FX Hedge Bot</div><div class="proj-d">Live FX, exposure aggregation, optimal forwards/options hedge recommendation with P&amp;L impact.</div><div class="proj-tags"><span class="proj-tag">Treasury</span><span class="proj-tag">FX</span></div></div>
       <div class="proj-c"><div class="proj-ico">📚</div><div class="proj-t">Equity Research RAG</div><div class="proj-d">RAG over annual reports + concalls + filings — answers any question with citations, like an analyst.</div><div class="proj-tags"><span class="proj-tag">RAG</span><span class="proj-tag">Equity</span></div></div>
     </div>
+  </div>
+</section>
+
+<section class="sec sec-alt" id="concepts">
+  <div class="sec-in">
+    <div class="sec-h">
+      <div class="sec-lbl">Core Concepts</div>
+      <h2>Tools vs RAG vs <span class="accent">MCP</span></h2>
+      <p>The three most-confused words in enterprise AI — untangled once, in finance terms.</p>
+    </div>
+    <div class="cmp-analogy">Think of the AI agent as a <strong>new analyst on your desk</strong>: RAG is the research library she reads, Tools are the actions she can take, and MCP is the standard socket both plug into.</div>
+    <div class="cmp-grid">
+      <div class="cmp-c">
+        <h3>🔧 Tools</h3>
+        <div class="cmp-q">"What can the AI DO?"</div>
+        <div class="cmp-row"><b>What it is</b>Actions the model can call — fetch a price, run Python, send an email. Each tool is one described, permissioned action.</div>
+        <div class="cmp-row"><b>Finance example</b>get_price("INFY") · draft_email(client) — the model requests, your system executes.</div>
+        <div class="cmp-row"><b>Without it</b>The AI can only talk. No actions, no work done.</div>
+      </div>
+      <div class="cmp-c">
+        <h3>📚 RAG</h3>
+        <div class="cmp-q">"What does the AI KNOW?"</div>
+        <div class="cmp-row"><b>What it is</b>A pattern for answering from your documents: chunk → embed → vector DB → retrieve → answer with citations.</div>
+        <div class="cmp-row"><b>Finance example</b>Q&amp;A over RBI master directions — every answer cites the exact clause and page.</div>
+        <div class="cmp-row"><b>Without it</b>Answers come from the model's memory — hallucination risk on your firm's facts.</div>
+      </div>
+      <div class="cmp-c">
+        <h3>🔌 MCP</h3>
+        <div class="cmp-q">"How does it all CONNECT?"</div>
+        <div class="cmp-row"><b>What it is</b>Model Context Protocol — an open standard connecting AI apps to systems. "USB-C for AI."</div>
+        <div class="cmp-row"><b>Finance example</b>One market-data MCP server, reused by every AI app in the bank — logged and permissioned.</div>
+        <div class="cmp-row"><b>Without it</b>Every app needs custom wiring to every system — the N × M integration problem.</div>
+      </div>
+    </div>
+    <div class="cmp-fit"><strong>How they fit together:</strong> MCP servers expose tools; RAG retrieval is itself often a tool; the agent uses all three in one loop — <strong>knowledge, hands, socket.</strong></div>
   </div>
 </section>
 
