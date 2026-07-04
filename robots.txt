@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://tejasgjadhav.github.io/scmhrd-ai-finance/sitemap.xml
+Sitemap: https://tejasgjadhav.github.io/SCMHRD/sitemap.xml
