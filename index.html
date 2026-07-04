@@ -280,6 +280,24 @@ footer a{color:#FF6B85;}
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:12px 22px;border-radius:24px;font-size:13px;font-weight:600;opacity:0;transition:opacity .25s;z-index:200;pointer-events:none;}
 .toast.show{opacity:1;}
 
+/* ── MOTION ── */
+:root{--ease-out:cubic-bezier(.16,1,.3,1);}
+@keyframes rise{from{opacity:0;transform:translateY(28px);filter:blur(10px);}to{opacity:1;transform:translateY(0);filter:blur(0);}}
+.hero-badge{animation:rise .7s var(--ease-out) .05s both;}
+.hero h1{animation:rise .85s var(--ease-out) .18s both;}
+.hero-tag{animation:rise .8s var(--ease-out) .34s both;}
+.curated{animation:rise .7s var(--ease-out) .46s both;}
+.hero-cta{animation:rise .7s var(--ease-out) .56s both;}
+.hero-stats{animation:rise .85s var(--ease-out) .68s both;}
+.rv{opacity:0;transform:translateY(26px);transition:opacity .7s var(--ease-out),transform .7s var(--ease-out);}
+.rv.vis{opacity:1;transform:translateY(0);}
+.btn-p:active,.btn-s:active,.nav-cta:active,.cta .btn-w:active,.ab-links a:active{transform:scale(.97);}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;}
+  html{scroll-behavior:auto;}
+  .rv{opacity:1;transform:none;}
+}
+
 /* ── MOBILE ── */
 @media(max-width:780px){
   .nav-in{padding:12px 16px;gap:10px;}
@@ -633,6 +651,48 @@ function cpP(c){
   el.classList.add('show');
   setTimeout(()=>el.classList.remove('show'),1800);
 }
+// ── SCROLL REVEAL + COUNT-UP (progressive enhancement; skipped for reduced motion) ──
+const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(!reduceMotion){
+  document.querySelectorAll('.sec-h,.camp-h,.ab-card,.ab-body,.book').forEach(el=>el.classList.add('rv'));
+  ['.camp-grid','.curr-grid','.ind-grid','.mod-wrap','.proj-grid','.pr-grid','.exp-list','.assess-grid'].forEach(sel=>
+    document.querySelectorAll(sel).forEach(g=>{
+      [...g.children].forEach((c,i)=>{c.classList.add('rv');c.style.transitionDelay=Math.min(i*60,360)+'ms';});
+    })
+  );
+  const rvObs=new IntersectionObserver(es=>{
+    es.forEach(e=>{
+      if(!e.isIntersecting)return;
+      const el=e.target;
+      el.classList.add('vis');
+      rvObs.unobserve(el);
+      // hand styling back to the base rules so hover lifts work again
+      el.addEventListener('transitionend',function done(ev){
+        if(ev.propertyName!=='opacity')return;
+        el.classList.remove('rv','vis');el.style.transitionDelay='';
+        el.removeEventListener('transitionend',done);
+      });
+    });
+  },{threshold:.08,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.rv').forEach(el=>rvObs.observe(el));
+
+  function countUp(el){
+    const m=el.textContent.match(/^([\d.]+)(.*)$/);
+    if(!m)return;
+    const target=parseFloat(m[1]),suffix=m[2],dec=(m[1].split('.')[1]||'').length;
+    const t0=performance.now(),dur=1200;
+    (function tick(now){
+      const p=Math.min((now-t0)/dur,1),v=target*(1-Math.pow(1-p,3));
+      el.textContent=v.toFixed(dec)+suffix;
+      if(p<1)requestAnimationFrame(tick);
+    })(t0);
+  }
+  const cObs=new IntersectionObserver(es=>{
+    es.forEach(e=>{if(e.isIntersecting){countUp(e.target);cObs.unobserve(e.target);}});
+  },{threshold:.5});
+  document.querySelectorAll('.hs-v,.ab-st-v').forEach(el=>cObs.observe(el));
+}
+
 console.log('%cAI Finance Mastery — SCMHRD','color:#CC0033;font-size:18px;font-weight:900;');
 console.log('%cBy Tejas Jadhav, CFA, FRM','color:#666;font-size:12px;');
 </script>
